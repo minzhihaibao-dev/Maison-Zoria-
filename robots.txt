@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://minzhihaibao-dev.github.io/Maison-Zoria-/sitemap.xml
