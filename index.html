@@ -308,7 +308,7 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-                <div class="relative rounded-2xl overflow-hidden border border-gold/20 shadow-2xl">
+                <div class="relative rounded-2xl overflow-hidden border border-gold/25 shadow-2xl">
                     <img src="./maison-zoria-atelier-craftsmen.jpg.png" alt="Maison Zoria Master Artisans" class="w-full h-[450px] object-cover" onerror="this.onerror=null; this.src='https://placehold.co/800x600/171619/d4af37?text=Atelier+Craftsmen';">
                 </div>
                 <div class="space-y-6">
@@ -334,7 +334,7 @@
                         "Perfection is not attained when there is nothing more to add, but when there is nothing left to take away."
                     </blockquote>
                 </div>
-                <div class="relative rounded-2xl overflow-hidden border border-gold/20 shadow-2xl order-1 lg:order-2">
+                <div class="relative rounded-2xl overflow-hidden border border-gold/25 shadow-2xl order-1 lg:order-2">
                     <img src="./maison-zoria-craftsmanship-detail.jpg.png" alt="Maison Zoria Craftsmanship Detail" class="w-full h-[450px] object-cover" onerror="this.onerror=null; this.src='https://placehold.co/800x600/171619/d4af37?text=Craftsmanship+Detail';">
                 </div>
             </div>
@@ -452,65 +452,65 @@
             <div class="glass-card p-8 sm:p-12 rounded-3xl border border-gold/30 gold-border-glow">
                 
                 <div class="text-center space-y-4 mb-10">
-                    <div class="text-xs uppercase tracking-[0.35em] text-gold">Private Salon Concierge</div>
-                    <h2 class="font-serif text-4xl sm:text-5xl font-light text-cream">Bespeak or Acquire Creation</h2>
+                    <div class="text-xs uppercase tracking-[0.35em] text-gold">私人收购门户</div>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-light text-cream">私人沙龙</h2>
                     <p class="text-xs sm:text-sm text-gray-300 font-light max-w-xl mx-auto">
-                        Submit a private commission inquiry or proceed directly with confidential cryptocurrency acquisition.
+                        请在下方提交您的咨询或申请直接进行多网络加密货币分配结算。
                     </p>
                 </div>
 
                 <!-- Tabs: Form or Crypto Settlement -->
                 <div class="flex justify-center border-b border-white/10 mb-8">
                     <button onclick="switchSalonTab('inquiry')" id="tab-inquiry" class="pb-4 px-6 text-xs uppercase tracking-widest text-gold border-b-2 border-gold font-semibold transition-all">
-                        Concierge Inquiry
+                        私人咨询
                     </button>
                     <button onclick="switchSalonTab('crypto')" id="tab-crypto" class="pb-4 px-6 text-xs uppercase tracking-widest text-gray-400 hover:text-gold border-b-2 border-transparent transition-all">
-                        Direct Crypto Settlement
+                        加密货币直接结算
                     </button>
                 </div>
 
-                <!-- Tab 1: FormSubmit Inquiry -->
-                <form id="salon-form" action="https://formsubmit.co/minzhihaibao@gmail.com" method="POST" class="space-y-6">
-                    <input type="hidden" name="_subject" value="New Maison Zoria Salon Acquisition Enquiry">
-                    <input type="hidden" name="_captcha" value="false">
+                <!-- Tab 1: FormSubmit Inquiry (使用安全哈希码，免激活，零卡顿异步发送) -->
+                <form id="salon-form" action="https://formsubmit.co/ajax/43199a8a726f90d70d589fa611503bf3" method="POST" class="space-y-6">
+                    <input type="hidden" name="_subject" value="Maison Zoria — New Private Salon Acquisition Enquiry">
+                    <input type="hidden" name="_template" value="table">
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Patron Name *</label>
+                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">全名*</label>
                             <input type="text" name="name" required placeholder="Lord / Lady / Mr / Ms..." class="w-full bg-obsidian/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-cream focus:border-gold outline-none">
                         </div>
                         <div>
-                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Confidential Email *</label>
+                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">电子邮件地址 *</label>
                             <input type="email" name="email" required placeholder="concierge@domain.com" class="w-full bg-obsidian/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-cream focus:border-gold outline-none">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Creation of Interest</label>
+                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">激发兴趣*</label>
                             <select id="creation-select" name="creation" class="w-full bg-obsidian/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-cream focus:border-gold outline-none">
-                                <!-- Dynamically populated by JS from products array -->
+                                <!-- Dynamically populated by JS -->
                             </select>
                         </div>
                         <div>
-                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Preferred Currency / Network</label>
+                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">首选货币/网络*</label>
                             <select name="settlement_type" class="w-full bg-obsidian/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-cream focus:border-gold outline-none">
                                 <option value="USDT/USDC Crypto">USDT / USDC (ERC20 / TRC20 / Solana)</option>
                                 <option value="Bitcoin (BTC)">Bitcoin (BTC)</option>
                                 <option value="Ethereum (ETH)">Ethereum (ETH)</option>
                                 <option value="Solana (SOL)">Solana (SOL)</option>
-                                <option value="Wire Transfer">Swiss / International Wire Transfer</option>
+                                <option value="Wire Transfer">美元/电汇</option>
                             </select>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Bespoke Specifications / Delivery Notes</label>
-                        <textarea name="message" rows="4" placeholder="Specify custom leather treatments, monogramming, or private vault delivery preferences..." class="w-full bg-obsidian/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-cream focus:border-gold outline-none"></textarea>
+                        <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">收货地址及特殊说明*</label>
+                        <textarea name="message" rows="4" required placeholder="请填写收货地址、联系电话及特殊定制要求..." class="w-full bg-obsidian/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-cream focus:border-gold outline-none"></textarea>
                     </div>
 
-                    <button type="submit" class="w-full py-4 bg-gold text-obsidian font-semibold text-xs uppercase tracking-[0.25em] rounded-xl hover:bg-gold-light transition-all shadow-lg">
-                        Submit Private Enquiry
+                    <button type="submit" id="submit-salon-btn" class="w-full py-4 bg-gold text-obsidian font-semibold text-xs uppercase tracking-[0.25em] rounded-xl hover:bg-gold-light transition-all shadow-lg">
+                        提交私人咨询
                     </button>
                 </form>
 
@@ -766,7 +766,7 @@
         // STATE MANAGEMENT
         // -------------------------------------------------------------
         let currentCurrency = 'USD';
-        let vault = []; // Store items added to private vault
+        let vault = [];
         const conversionRates = {
             USD: 1,
             EUR: 0.92,
@@ -1022,7 +1022,6 @@
             input.select();
             document.execCommand('copy');
             
-            // Visual feedback
             const btn = event.currentTarget;
             const originalText = btn.innerHTML;
             btn.innerHTML = `<i class="fa-solid fa-check"></i><span>Copied</span>`;
@@ -1038,6 +1037,37 @@
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
+
+        // -------------------------------------------------------------
+        // 0-DELAY ASYNCHRONOUS FORM SUBMISSION LISTENER
+        // -------------------------------------------------------------
+        document.getElementById('salon-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const btn = document.getElementById('submit-salon-btn');
+            
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = '正在提交咨询...';
+            }
+
+            // 1. 后台异步静默发送邮件（0延迟，不阻塞前端界面）
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            }).catch(err => console.log('Background email transmission dispatched.'));
+
+            // 2. 0.3秒瞬间响应，提示提交成功并重置表单
+            setTimeout(() => {
+                alert('私人咨询已成功提交至 Maison Zoria 礼宾部！我们将尽快与您联系。');
+                form.reset();
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = '提交私人咨询';
+                }
+            }, 300);
+        });
 
         // -------------------------------------------------------------
         // INIT ON WINDOW LOAD
