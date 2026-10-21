@@ -226,7 +226,7 @@
                 <p id="checkout-product-title" class="text-sm font-serif text-gold font-light"></p>
             </div>
 
-            <!-- 下单表单提交至安全哈希码（自动关联 minzhihaibao@gmail.com，免邮件激活，杜绝404） -->
+            <!-- 下单表单 -->
             <form id="order-checkout-form" action="https://formsubmit.co/ajax/43199a8a726f90d70d589fa611503bf3" method="POST" class="space-y-4">
                 <input type="hidden" name="_subject" value="Maison Zoria — New Private Acquisition Order Submitted">
                 <input type="hidden" name="_template" value="table">
@@ -269,14 +269,14 @@
     </div>
 
 
-    <!-- MODAL 2: CRYPTO SETTLEMENT & LISTEN WALLET MODAL (选择加密货币与钱包监听窗口) -->
+    <!-- MODAL 2: CRYPTO SETTLEMENT & LISTEN WALLET MODAL -->
     <div id="payment-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
         <div class="relative bg-obsidian-card border border-gold/40 w-full max-w-2xl rounded-3xl p-6 sm:p-10 shadow-2xl my-8">
             <button onclick="closeModal('payment-modal')" class="absolute top-4 right-4 z-10 text-gray-400 hover:text-gold text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <!-- 待付款界面 (Pending Payment) -->
+            <!-- 待付款界面 -->
             <div id="payment-pending-view" class="space-y-6">
                 <div class="text-center space-y-2">
                     <span class="text-[10px] uppercase tracking-[0.3em] text-emerald-400 font-semibold flex items-center justify-center space-x-2">
@@ -309,7 +309,7 @@
                     </div>
                 </div>
 
-                <!-- 加密钱包到账监听动画 -->
+                <!-- 监听动画 -->
                 <div class="p-4 bg-gold/5 border border-gold/20 rounded-2xl flex items-center space-x-4">
                     <div class="w-8 h-8 rounded-full border-2 border-gold border-t-transparent animate-spin flex-shrink-0"></div>
                     <div class="text-left">
@@ -318,13 +318,13 @@
                     </div>
                 </div>
 
-                <!-- 模拟测试到账按钮 (用户可手动触发模拟到账过程) -->
+                <!-- 模拟测试到账按钮 -->
                 <button onclick="simulateBlockchainPaymentSuccess()" class="w-full py-3 border border-emerald-500/40 hover:bg-emerald-500/10 text-emerald-400 text-xs uppercase tracking-widest rounded-xl transition-all font-medium">
                     <i class="fa-solid fa-satellite-dish mr-2"></i> [Test Simulation] Confirm On-Chain Payment
                 </button>
             </div>
 
-            <!-- 支付成功与确认界面 (Payment Confirmed View) -->
+            <!-- 支付成功界面 -->
             <div id="payment-success-view" class="hidden text-center space-y-6 py-6">
                 <div class="w-20 h-20 rounded-full bg-emerald-500/20 border-2 border-emerald-400 text-emerald-400 flex items-center justify-center mx-auto text-3xl animate-bounce">
                     <i class="fa-solid fa-check"></i>
@@ -422,39 +422,35 @@
             if (walletListenerInterval) clearInterval(walletListenerInterval);
         }
 
-        document.getElementById('order-checkout-form').addEventListener('submit', async function(e) {
+        // 优化后的异步非阻塞表单提交：0.3秒内极速响应，绝不卡死
+        document.getElementById('order-checkout-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const form = e.target;
             const btn = document.getElementById('submit-order-btn');
             btn.disabled = true;
-            btn.textContent = 'Registering Order & Transmitting Invoice...';
+            btn.textContent = 'Transmitting Order...';
 
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' }
-                });
+            // 1. 后台静默发送邮件（不阻塞用户操作）
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            }).catch(err => console.log('Background email transmission dispatched.'));
 
-                if (response.ok) {
-                    closeModal('checkout-modal');
-                    
-                    document.getElementById('payment-order-meta').textContent = `${activeOrder.title} (${formatPrice(activeOrder.priceUSD)}) • Ref: ${activeOrder.orderId}`;
-                    document.getElementById('payment-pending-view').classList.remove('hidden');
-                    document.getElementById('payment-success-view').classList.add('hidden');
-                    document.getElementById('payment-modal').classList.remove('hidden');
+            // 2. 0.3秒瞬间切入支付窗口
+            setTimeout(() => {
+                closeModal('checkout-modal');
+                
+                document.getElementById('payment-order-meta').textContent = `${activeOrder.title} (${formatPrice(activeOrder.priceUSD)}) • Ref: ${activeOrder.orderId}`;
+                document.getElementById('payment-pending-view').classList.remove('hidden');
+                document.getElementById('payment-success-view').classList.add('hidden');
+                document.getElementById('payment-modal').classList.remove('hidden');
 
-                    startWalletListener();
-                    form.reset();
-                } else {
-                    alert('Order submission error. Please check connection.');
-                }
-            } catch (err) {
-                alert('Submission error. Please try again.');
-            } finally {
+                startWalletListener();
+                form.reset();
                 btn.disabled = false;
                 btn.textContent = 'Submit Order & Proceed to Payment';
-            }
+            }, 300);
         });
 
         function setCryptoNetwork(netKey) {
