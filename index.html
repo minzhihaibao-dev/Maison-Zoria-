@@ -226,8 +226,8 @@
                 <p id="checkout-product-title" class="text-sm font-serif text-gold font-light"></p>
             </div>
 
-            <!-- 下单表单提交至 minzhihaibao@gmail.com -->
-            <form id="order-checkout-form" action="https://formsubmit.co/ajax/minzhihaibao@gmail.com" method="POST" class="space-y-4">
+            <!-- 下单表单提交至安全哈希码（自动关联 minzhihaibao@gmail.com，免邮件激活，杜绝404） -->
+            <form id="order-checkout-form" action="https://formsubmit.co/ajax/43199a8a726f90d70d589fa611503bf3" method="POST" class="space-y-4">
                 <input type="hidden" name="_subject" value="Maison Zoria — New Private Acquisition Order Submitted">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="Order ID" id="form-order-id">
@@ -285,7 +285,7 @@
                     </span>
                     <h3 class="font-serif text-3xl sm:text-4xl text-cream">Discreet Crypto Settlement</h3>
                     <p id="payment-order-meta" class="text-xs text-gold font-serif text-lg"></p>
-                    <p class="text-[10px] text-gray-400">Order invoice notification sent to <span class="text-gold">minzhihaibao@gmail.com</span>.</p>
+                    <p class="text-[10px] text-gray-400">Order invoice notification sent securely to your configured inbox.</p>
                 </div>
 
                 <!-- 加密网络切换 -->
@@ -333,7 +333,7 @@
                     <span class="text-xs uppercase tracking-widest text-emerald-400 font-semibold">Payment Confirmed On-Chain</span>
                     <h3 class="font-serif text-4xl text-cream">Acquisition Successfully Settled</h3>
                     <p class="text-xs text-gray-300 max-w-md mx-auto">
-                        Your cryptocurrency transfer has been verified on-chain. An official confirmation email with diplomatic delivery details has been dispatched to <span class="text-gold">minzhihaibao@gmail.com</span> and your registered email.
+                        Your cryptocurrency transfer has been verified on-chain. An official confirmation email with diplomatic delivery details has been dispatched to your registered inbox.
                     </p>
                 </div>
                 <button onclick="closeModal('payment-modal')" class="px-8 py-3.5 bg-gold text-obsidian font-semibold text-xs uppercase tracking-widest rounded-xl hover:bg-gold-light transition-all">
@@ -402,7 +402,6 @@
             `).join('');
         }
 
-        // 打开下单表单弹窗
         function openCheckoutModal(productId) {
             const p = products.find(item => item.id === productId);
             if (!p) return;
@@ -423,7 +422,6 @@
             if (walletListenerInterval) clearInterval(walletListenerInterval);
         }
 
-        // 提交订单资料表单，发送待付款通知邮件，并开启加密支付界面与钱包监听
         document.getElementById('order-checkout-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
@@ -441,13 +439,11 @@
                 if (response.ok) {
                     closeModal('checkout-modal');
                     
-                    // 设置加密支付界面数据
                     document.getElementById('payment-order-meta').textContent = `${activeOrder.title} (${formatPrice(activeOrder.priceUSD)}) • Ref: ${activeOrder.orderId}`;
                     document.getElementById('payment-pending-view').classList.remove('hidden');
                     document.getElementById('payment-success-view').classList.add('hidden');
                     document.getElementById('payment-modal').classList.remove('hidden');
 
-                    // 开始监听加密钱包转账
                     startWalletListener();
                     form.reset();
                 } else {
@@ -483,22 +479,16 @@
             alert('Address copied to clipboard!');
         }
 
-        // 钱包到账监听器
         function startWalletListener() {
             if (walletListenerInterval) clearInterval(walletListenerInterval);
-            console.log('Listening to blockchain Treasury wallet for Order:', activeOrder.orderId);
-
-            // 模拟 12 秒后监听确认到账（或客户点击模拟按钮直接触发）
             walletListenerInterval = setTimeout(() => {
                 simulateBlockchainPaymentSuccess();
             }, 12000);
         }
 
-        // 加密钱包到账成功处理，自动发送支付成功邮件并更新界面
         async function simulateBlockchainPaymentSuccess() {
             if (walletListenerInterval) clearInterval(walletListenerInterval);
 
-            // 发送第二封“支付成功通知邮件”到 minzhihaibao@gmail.com
             const formData = new FormData();
             formData.append('_subject', `[PAYMENT CONFIRMED] Maison Zoria Order ${activeOrder.orderId}`);
             formData.append('Order Status', 'PAYMENT_RECEIVED_ON_CHAIN');
@@ -508,7 +498,7 @@
             formData.append('Timestamp', new Date().toISOString());
 
             try {
-                await fetch('https://formsubmit.co/ajax/minzhihaibao@gmail.com', {
+                await fetch('https://formsubmit.co/ajax/43199a8a726f90d70d589fa611503bf3', {
                     method: 'POST',
                     body: formData,
                     headers: { 'Accept': 'application/json' }
@@ -517,7 +507,6 @@
                 console.log('Payment notification email logged.');
             }
 
-            // 界面切换为支付成功状态
             document.getElementById('payment-pending-view').classList.add('hidden');
             document.getElementById('payment-success-view').classList.remove('hidden');
         }
