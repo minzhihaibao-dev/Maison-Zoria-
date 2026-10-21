@@ -422,7 +422,7 @@
             if (walletListenerInterval) clearInterval(walletListenerInterval);
         }
 
-        // 优化后的异步非阻塞表单提交：0.3秒内极速响应，绝不卡死
+        // 异步非阻塞表单提交：0.3秒极速响应，并在后台顺畅发送邮件
         document.getElementById('order-checkout-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const form = e.target;
@@ -430,7 +430,7 @@
             btn.disabled = true;
             btn.textContent = 'Transmitting Order...';
 
-            // 1. 后台静默发送邮件（不阻塞用户操作）
+            // 1. 后台异步静默发送邮件
             fetch(form.action, {
                 method: 'POST',
                 body: new FormData(form),
