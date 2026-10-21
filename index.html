@@ -488,14 +488,8 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Creation of Interest</label>
-                            <select name="creation" class="w-full bg-obsidian/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-cream focus:border-gold outline-none">
-                                <option value="Dream Awakening">Dream Awakening ($3,000,000)</option>
-                                <option value="Nocturnal Cure">Nocturnal Cure ($250,000)</option>
-                                <option value="Cloud Bloom">Cloud Bloom ($280,000)</option>
-                                <option value="Carousel Dreams">Carousel Dreams ($380,000)</option>
-                                <option value="Aurora Castle">Aurora Castle ($295,000)</option>
-                                <option value="Lunar Nova">Lunar Nova ($120,000)</option>
-                                <option value="Bespoke Atelier Commission">Bespoke Bespoke Commission</option>
+                            <select id="creation-select" name="creation" class="w-full bg-obsidian/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-cream focus:border-gold outline-none">
+                                <!-- Dynamically populated by JS from products array -->
                             </select>
                         </div>
                         <div>
@@ -731,17 +725,42 @@
                 origin: 'Geneva Master Atelier'
             },
             {
+                id: 'lunar-cove',
+                title: 'Lunar Cove Cat Bag',
+                priceUSD: 170000,
+                image: './Lunar Cove Cat Bag.jpg',
+                altImage: 'https://placehold.co/800x800/171619/d4af37?text=Lunar+Cove+Cat+Bag',
+                tag: 'Sculptural Masterpiece',
+                description: 'An iconic feline sculptural silhouette rendered in ultra-smooth midnight black calf leather with 18K solid gold hardware.',
+                craftingTime: '260 Hours',
+                origin: 'Paris Atelier'
+            },
+            {
                 id: 'lunar-nova',
                 title: 'Lunar Nova',
                 priceUSD: 120000,
                 image: './Lunar Nova.png',
-                altImage: './Lunar Cove Cat Bag.jpg',
+                altImage: 'https://placehold.co/800x800/171619/d4af37?text=Lunar+Nova',
                 tag: 'Sculptural Masterpiece',
                 description: 'A whimsical yet intensely sophisticated feline sculptural silhouette crafted from ultra-smooth black leather and gold hardware.',
                 craftingTime: '210 Hours',
                 origin: 'Paris Atelier'
             }
         ];
+
+        // -------------------------------------------------------------
+        // DYNAMIC DROPDOWN RENDER
+        // -------------------------------------------------------------
+        function renderCreationDropdown() {
+            const select = document.getElementById('creation-select');
+            if (!select) return;
+
+            const productOptions = products.map(product => 
+                `<option value="${product.title}">${product.title} ($${product.priceUSD.toLocaleString()})</option>`
+            ).join('');
+
+            select.innerHTML = productOptions + `<option value="Bespoke Atelier Commission">Bespoke Bespoke Commission</option>`;
+        }
 
         // -------------------------------------------------------------
         // STATE MANAGEMENT
@@ -1025,6 +1044,7 @@
         // -------------------------------------------------------------
         window.onload = function() {
             renderProducts();
+            renderCreationDropdown();
             updateVaultUI();
         };
     </script>
