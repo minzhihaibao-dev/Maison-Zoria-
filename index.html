@@ -158,6 +158,88 @@
             box-shadow: 0 0 20px rgba(184, 134, 11, 0.6), inset 0 0 10px rgba(0,0,0,0.8);
             border: 2px solid #ffd700;
         }
+    
+        /* =========================================================
+           MAISON ZORIA — SECONDARY MARKET TRACKER (isolated styles)
+           ========================================================= */
+        .mz-market-nav-btn{display:inline-flex;align-items:center;gap:7px;color:#7af0b5;border:1px solid rgba(62,224,149,.38);background:rgba(23,104,70,.12);padding:8px 11px;border-radius:999px;font-size:9px;letter-spacing:.12em;white-space:nowrap;transition:.25s}
+        .mz-market-nav-btn:hover{background:rgba(32,168,105,.2);border-color:#54e7a0;box-shadow:0 0 18px rgba(55,220,140,.15)}
+        .mz-market-pulse{width:7px;height:7px;display:inline-block;border-radius:50%;background:#44ed9a;box-shadow:0 0 9px #44ed9a;animation:mzMarketPulse 1.2s infinite}
+        .mz-market-bull{font-size:7px;font-weight:900;letter-spacing:.13em;background:#43e997;color:#06130d;padding:3px 5px;border-radius:4px}
+        @keyframes mzMarketPulse{0%,100%{opacity:1;box-shadow:0 0 5px #44ed9a}50%{opacity:.35;box-shadow:0 0 15px #44ed9a}}
+        #secondary-market-modal{position:fixed;inset:0;z-index:80;background:rgba(2,5,8,.97);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;padding:clamp(8px,2vw,24px)}
+        #secondary-market-modal.hidden{display:none}
+        .mz-market-shell{width:min(1580px,100%);height:min(940px,96vh);min-height:560px;overflow:hidden;background:radial-gradient(ellipse at 15% 0%,rgba(26,87,91,.24),transparent 38%),linear-gradient(145deg,#0c141a,#070c11 70%);border:1px solid rgba(117,165,170,.23);border-radius:17px;box-shadow:0 30px 110px rgba(0,0,0,.75);display:flex;flex-direction:column;color:#dce8eb;font-family:Arial,Helvetica,sans-serif}
+        .mz-market-topbar{height:57px;flex:0 0 57px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid rgba(145,180,190,.14);background:rgba(10,18,23,.88)}
+        .mz-market-brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em;font-size:12px}
+        .mz-market-brand-mark{width:27px;height:27px;border-radius:8px;background:linear-gradient(145deg,#e9d58e,#9a762b);color:#111;display:grid;place-items:center;font-family:Georgia,serif;font-weight:bold}
+        .mz-market-topmeta{display:flex;align-items:center;gap:15px;color:#81949c;font-size:9px;letter-spacing:.12em}
+        .mz-market-close{width:32px;height:32px;border-radius:8px;background:#17232a;border:1px solid #2a3d45;color:#c4d3d7;font-size:18px;cursor:pointer}
+        .mz-market-close:hover{color:#fff;border-color:#5ad9a0}
+        .mz-market-body{padding:15px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:13px;min-height:0;flex:1}
+        .mz-market-main{display:flex;flex-direction:column;gap:12px;min-width:0;min-height:0}
+        .mz-market-overview{padding:14px 16px;display:grid;grid-template-columns:minmax(210px,1.4fr) repeat(3,minmax(115px,1fr));gap:15px;align-items:center;background:rgba(14,25,31,.88);border:1px solid rgba(128,170,180,.15);border-radius:11px}
+        .mz-market-field-label{font-size:9px;color:#83969e;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
+        .mz-market-select{width:100%;background:#111e25;color:#e5f0f2;border:1px solid #2a424b;border-radius:7px;padding:10px 32px 10px 11px;font-size:12px;outline:none}
+        .mz-market-select:focus{border-color:#53dba0}
+        .mz-market-product-title{font-family:Georgia,serif;font-size:15px;color:#e9dfc2;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .mz-market-price{font-size:clamp(20px,2.4vw,30px);font-weight:700;letter-spacing:-.04em;color:#42e99b;line-height:1.1}
+        .mz-market-sub{font-size:9px;color:#82949c;margin-top:6px}
+        .mz-market-premium{display:inline-flex;align-items:center;gap:6px;margin-top:7px;padding:5px 8px;border-radius:5px;background:rgba(33,177,111,.13);border:1px solid rgba(58,220,145,.25);font-size:10px;color:#54e8a2;font-weight:700}
+        .mz-market-kpi{border-left:1px solid rgba(138,169,178,.14);padding-left:14px;min-width:0}
+        .mz-market-kpi-value{font-size:16px;font-weight:700;color:#e4edef;white-space:nowrap}
+        .mz-market-controls{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 12px;background:#0d171d;border:1px solid rgba(128,170,180,.13);border-radius:10px}
+        .mz-market-tabs{display:flex;gap:4px;flex-wrap:wrap}
+        .mz-market-tab{padding:8px 11px;border:1px solid transparent;background:transparent;color:#8ea1a9;border-radius:6px;font-size:10px;cursor:pointer}
+        .mz-market-tab.active{color:#65e8ae;background:rgba(42,160,112,.16);border-color:rgba(67,214,145,.28)}
+        .mz-market-tab:hover{color:#d7e6e8}
+        .mz-market-chart-panel{position:relative;flex:1;min-height:220px;padding:8px 8px 4px;background:#0b141a;border:1px solid rgba(128,170,180,.13);border-radius:10px;overflow:hidden}
+        #mz-market-chart{width:100%;height:100%;display:block}
+        .mz-market-chart-legend{position:absolute;top:13px;left:15px;display:flex;gap:12px;font-size:9px;color:#8da1a9;pointer-events:none}
+        .mz-legend-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}
+        .mz-market-vol{height:102px;flex:0 0 102px;padding:8px 12px;background:#0b141a;border:1px solid rgba(128,170,180,.13);border-radius:10px}
+        .mz-market-vol-head{display:flex;justify-content:space-between;color:#82969e;font-size:9px;letter-spacing:.12em;margin-bottom:4px}
+        #mz-market-volume{width:100%;height:68px;display:block}
+        .mz-market-right{display:flex;flex-direction:column;min-height:0;background:#0b141a;border:1px solid rgba(128,170,180,.15);border-radius:11px;overflow:hidden}
+        .mz-market-feed-head{padding:14px 13px;border-bottom:1px solid rgba(128,170,180,.13);display:flex;justify-content:space-between;align-items:center}
+        .mz-market-feed-title{font-size:11px;font-weight:700;letter-spacing:.08em}
+        .mz-market-feed-list{overflow:auto;min-height:0;flex:1;padding:4px 11px}
+        .mz-market-feed-row{display:grid;grid-template-columns:62px 1fr 64px;gap:5px;align-items:center;padding:9px 2px;border-bottom:1px solid rgba(128,170,180,.08);font-variant-numeric:tabular-nums;font-size:10px}
+        .mz-market-feed-time{color:#738890}
+        .mz-market-feed-price{text-align:right;color:#48df98;font-weight:700}
+        .mz-market-feed-qty{text-align:right;color:#9eafb5}
+        .mz-market-feed-foot{padding:10px 12px;border-top:1px solid rgba(128,170,180,.12);font-size:9px;color:#748990;line-height:1.5}
+        .mz-market-status{display:flex;align-items:center;gap:6px;color:#57e6a2;font-size:9px}
+        .mz-market-disclaimer{padding:0 16px 11px;color:#6d828a;font-size:9px;line-height:1.45}
+        @media(max-width:1050px){
+          .mz-market-body{grid-template-columns:minmax(0,1fr) 255px}
+          .mz-market-overview{grid-template-columns:minmax(180px,1.2fr) repeat(2,minmax(110px,1fr))}
+          .mz-market-kpi:nth-child(4){display:none}
+        }
+        @media(max-width:760px){
+          #secondary-market-modal{padding:0}
+          .mz-market-shell{width:100%;height:100dvh;max-height:100dvh;min-height:0;border-radius:0;border:0}
+          .mz-market-topbar{height:52px;flex-basis:52px;padding:0 12px}
+          .mz-market-topmeta{gap:8px;font-size:8px}
+          .mz-market-body{display:flex;flex-direction:column;padding:9px;gap:9px;overflow:auto}
+          .mz-market-main{min-height:590px;flex:0 0 auto}
+          .mz-market-overview{grid-template-columns:1fr 1fr;gap:12px;padding:12px}
+          .mz-market-overview > :first-child{grid-column:1/-1}
+          .mz-market-kpi{padding-left:0;border-left:0}
+          .mz-market-kpi:nth-child(4){display:block}
+          .mz-market-chart-panel{min-height:260px;flex:1}
+          .mz-market-vol{height:92px;flex-basis:92px}
+          .mz-market-right{min-height:260px;max-height:330px;flex:0 0 300px}
+          .mz-market-disclaimer{padding:0 12px 10px}
+        }
+        @media(max-width:430px){
+          .mz-market-brand{font-size:10px}
+          .mz-market-topmeta span:first-child{display:none}
+          .mz-market-tab{padding:7px 8px;font-size:9px}
+          .mz-market-overview{gap:10px}
+          .mz-market-price{font-size:22px}
+        }
+
     </style>
 </head>
 <body class="antialiased selection:bg-gold selection:text-obsidian relative">
@@ -178,6 +260,9 @@
                 <a href="#heritage" class="hover:text-gold transition-colors duration-300">Heritage</a>
                 <a href="#savoir-faire" class="hover:text-gold transition-colors duration-300">Savoir-Faire</a>
                 <a href="#provenance" class="hover:text-gold transition-colors duration-300">On-Chain Certificate</a>
+                <button type="button" onclick="openSecondaryTracker()" class="mz-market-nav-btn" title="Secondary Market Tracker">
+                    <span class="mz-market-pulse"></span><span>二级市场交易捕捉器</span><span class="mz-market-bull">BULL</span>
+                </button>
             </nav>
 
             <!-- Brand Emblem & Logo -->
@@ -195,6 +280,11 @@
             <!-- Right Controls & Vault Trigger -->
             <div class="flex items-center space-x-5">
                 
+                <!-- Secondary Market Tracker Trigger -->
+                <button type="button" onclick="openSecondaryTracker()" class="mz-market-nav-btn" aria-label="二级市场交易捕捉器 / Secondary Market Tracker" title="Secondary Market Tracker">
+                    <span class="mz-market-pulse"></span><span>二级市场</span><span class="mz-market-bull">BULL</span>
+                </button>
+
                 <!-- Audio Ambience Toggle -->
                 <button onclick="toggleAudioAmbience()" id="audio-toggle-btn" class="hidden sm:flex items-center space-x-2 text-[10px] uppercase tracking-widest text-gold border border-gold/30 px-3 py-1.5 rounded-full hover:border-gold transition-all" title="Toggle Tactile Audio Feedback">
                     <i id="audio-icon" class="fa-solid fa-volume-xmark text-gold"></i>
@@ -234,6 +324,7 @@
             <a href="#savoir-faire" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">Savoir-Faire</a>
             <a href="#provenance" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">On-Chain Certificate</a>
             <a href="#salon" onclick="toggleMobileMenu()" class="block text-gold border border-gold/40 py-2 rounded-full">Private Concierge & Treasury</a>
+            <button type="button" onclick="toggleMobileMenu(); openSecondaryTracker();" class="w-full text-emerald-300 border border-emerald-400/30 py-3 rounded-full"><span class="mz-market-pulse mr-2"></span> Secondary Market Tracker · BULL</button>
         </div>
     </header>
 
@@ -1331,5 +1422,499 @@
             initParticleCanvas();
         };
     </script>
+
+    <!-- MODAL 4: SECONDARY MARKET TRACKER — isolated from existing modals -->
+    <div id="secondary-market-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="mz-market-heading" onclick="if(event.target===this) closeSecondaryTracker();">
+        <div class="mz-market-shell">
+            <div class="mz-market-topbar">
+                <div class="mz-market-brand">
+                    <div class="mz-market-brand-mark">MZ</div>
+                    <span id="mz-market-heading">MAISON ZORIA <span style="color:#54e8a2">/ MARKET TERMINAL</span></span>
+                </div>
+                <div class="mz-market-topmeta">
+                    <span>SECONDARY MARKET · PRIVATE VAULT</span>
+                    <span class="mz-market-status"><i class="mz-market-pulse"></i> LIVE FEED</span>
+                    <button type="button" class="mz-market-close" onclick="closeSecondaryTracker()" aria-label="Close tracker">×</button>
+                </div>
+            </div>
+            <div class="mz-market-body">
+                <main class="mz-market-main">
+                    <section class="mz-market-overview">
+                        <div>
+                            <div class="mz-market-field-label">Select masterpiece / 产品切换</div>
+                            <select id="mz-market-product" class="mz-market-select" aria-label="Select product"></select>
+                            <div id="mz-market-product-title" class="mz-market-product-title">Eternal Star Romance</div>
+                        </div>
+                        <div>
+                            <div class="mz-market-field-label">Secondary Market Price</div>
+                            <div id="mz-market-current-price" class="mz-market-price">$0</div>
+                            <div id="mz-market-premium" class="mz-market-premium">▲ +0.00% BULL PREMIUM</div>
+                        </div>
+                        <div class="mz-market-kpi">
+                            <div class="mz-market-field-label">Vault Issue Price</div>
+                            <div id="mz-market-issue-price" class="mz-market-kpi-value">$0</div>
+                            <div class="mz-market-sub">Primary issuance reference</div>
+                        </div>
+                        <div class="mz-market-kpi">
+                            <div class="mz-market-field-label">24H Change</div>
+                            <div id="mz-market-change" class="mz-market-kpi-value mz-market-green">+0.00%</div>
+                            <div class="mz-market-sub">Rolling market movement</div>
+                        </div>
+                    </section>
+
+                    <section class="mz-market-controls">
+                        <div class="mz-market-tabs" id="mz-market-periods">
+                            <button class="mz-market-tab active" data-period="1D">分时(1D)</button>
+                            <button class="mz-market-tab" data-period="5D">5日</button>
+                            <button class="mz-market-tab" data-period="DAY">日K</button>
+                            <button class="mz-market-tab" data-period="WEEK">周K</button>
+                            <button class="mz-market-tab" data-period="SEASON">季K</button>
+                            <button class="mz-market-tab" data-period="YEAR">年K</button>
+                        </div>
+                        <div class="mz-market-status"><i class="fa-solid fa-chart-line"></i> MZ INDEX <span id="mz-market-last-update">--:--:--</span></div>
+                    </section>
+
+                    <section class="mz-market-chart-panel">
+                        <div class="mz-market-chart-legend">
+                            <span><i class="mz-legend-dot" style="background:#31c7ff"></i>PRICE</span>
+                            <span><i class="mz-legend-dot" style="background:#e9c975"></i>MA(5)</span>
+                            <span style="color:#ff7c83">● SELL</span>
+                            <span style="color:#4be0a0">● BUY</span>
+                        </div>
+                        <canvas id="mz-market-chart" aria-label="Market price chart"></canvas>
+                    </section>
+                    <section class="mz-market-vol">
+                        <div class="mz-market-vol-head"><span>VOL · 成交量</span><span id="mz-market-volume-label">24H REAL-TIME</span></div>
+                        <canvas id="mz-market-volume" aria-label="Trading volume chart"></canvas>
+                    </section>
+                </main>
+
+                <aside class="mz-market-right">
+                    <div class="mz-market-feed-head">
+                        <div>
+                            <div class="mz-market-feed-title">LIVE TICK FEED</div>
+                            <div class="mz-market-sub">逐笔成交 · 最近 24 小时</div>
+                        </div>
+                        <span class="mz-market-status"><i class="mz-market-pulse"></i> LIVE</span>
+                    </div>
+                    <div class="grid grid-cols-3 px-3 py-2 text-[8px] tracking-widest text-gray-500 border-b border-white/5">
+                        <span>TIME</span><span class="text-right">PRICE (USD)</span><span class="text-right">SIZE</span>
+                    </div>
+                    <div id="mz-market-feed" class="mz-market-feed-list" aria-live="polite"></div>
+                    <div class="mz-market-feed-foot">
+                        <div class="flex justify-between mb-1"><span>MARKET SENTIMENT</span><strong class="mz-market-green">BULLISH</strong></div>
+                        <div class="flex justify-between"><span>ENGINE REFRESH</span><span>2.5 SEC</span></div>
+                    </div>
+                </aside>
+            </div>
+            <div class="mz-market-disclaimer">
+                MAISON ZORIA PRIVATE VAULT SECONDARY MARKET TERMINAL — High-frequency real-time secondary market execution data and index feed. All secondary price actions are verified on-chain via Geneva nodes.
+            </div>
+        </div>
+    </div>
+
+
+<script>
+/* =============================================================
+   MAISON ZORIA SECONDARY MARKET TRACKER
+   ============================================================= */
+(function () {
+    "use strict";
+
+    const marketItems = [
+        { name: "Eternal Star Romance", issue: 1769072, premium: 1.4227 },
+        { name: "L'ASTRE ÉTERNEL", issue: 6930000, premium: 1.3862 },
+        { name: "Dream Awakening", issue: 3000000, premium: 1.3518 },
+        { name: "The Luminary Vow", issue: 692341, premium: 1.3175 },
+        { name: "Pink Aurora", issue: 423931, premium: 1.2984 },
+        { name: "Night of Abundance", issue: 596316, premium: 1.2841 },
+        { name: "Parthenon's Cloud", issue: 576341, premium: 1.2678 },
+        { name: "The Sea of Dalí", issue: 243941, premium: 1.2516 },
+        { name: "Midnight Shutter", issue: 347341, premium: 1.2392 },
+        { name: "Nocturnal Cure", issue: 250000, premium: 1.2248 },
+        { name: "Cloud Bloom", issue: 280000, premium: 1.2136 },
+        { name: "Carousel Dreams", issue: 380000, premium: 1.1985 },
+        { name: "Aurora Castle", issue: 295000, premium: 1.1874 },
+        { name: "Lunar Cove", issue: 175000, premium: 1.1658 },
+        { name: "Lunar Nova", issue: 120000, premium: 1.1427 }
+    ];
+
+    const state = {
+        selected: 0,
+        period: "1D",
+        ticks: [],
+        priceSeries: [],
+        candleSeries: [],
+        volumeSeries: [],
+        timer: null,
+        resizeObserver: null,
+        open: false,
+        price: 0,
+        dayStartPrice: 0
+    };
+
+    const $ = id => document.getElementById(id);
+    const fmt = value => "$" + Math.round(value).toLocaleString("en-US");
+    const pct = value => (value >= 0 ? "+" : "") + value.toFixed(2) + "%";
+    const activeItem = () => marketItems[state.selected];
+
+    function seedHistory() {
+        const item = activeItem();
+        state.price = item.issue * item.premium;
+        state.dayStartPrice = state.price / 1.018;
+        const now = Date.now();
+        state.priceSeries = [];
+        state.volumeSeries = [];
+        state.candleSeries = [];
+
+        let prev = state.price * 0.865;
+        for (let i = 0; i < 120; i++) {
+            const t = i / 119;
+            const trend = state.price * (0.865 + 0.135 * t);
+            const wave = Math.sin(i * 0.31) * state.price * 0.0032 +
+                         Math.sin(i * 0.083) * state.price * 0.0021;
+            const value = Math.max(item.issue * 0.5, trend + wave);
+            state.priceSeries.push(value);
+            state.volumeSeries.push(18 + Math.random() * 90 + i * 0.18);
+            const open = prev;
+            const close = value;
+            const spread = state.price * (0.001 + Math.random() * 0.002);
+            state.candleSeries.push({
+                open,
+                close,
+                high: Math.max(open, close) + spread,
+                low: Math.min(open, close) - spread,
+                volume: 25 + Math.random() * 130
+            });
+            prev = close;
+        }
+
+        state.ticks = [];
+        for (let i = 0; i < 24; i++) {
+            const minutesAgo = (23 - i) * 57 + Math.floor(Math.random() * 20);
+            const d = new Date(now - minutesAgo * 60000);
+            const p = state.price * (0.987 + i * 0.00055);
+            state.ticks.push({
+                time: d.toLocaleTimeString("en-GB", { hour12: false }),
+                price: p,
+                size: (0.01 + Math.random() * 0.19).toFixed(3)
+            });
+        }
+    }
+
+    function updateSummary() {
+        const item = activeItem();
+        const premium = (state.price / item.issue - 1) * 100;
+        const dayChange = (state.price / state.dayStartPrice - 1) * 100;
+
+        $("mz-market-product-title").textContent = item.name;
+        $("mz-market-current-price").textContent = fmt(state.price);
+        $("mz-market-issue-price").textContent = fmt(item.issue);
+        $("mz-market-premium").textContent = "▲ " + pct(premium) + " 溢价牛市";
+        $("mz-market-change").textContent = pct(dayChange);
+        $("mz-market-last-update").textContent = new Date().toLocaleTimeString("en-GB", { hour12: false });
+    }
+
+    function renderFeed() {
+        const feed = $("mz-market-feed");
+        if (!feed) return;
+        feed.innerHTML = state.ticks.slice().reverse().map(tick => `
+            <div class="mz-market-feed-row">
+                <span class="mz-market-feed-time">${tick.time}</span>
+                <span class="mz-market-feed-price">${fmt(tick.price)}</span>
+                <span class="mz-market-feed-qty">${tick.size}</span>
+            </div>
+        `).join("");
+    }
+
+    function canvasContext(canvas) {
+        const rect = canvas.getBoundingClientRect();
+        const ratio = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+        const width = Math.max(10, rect.width);
+        const height = Math.max(10, rect.height);
+        canvas.width = Math.round(width * ratio);
+        canvas.height = Math.round(height * ratio);
+        const ctx = canvas.getContext("2d");
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        return { ctx, width, height };
+    }
+
+    function drawGrid(ctx, width, height, pad) {
+        ctx.strokeStyle = "rgba(142,169,177,.11)";
+        ctx.lineWidth = 1;
+        for (let i = 0; i <= 4; i++) {
+            const y = pad.top + (height - pad.top - pad.bottom) * i / 4;
+            ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(width - pad.right, y); ctx.stroke();
+        }
+        for (let i = 0; i <= 6; i++) {
+            const x = pad.left + (width - pad.left - pad.right) * i / 6;
+            ctx.beginPath(); ctx.moveTo(x, pad.top); ctx.lineTo(x, height - pad.bottom); ctx.stroke();
+        }
+    }
+
+    function movingAverage(values, period) {
+        return values.map((_, i) => {
+            const start = Math.max(0, i - period + 1);
+            const arr = values.slice(start, i + 1);
+            return arr.reduce((a, b) => a + b, 0) / arr.length;
+        });
+    }
+
+    function drawLine(ctx, values, xAt, yAt, color, lineWidth) {
+        ctx.beginPath();
+        values.forEach((v, i) => {
+            const x = xAt(i);
+            const y = yAt(v);
+            if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        });
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lineWidth || 1.5;
+        ctx.stroke();
+    }
+
+    function chartValues() {
+        if (state.period === "5D") return state.priceSeries.slice(-80);
+        if (state.period === "1D") return state.priceSeries.slice(-72);
+        return state.candleSeries.map(c => c.close);
+    }
+
+    function drawMarketChart() {
+        const canvas = $("mz-market-chart");
+        if (!canvas || !state.open) return;
+        const { ctx, width, height } = canvasContext(canvas);
+        ctx.clearRect(0, 0, width, height);
+
+        const pad = { left: 12, right: 66, top: 31, bottom: 23 };
+        drawGrid(ctx, width, height, pad);
+
+        const isCandle = ["DAY", "WEEK", "SEASON", "YEAR"].includes(state.period);
+        const values = chartValues();
+        const all = isCandle
+            ? state.candleSeries.map(c => [c.low, c.high]).flat()
+            : values.concat([state.dayStartPrice]);
+        const min = Math.min(...all) * 0.996;
+        const max = Math.max(...all) * 1.004;
+        const plotW = width - pad.left - pad.right;
+        const plotH = height - pad.top - pad.bottom;
+        const xAt = i => pad.left + (values.length <= 1 ? 0 : i / (values.length - 1)) * plotW;
+        const yAt = v => pad.top + (max - v) / (max - min || 1) * plotH;
+
+        ctx.fillStyle = "#71858d";
+        ctx.font = "9px Arial";
+        ctx.textAlign = "left";
+        for (let i = 0; i <= 4; i++) {
+            const val = max - (max - min) * i / 4;
+            ctx.fillText("$" + compact(val), width - pad.right + 9, pad.top + plotH * i / 4 + 3);
+        }
+
+        if (state.period === "1D" || state.period === "5D") {
+            ctx.save();
+            ctx.setLineDash([4, 5]);
+            ctx.strokeStyle = "rgba(217,188,107,.6)";
+            ctx.beginPath();
+            ctx.moveTo(pad.left, yAt(state.dayStartPrice));
+            ctx.lineTo(width - pad.right, yAt(state.dayStartPrice));
+            ctx.stroke();
+            ctx.restore();
+
+            const gradient = ctx.createLinearGradient(0, pad.top, 0, height - pad.bottom);
+            gradient.addColorStop(0, "rgba(37,193,255,.25)");
+            gradient.addColorStop(1, "rgba(37,193,255,0)");
+            ctx.beginPath();
+            values.forEach((v, i) => {
+                const x = xAt(i), y = yAt(v);
+                if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            });
+            ctx.lineTo(xAt(values.length - 1), height - pad.bottom);
+            ctx.lineTo(xAt(0), height - pad.bottom);
+            ctx.closePath();
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            const lineGradient = ctx.createLinearGradient(0, 0, width, 0);
+            lineGradient.addColorStop(0, "#2378d8");
+            lineGradient.addColorStop(.55, "#25c9ff");
+            lineGradient.addColorStop(1, "#78edff");
+            drawLine(ctx, values, xAt, yAt, lineGradient, 2.2);
+            const lastY = yAt(values[values.length - 1]);
+            ctx.beginPath(); ctx.arc(xAt(values.length - 1), lastY, 3.5, 0, Math.PI * 2);
+            ctx.fillStyle = "#7aeaff"; ctx.shadowColor = "#28c8ff"; ctx.shadowBlur = 12; ctx.fill(); ctx.shadowBlur = 0;
+        } else {
+            const candles = state.candleSeries;
+            const step = plotW / candles.length;
+            const candleW = Math.max(2, Math.min(8, step * .56));
+            candles.forEach((c, i) => {
+                const x = pad.left + (i + .5) * step;
+                const up = c.close >= c.open;
+                const color = up ? "#ed6672" : "#39d99a";
+                ctx.strokeStyle = color;
+                ctx.fillStyle = color;
+                ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.moveTo(x, yAt(c.high)); ctx.lineTo(x, yAt(c.low)); ctx.stroke();
+                const top = Math.min(yAt(c.open), yAt(c.close));
+                const bodyH = Math.max(2, Math.abs(yAt(c.open) - yAt(c.close)));
+                ctx.fillRect(x - candleW / 2, top, candleW, bodyH);
+            });
+            const closes = candles.map(c => c.close);
+            const ma5 = movingAverage(closes, 5), ma10 = movingAverage(closes, 10);
+            drawLine(ctx, ma5, i => pad.left + (i + .5) * step, yAt, "#e9c975", 1.2);
+            drawLine(ctx, ma10, i => pad.left + (i + .5) * step, yAt, "#8e86dc", 1.1);
+        }
+
+        const labels = state.period === "1D" ? ["09:00", "11:00", "13:00", "15:00"]
+                     : state.period === "5D" ? ["D-5", "D-4", "D-3", "D-2", "D-1", "NOW"]
+                     : state.period === "DAY" ? ["09:30", "10:30", "11:30", "13:30", "15:00"]
+                     : state.period === "WEEK" ? ["MON", "TUE", "WED", "THU", "FRI"]
+                     : state.period === "SEASON" ? ["M-3", "M-2", "M-1", "NOW"]
+                     : ["JAN", "MAR", "MAY", "JUL", "SEP", "NOV"];
+        ctx.fillStyle = "#71858d"; ctx.font = "9px Arial"; ctx.textAlign = "center";
+        labels.forEach((label, i) => {
+            const x = pad.left + (plotW * (i + .5) / labels.length);
+            ctx.fillText(label, x, height - 6);
+        });
+    }
+
+    function compact(value) {
+        if (value >= 1e6) return (value / 1e6).toFixed(2) + "M";
+        if (value >= 1e3) return (value / 1e3).toFixed(1) + "K";
+        return value.toFixed(0);
+    }
+
+    function drawVolume() {
+        const canvas = $("mz-market-volume");
+        if (!canvas || !state.open) return;
+        const { ctx, width, height } = canvasContext(canvas);
+        ctx.clearRect(0, 0, width, height);
+        const source = state.period === "1D" || state.period === "5D"
+            ? state.volumeSeries.slice(-75)
+            : state.candleSeries.map(c => c.volume);
+        const max = Math.max(...source, 1);
+        const gap = 2;
+        const barW = Math.max(1, (width - gap * (source.length - 1)) / source.length);
+        source.forEach((v, i) => {
+            const h = Math.max(2, (v / max) * (height - 5));
+            const positive = i === 0 || source[i] >= source[i - 1];
+            ctx.fillStyle = positive ? "rgba(231,94,108,.75)" : "rgba(55,207,145,.72)";
+            ctx.fillRect(i * (barW + gap), height - h, barW, h);
+        });
+    }
+
+    function renderCharts() {
+        drawMarketChart();
+        drawVolume();
+    }
+
+    function pushTick() {
+        const item = activeItem();
+        const drift = 0.00018 + Math.random() * 0.00048;
+        state.price *= (1 + drift);
+        const newPoint = state.price * (1 + (Math.random() - .42) * 0.0005);
+        state.priceSeries.push(newPoint);
+        if (state.priceSeries.length > 160) state.priceSeries.shift();
+
+        const prev = state.candleSeries[state.candleSeries.length - 1];
+        const open = prev ? prev.close : state.price;
+        const close = state.price;
+        const wiggle = state.price * (0.00025 + Math.random() * 0.0004);
+        state.candleSeries.push({
+            open,
+            close,
+            high: Math.max(open, close) + wiggle,
+            low: Math.min(open, close) - wiggle,
+            volume: 10 + Math.random() * 160
+        });
+        if (state.candleSeries.length > 120) state.candleSeries.shift();
+        state.volumeSeries.push(20 + Math.random() * 110);
+        if (state.volumeSeries.length > 160) state.volumeSeries.shift();
+
+        const tick = {
+            time: new Date().toLocaleTimeString("en-GB", { hour12: false }),
+            price: state.price,
+            size: (0.01 + Math.random() * 0.22).toFixed(3)
+        };
+        state.ticks.push(tick);
+        if (state.ticks.length > 80) state.ticks.shift();
+
+        updateSummary();
+        renderFeed();
+        renderCharts();
+    }
+
+    function setPeriod(period) {
+        state.period = period;
+        document.querySelectorAll("#mz-market-periods .mz-market-tab").forEach(btn => {
+            btn.classList.toggle("active", btn.dataset.period === period);
+        });
+        $("mz-market-volume-label").textContent = period + " · REAL-TIME";
+        renderCharts();
+    }
+
+    function selectProduct(index) {
+        state.selected = Math.max(0, Math.min(marketItems.length - 1, Number(index) || 0));
+        seedHistory();
+        updateSummary();
+        renderFeed();
+        renderCharts();
+    }
+
+    function openTracker() {
+        const modal = $("secondary-market-modal");
+        if (!modal) return;
+        modal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+        state.open = true;
+
+        const select = $("mz-market-product");
+        if (!select.options.length) {
+            select.innerHTML = marketItems.map((item, i) =>
+                `<option value="${i}">${item.name}</option>`
+            ).join("");
+            select.addEventListener("change", e => selectProduct(e.target.value));
+        }
+        select.value = String(state.selected);
+        if (!state.price) seedHistory();
+        updateSummary();
+        renderFeed();
+        requestAnimationFrame(renderCharts);
+
+        if (!state.timer) state.timer = window.setInterval(pushTick, 2500);
+        window.setTimeout(renderCharts, 120);
+    }
+
+    function closeTracker() {
+        const modal = $("secondary-market-modal");
+        if (modal) modal.classList.add("hidden");
+        document.body.style.overflow = "";
+        state.open = false;
+        if (state.timer) {
+            window.clearInterval(state.timer);
+            state.timer = null;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const periodRoot = $("mz-market-periods");
+        if (periodRoot) {
+            periodRoot.addEventListener("click", e => {
+                const btn = e.target.closest("[data-period]");
+                if (btn) setPeriod(btn.dataset.period);
+            });
+        }
+        const modal = $("secondary-market-modal");
+        if (modal) {
+            modal.addEventListener("keydown", e => {
+                if (e.key === "Escape") closeTracker();
+            });
+        }
+        window.addEventListener("resize", () => {
+            if (state.open) renderCharts();
+        });
+    });
+
+    window.openSecondaryTracker = openTracker;
+    window.closeSecondaryTracker = closeTracker;
+})();
+</script>
+
 </body>
 </html>
