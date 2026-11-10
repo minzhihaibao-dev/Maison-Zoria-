@@ -252,47 +252,44 @@
 
     <!-- NAVIGATION HEADER -->
     <header class="fixed top-0 left-0 w-full z-40 glass-header transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between gap-4">
             
-            <!-- Left Nav Links -->
-            <nav class="hidden lg:flex items-center space-x-8 text-[11px] uppercase tracking-[0.3em] text-gray-300">
-                <a href="#collection" class="hover:text-gold transition-colors duration-300">High Creations</a>
-                <a href="#heritage" class="hover:text-gold transition-colors duration-300">Heritage</a>
-                <a href="#savoir-faire" class="hover:text-gold transition-colors duration-300">Savoir-Faire</a>
-                <a href="#provenance" class="hover:text-gold transition-colors duration-300">On-Chain Certificate</a>
-                <button type="button" onclick="openSecondaryTracker()" class="mz-market-nav-btn" title="Secondary Market Tracker">
-                    <span class="mz-market-pulse"></span><span>二级市场交易捕捉器</span><span class="mz-market-bull">BULL</span>
-                </button>
+            <!-- Left Nav Links (Cleaned & spaced without duplicate button) -->
+            <nav class="hidden xl:flex items-center space-x-6 text-[10px] uppercase tracking-[0.25em] text-gray-300">
+                <a href="#collection" class="hover:text-gold transition-colors duration-300 whitespace-nowrap">High Creations</a>
+                <a href="#heritage" class="hover:text-gold transition-colors duration-300 whitespace-nowrap">Heritage</a>
+                <a href="#savoir-faire" class="hover:text-gold transition-colors duration-300 whitespace-nowrap">Savoir-Faire</a>
+                <a href="#provenance" class="hover:text-gold transition-colors duration-300 whitespace-nowrap">On-Chain Certificate</a>
             </nav>
 
             <!-- Brand Emblem & Logo -->
-            <a href="#" class="flex items-center space-x-4 group">
+            <a href="#" class="flex items-center space-x-3 group shrink-0">
                 <div class="relative">
-                    <img src="./LOGO.jpg" alt="Maison Zoria Emblem" class="h-11 w-11 object-cover rounded-full border border-gold/60 group-hover:border-gold transition-all duration-500 shadow-[0_0_15px_rgba(240,210,120,0.3)]" onerror="this.onerror=null; this.src='https://placehold.co/100x100/030304/f0d278?text=MZ';">
+                    <img src="./LOGO.jpg" alt="Maison Zoria Emblem" class="h-10 w-10 object-cover rounded-full border border-gold/60 group-hover:border-gold transition-all duration-500 shadow-[0_0_15px_rgba(240,210,120,0.3)]" onerror="this.onerror=null; this.src='https://placehold.co/100x100/030304/f0d278?text=MZ';">
                     <span class="absolute inset-0 rounded-full border border-gold animate-ping opacity-25"></span>
                 </div>
                 <div class="flex flex-col text-center">
-                    <span class="font-cinzel text-xl sm:text-2xl tracking-[0.35em] font-light text-cream group-hover:text-gold transition-colors">MAISON ZORIA</span>
-                    <span class="text-[8px] uppercase tracking-[0.5em] text-gold/80 -mt-1 font-medium">Geneva • Paris • High Jewelry Vault</span>
+                    <span class="font-cinzel text-lg sm:text-xl tracking-[0.3em] font-light text-cream group-hover:text-gold transition-colors whitespace-nowrap">MAISON ZORIA</span>
+                    <span class="text-[7px] uppercase tracking-[0.45em] text-gold/80 -mt-0.5 font-medium whitespace-nowrap">Geneva • Paris • High Jewelry Vault</span>
                 </div>
             </a>
 
             <!-- Right Controls & Vault Trigger -->
-            <div class="flex items-center space-x-5">
+            <div class="flex items-center space-x-3 sm:space-x-4">
                 
-                <!-- Secondary Market Tracker Trigger -->
+                <!-- Single Secondary Market Tracker Button -->
                 <button type="button" onclick="openSecondaryTracker()" class="mz-market-nav-btn" aria-label="二级市场交易捕捉器 / Secondary Market Tracker" title="Secondary Market Tracker">
-                    <span class="mz-market-pulse"></span><span>二级市场</span><span class="mz-market-bull">BULL</span>
+                    <span class="mz-market-pulse"></span><span class="hidden sm:inline">二级市场交易捕捉器</span><span class="sm:hidden">二级市场</span><span class="mz-market-bull">BULL</span>
                 </button>
 
                 <!-- Audio Ambience Toggle -->
-                <button onclick="toggleAudioAmbience()" id="audio-toggle-btn" class="hidden sm:flex items-center space-x-2 text-[10px] uppercase tracking-widest text-gold border border-gold/30 px-3 py-1.5 rounded-full hover:border-gold transition-all" title="Toggle Tactile Audio Feedback">
+                <button onclick="toggleAudioAmbience()" id="audio-toggle-btn" class="hidden md:flex items-center space-x-1.5 text-[10px] uppercase tracking-widest text-gold border border-gold/30 px-3 py-1.5 rounded-full hover:border-gold transition-all shrink-0" title="Toggle Tactile Audio Feedback">
                     <i id="audio-icon" class="fa-solid fa-volume-xmark text-gold"></i>
-                    <span id="audio-text" class="hidden md:inline">Sound: Off</span>
+                    <span id="audio-text" class="hidden lg:inline">Sound: Off</span>
                 </button>
 
                 <!-- Currency Selector -->
-                <div class="flex items-center space-x-1 text-xs uppercase tracking-widest text-gray-300 border border-gold/30 px-3 py-1.5 rounded-full bg-obsidian-card">
+                <div class="flex items-center space-x-1 text-xs uppercase tracking-widest text-gray-300 border border-gold/30 px-2.5 py-1.5 rounded-full bg-obsidian-card shrink-0">
                     <i class="fa-solid fa-coins text-gold text-[10px] me-1"></i>
                     <select id="currency-select" onchange="updateCurrencyDisplay()" class="bg-transparent text-gray-200 outline-none cursor-pointer text-[11px]">
                         <option value="USD" class="bg-obsidian text-cream">USD ($)</option>
@@ -305,20 +302,20 @@
                 </div>
 
                 <!-- Private Vault Trigger -->
-                <button onclick="toggleVaultModal(true)" class="relative p-2.5 text-gray-200 hover:text-gold transition-colors focus:outline-none" aria-label="Open Private Vault">
-                    <i class="fa-solid fa-gem text-xl text-gold"></i>
-                    <span id="vault-count-badge" class="absolute -top-1 -right-1 bg-gold text-obsidian font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(240,210,120,0.8)]">0</span>
+                <button onclick="toggleVaultModal(true)" class="relative p-2 text-gray-200 hover:text-gold transition-colors focus:outline-none shrink-0" aria-label="Open Private Vault">
+                    <i class="fa-solid fa-gem text-lg text-gold"></i>
+                    <span id="vault-count-badge" class="absolute -top-1 -right-1 bg-gold text-obsidian font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(240,210,120,0.8)]">0</span>
                 </button>
 
                 <!-- Mobile Menu Button -->
-                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-gray-300 hover:text-gold">
+                <button onclick="toggleMobileMenu()" class="xl:hidden p-2 text-gray-300 hover:text-gold shrink-0">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Navigation Drawer -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-obsidian border-b border-gold/20 px-6 py-6 space-y-4 text-center text-xs uppercase tracking-widest">
+        <div id="mobile-menu" class="hidden xl:hidden bg-obsidian border-b border-gold/20 px-6 py-6 space-y-4 text-center text-xs uppercase tracking-widest">
             <a href="#collection" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">High Creations ($200K+)</a>
             <a href="#heritage" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">Heritage Story</a>
             <a href="#savoir-faire" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">Savoir-Faire</a>
