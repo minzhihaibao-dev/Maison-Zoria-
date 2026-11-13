@@ -331,7 +331,7 @@
             
             <div class="inline-flex items-center space-x-3 px-5 py-2 rounded-full border border-gold/40 bg-obsidian/80 backdrop-blur-md shadow-[0_0_20px_rgba(240,210,120,0.2)]">
                 <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
-                <span class="text-[10px] uppercase tracking-[0.4em] text-gold font-medium">Bespoke Vault • Masterpieces $200,000 to $6,930,000 USD</span>
+                <span class="text-[10px] uppercase tracking-[0.4em] text-gold font-medium">Bespoke Vault • Masterpieces $120,000 to $6,930,000 USD</span>
             </div>
 
             <h1 class="font-cinzel text-4xl sm:text-6xl md:text-8xl font-light text-cream tracking-tight leading-[1.08] diamond-sparkle py-2">
@@ -755,6 +755,17 @@
         // $200K+ HIGH JEWELRY PRODUCTS DATA ENGINE
         // -------------------------------------------------------------
         const products = [
+            {
+                id: 'lunar-architects',
+                title: 'LUNAR ARCHITECTS - The Lunar Dome Masterpiece',
+                basePriceUSD: 890000,
+                image: 'https://raw.githubusercontent.com/minzhihaibao-dev/Maison-Zoria-/main/LUNAR%20ARCHITECTS.png',
+                altImage: 'https://placehold.co/800x800/030304/f0d278?text=LUNAR+ARCHITECTS+890K',
+                tag: 'GLOBAL 1/1 · UNIQUE PIECE',
+                description: 'A one-of-one Maison Zoria creation inspired by Rococo and Baroque architecture, pairing mother-of-pearl white with midnight-blue crocodile texture and an ornate golden MZ emblem.',
+                craftingTime: 'Private Atelier Commission',
+                origin: 'Maison Zoria Private Collection'
+            },
             {
                 id: 'lastre-eternel',
                 title: "L'ASTRE ÉTERNEL - Diamond Haute Horlogerie Timepiece",
@@ -1519,6 +1530,7 @@
     "use strict";
 
     const marketItems = [
+        { name: "LUNAR ARCHITECTS", issue: 890000, premium: 1.0 },
         { name: "Eternal Star Romance", issue: 1769072, premium: 1.4227 },
         { name: "L'ASTRE ÉTERNEL", issue: 6930000, premium: 1.3862 },
         { name: "Dream Awakening", issue: 3000000, premium: 1.3518 },
