@@ -158,8 +158,7 @@
             box-shadow: 0 0 20px rgba(184, 134, 11, 0.6), inset 0 0 10px rgba(0,0,0,0.8);
             border: 2px solid #ffd700;
         }
-    
-            </style>
+    </style>
     <style>
         .goog-te-banner-frame, .skiptranslate iframe, #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
         .goog-text-highlight { background: none !important; box-shadow: none !important; }
@@ -350,14 +349,45 @@
     <section id="collection" class="py-32 bg-obsidian-card border-t border-gold/15 relative z-10">
         <div class="max-w-7xl mx-auto px-6">
             
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 space-y-6 md:space-y-0">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 space-y-6 md:space-y-0">
                 <div>
                     <div class="text-xs uppercase tracking-[0.4em] text-gold font-semibold">The Private Portfolio</div>
                     <h2 class="font-cinzel text-3xl sm:text-5xl font-light text-cream mt-2">Haute Création Masterpieces</h2>
                 </div>
                 <p class="text-xs text-gray-400 max-w-md font-light leading-relaxed">
-                    Exclusive high-jewelry & horological leather sculptures valued between $200,000 and $6,930,000 USD. Customizer enabled for personalized gold alloy and monogramming.
+                    Exclusive high-jewelry & horological leather sculptures valued between $120,000 and $6,930,000 USD. Customizer enabled for personalized gold alloy and monogramming.
                 </p>
+            </div>
+
+            <!-- DAILY INVENTORY URGENCY SUITE BANNER -->
+            <div class="mb-10 p-4 sm:p-5 rounded-2xl bg-obsidian/95 border border-gold/40 shadow-[0_0_30px_rgba(240,210,120,0.12)] flex flex-col lg:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-3.5 text-center sm:text-left">
+                    <span class="relative flex h-2.5 w-2.5 shrink-0">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold"></span>
+                    </span>
+                    <div>
+                        <div class="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-gold font-semibold flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                            <span>Geneva Vault Daily Allocation Live</span>
+                            <span id="daily-allocation-date" class="px-2 py-0.5 rounded bg-gold/15 border border-gold/30 text-[9px] font-mono text-cream"></span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 font-light mt-0.5">
+                            Atelier release slots refresh every 24 hours. Unclaimed daily pieces return to private reserve upon window close.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 shrink-0">
+                    <div class="text-center sm:text-right">
+                        <div class="text-[9px] uppercase tracking-[0.25em] text-gray-400">Remaining Today</div>
+                        <div id="daily-total-remaining" class="font-cinzel text-base sm:text-lg text-gold font-semibold">-- Slots Globally</div>
+                    </div>
+                    <div class="h-8 w-[1px] bg-gold/20 hidden sm:block"></div>
+                    <div class="px-4 py-2 rounded-xl bg-obsidian-card border border-gold/30 text-center">
+                        <div class="text-[8px] uppercase tracking-[0.25em] text-gray-400">Daily Allocation Reset In</div>
+                        <div id="daily-reset-timer" class="font-mono text-xs sm:text-sm text-cream tracking-widest font-semibold mt-0.5">00:00:00</div>
+                    </div>
+                </div>
             </div>
 
             <p id="fx-note" class="text-[11px] text-gray-500 font-light mb-12">Prices in your local currency are indicative, based on current exchange rates. The USD price is the reference price.</p>
@@ -732,7 +762,7 @@
             },
             {
                 id: 'nocturnal-cure',
-                title: 'Nocturnal Cure - Midnight Sapphire & Platinum',
+                title: 'Nocturnal Cure',
                 basePriceUSD: 250000,
                 image: './Nocturnal Cure.jpg',
                 altImage: 'https://placehold.co/800x800/030304/f0d278?text=Nocturnal+Cure+250K',
@@ -743,7 +773,7 @@
             },
             {
                 id: 'cloud-bloom',
-                title: 'Cloud Bloom - Imperial Jade & Palladium',
+                title: 'Cloud Bloom',
                 basePriceUSD: 280000,
                 image: './Cloud Bloom.jpg',
                 altImage: 'https://placehold.co/800x800/030304/f0d278?text=Cloud+Bloom+280K',
@@ -754,7 +784,7 @@
             },
             {
                 id: 'carousel-dreams',
-                title: 'Carousel Dreams - Horological Tourbillon Lock Bag',
+                title: 'Carousel Dreams',
                 basePriceUSD: 380000,
                 image: './Carousel Dreams.jpg',
                 altImage: 'https://placehold.co/800x800/030304/f0d278?text=Carousel+Dreams+380K',
@@ -765,7 +795,7 @@
             },
             {
                 id: 'aurora-castle',
-                title: 'Aurora Castle - Emerald & White Gold Crownpiece',
+                title: 'Aurora Castle',
                 basePriceUSD: 295000,
                 image: './Aurora Castle.jpg',
                 altImage: 'https://placehold.co/800x800/030304/f0d278?text=Aurora+Castle+295K',
@@ -776,7 +806,7 @@
             },
             {
                 id: 'lunar-cove',
-                title: 'Lunar Cove - Pure Gold Sculptural Panther/Cat Bag',
+                title: 'Lunar Cove',
                 basePriceUSD: 175000,
                 image: './Lunar Cove Cat Bag.jpg',
                 altImage: 'https://placehold.co/800x800/030304/f0d278?text=Lunar+Cove+175K',
@@ -787,7 +817,7 @@
             },
             {
                 id: 'lunar-nova',
-                title: 'Lunar Nova - Midnight Diamond Bespoke Trunk',
+                title: 'Lunar Nova',
                 basePriceUSD: 120000,
                 image: './Lunar Nova.png',
                 altImage: 'https://placehold.co/800x800/030304/f0d278?text=Lunar+Nova+120K',
@@ -795,6 +825,28 @@
                 description: 'Sculptural luxury trunk crafted from black crocodile leather, featuring black diamond dust coating and solid gold corner hardware.',
                 craftingTime: '280 Hours',
                 origin: 'Paris Atelier'
+            },
+            {
+                id: 'caramel-daydream',
+                title: 'Caramel Daydream',
+                basePriceUSD: 234314,
+                image: 'https://raw.githubusercontent.com/minzhihaibao-dev/Maison-Zoria-/main/Caramel%20Daydream.png',
+                altImage: 'https://placehold.co/800x800/030304/f0d278?text=Caramel+Daydream',
+                tag: 'Haute Création · New Release',
+                description: 'Warm caramel shearling couture architecture crowned with a luminous mother-of-pearl cloud emblem and solid 18K gold seashell clasp.',
+                craftingTime: 'Bespoke Commission',
+                origin: 'Maison Zoria Private Collection'
+            },
+            {
+                id: 'dialogue-under-the-moonlight',
+                title: 'Dialogue under the Moonlight',
+                basePriceUSD: 723914,
+                image: 'https://raw.githubusercontent.com/minzhihaibao-dev/Maison-Zoria-/main/Dialogue%20under%20the%20Moonlight.png',
+                altImage: 'https://placehold.co/800x800/030304/f0d278?text=Dialogue+under+the+Moonlight',
+                tag: 'Nocturne Vault · Unique Edition',
+                description: 'A poetic nocturnal sculpture combining moonlit silver filigree, celestial gemstone inlays, and Maison Zoria heirloom goldwork.',
+                craftingTime: 'Private Atelier Commission',
+                origin: 'Geneva Master Atelier'
             },
             {
                 id: 'eternal-star-romance',
@@ -898,6 +950,118 @@
         ];
 
         // -------------------------------------------------------------
+        // DAILY INVENTORY URGENCY ENGINE (AUTO-UPDATES EVERY DAY)
+        // -------------------------------------------------------------
+        let currentDayKey = '';
+
+        function getDailySeedKey() {
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+
+        function hashString(str) {
+            let hash = 2166136261;
+            for (let i = 0; i < str.length; i++) {
+                hash ^= str.charCodeAt(i);
+                hash = Math.imul(hash, 16777619);
+            }
+            return hash >>> 0;
+        }
+
+        function getDailyInventoryStatus(product, index) {
+            const dayKey = getDailySeedKey();
+            const seed = hashString(`${dayKey}:${product.id}:${index}`);
+            const inquiries = (seed % 7) + 2;
+
+            if (product.basePriceUSD >= 700000 || product.tag.includes('1/1') || product.tag.includes('Unique')) {
+                const isLastPiece = (seed % 4) !== 0;
+                return {
+                    remaining: isLastPiece ? 1 : 0,
+                    totalDaily: 1,
+                    statusLabel: isLastPiece ? '1 OF 1 LEFT TODAY' : 'RESERVED TODAY · WAITLIST',
+                    urgencyText: isLastPiece
+                        ? `Last global allocation · ${inquiries} collectors viewing now`
+                        : `Daily slot claimed · Next vault release at 00:00`,
+                    isCritical: true,
+                    isSoldOutToday: !isLastPiece
+                };
+            }
+
+            const roll = seed % 10;
+            let remaining = 1;
+            let totalDaily = 2;
+            if (roll <= 4) {
+                remaining = 1;
+                totalDaily = 2;
+            } else if (roll <= 7) {
+                remaining = 2;
+                totalDaily = 3;
+            } else {
+                remaining = 0;
+                totalDaily = 2;
+            }
+
+            if (remaining === 0) {
+                return {
+                    remaining: 0,
+                    totalDaily,
+                    statusLabel: 'DAILY QUOTA CLAIMED',
+                    urgencyText: `All ${totalDaily} daily slots reserved · Priority waitlist open`,
+                    isCritical: true,
+                    isSoldOutToday: true
+                };
+            }
+
+            return {
+                remaining,
+                totalDaily,
+                statusLabel: remaining === 1 ? 'ONLY 1 LEFT TODAY' : `${remaining} OF ${totalDaily} LEFT TODAY`,
+                urgencyText: remaining === 1
+                    ? `Final daily piece · ${inquiries} active salon inquiries`
+                    : `${remaining} atelier slots left before midnight reset`,
+                isCritical: remaining === 1,
+                isSoldOutToday: false
+            };
+        }
+
+        function updateDailyUrgencyBanner() {
+            const dateBadge = document.getElementById('daily-allocation-date');
+            const totalEl = document.getElementById('daily-total-remaining');
+            const timerEl = document.getElementById('daily-reset-timer');
+
+            const now = new Date();
+            const dayKey = getDailySeedKey();
+
+            if (currentDayKey && currentDayKey !== dayKey) {
+                currentDayKey = dayKey;
+                renderProducts();
+            }
+            currentDayKey = dayKey;
+
+            if (dateBadge) {
+                dateBadge.textContent = dayKey;
+            }
+
+            if (totalEl) {
+                const totalRemaining = products.reduce((sum, p, idx) => sum + getDailyInventoryStatus(p, idx).remaining, 0);
+                totalEl.textContent = `${totalRemaining} Pieces Globally`;
+            }
+
+            if (timerEl) {
+                const midnight = new Date(now);
+                midnight.setHours(24, 0, 0, 0);
+                const diff = Math.max(0, midnight - now);
+                const hrs = String(Math.floor(diff / 3600000)).padStart(2, '0');
+                const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+                const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+                timerEl.textContent = `${hrs}:${mins}:${secs}`;
+            }
+        }
+
+        // -------------------------------------------------------------
         // GLOBAL STATE & CURRENCY CONVERSION RATES
         // -------------------------------------------------------------
         let currentCurrency = 'USD';
@@ -905,7 +1069,6 @@
         let audioEnabled = false;
         let selectedCustomizerProduct = null;
 
-        // Offline fallback FX table (USD = 1). Replaced by live rates when they load.
         const conversionRates = {
             USD: 1, EUR: 0.92, GBP: 0.78, CAD: 1.37, AUD: 1.52, NZD: 1.66, CHF: 0.88,
             CNY: 7.22, HKD: 7.8, TWD: 32.5, JPY: 150, KRW: 1380, SGD: 1.35, MYR: 4.7,
@@ -916,7 +1079,6 @@
         const cryptoRates = { BTC: 0.000015, ETH: 0.00038, SOL: 0.0068 };
         let currentLocale = 'en-US';
 
-        // ISO country code -> [currency code, locale]
         const COUNTRY_PROFILE = {
             US: ['USD', 'en-US'], CA: ['CAD', 'en-CA'], GB: ['GBP', 'en-GB'], AU: ['AUD', 'en-AU'],
             NZ: ['NZD', 'en-NZ'], IE: ['EUR', 'en-IE'], IN: ['INR', 'en-IN'], ZA: ['ZAR', 'en-ZA'],
@@ -931,7 +1093,6 @@
             TR: ['TRY', 'tr-TR'], BR: ['BRL', 'pt-BR'], MX: ['MXN', 'es-MX']
         };
 
-        // Map a locale to a Google Translate target code
         function googleTargetFor(locale) {
             const base = String(locale).split('-')[0];
             if (base === 'en') return 'en';
@@ -960,7 +1121,7 @@
                     if (data && typeof data.country_code === 'string') {
                         return data.country_code.toUpperCase();
                     }
-                } catch (e) { /* try next source */ }
+                } catch (e) { }
             }
             return null;
         }
@@ -975,7 +1136,7 @@
                         }
                     });
                 }
-            } catch (e) { /* keep fallback table */ }
+            } catch (e) { }
         }
 
         function ensureOption(selectEl, value, label) {
@@ -1020,7 +1181,6 @@
                 ensureOption(currencySelect, currentCurrency, currentCurrency);
                 currencySelect.value = currentCurrency;
 
-                // Auto-translate on first visit (only once: the cookie prevents reload loops)
                 if (!getTranslateCookie()) {
                     const auto = googleTargetFor(currentLocale);
                     if (auto !== 'en' && setTranslateCookie(auto)) {
@@ -1035,11 +1195,8 @@
 
                 renderProducts();
                 updateVaultUI();
-            } catch (e) {
-                // Fall back silently to USD / English
-            }
+            } catch (e) { }
         }
-
 
         const cryptoWallets = {
             BTC: 'bc1q7g9cjpc4686m4tzdjmajpray4ats4xjgvh3x8j',
@@ -1122,7 +1279,18 @@
             const grid = document.getElementById('product-grid');
             if (!grid) return;
 
-            grid.innerHTML = products.map(product => `
+            grid.innerHTML = products.map((product, idx) => {
+                const inv = getDailyInventoryStatus(product, idx);
+                const badgeStyle = inv.isSoldOutToday
+                    ? 'bg-red-950/90 border-red-400/60 text-red-200'
+                    : (inv.isCritical
+                        ? 'bg-amber-950/90 border-amber-400/70 text-amber-200'
+                        : 'bg-obsidian/90 border-gold/50 text-gold');
+
+                const dotColor = inv.isSoldOutToday ? 'bg-red-400' : 'bg-amber-400 animate-ping';
+                const fillPct = inv.totalDaily > 0 ? Math.round((inv.remaining / inv.totalDaily) * 100) : 0;
+
+                return `
                 <div class="glass-card rounded-3xl overflow-hidden gold-border-glow flex flex-col justify-between group">
                     <div class="relative overflow-hidden aspect-square bg-obsidian">
                         <img src="${product.image}" alt="${product.title}" 
@@ -1130,6 +1298,13 @@
                              onerror="this.onerror=null; this.src='${product.altImage}';">
                         <div class="absolute top-4 left-4 bg-obsidian/90 backdrop-blur-md px-3.5 py-1 rounded-full border border-gold/40 text-[9px] text-gold uppercase tracking-widest font-semibold">
                             ${product.tag}
+                        </div>
+                        <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3 py-1.5 rounded-xl backdrop-blur-md border ${badgeStyle}">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-1.5 h-1.5 rounded-full ${dotColor}"></span>
+                                <span class="text-[9px] uppercase tracking-[0.2em] font-bold">${inv.statusLabel}</span>
+                            </div>
+                            <span class="text-[8px] uppercase tracking-widest opacity-80 font-mono">DAILY VAULT</span>
                         </div>
                     </div>
 
@@ -1142,6 +1317,18 @@
                             <p class="text-xs text-gray-400 font-light mt-2 line-clamp-2 leading-relaxed">
                                 ${product.description}
                             </p>
+
+                            <!-- Daily Scarcity Meter -->
+                            <div class="mt-4 pt-3 border-t border-white/5 space-y-1.5">
+                                <div class="flex items-center justify-between text-[10px]">
+                                    <span class="${inv.isCritical ? 'text-amber-300' : 'text-gray-300'} font-medium tracking-wide">
+                                        <i class="fa-solid fa-fire-flame-curved text-gold mr-1"></i>${inv.urgencyText}
+                                    </span>
+                                </div>
+                                <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-amber-500 to-gold transition-all duration-700" style="width: ${fillPct}%"></div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="pt-4 border-t border-white/5 flex items-center gap-3">
@@ -1149,14 +1336,16 @@
                                 Customizer
                             </button>
                             <button onclick="addToVault('${product.id}')" class="flex-1 py-3 bg-gold/15 hover:bg-gold text-gold hover:text-obsidian border border-gold/50 text-[11px] uppercase tracking-wider rounded-xl transition-all font-semibold">
-                                Reserve Vault
+                                ${inv.isSoldOutToday ? 'Join Waitlist' : 'Reserve Vault'}
                             </button>
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
 
             renderCreationDropdown();
+            updateDailyUrgencyBanner();
         }
 
         function renderCreationDropdown() {
@@ -1165,7 +1354,7 @@
 
             select.innerHTML = products.map(product => 
                 `<option value="${product.title}">${product.title} ($${product.basePriceUSD.toLocaleString()})</option>`
-            ).join('') + `<option value="Bespoke Private Commission">Bespoke Bespoke Commission</option>`;
+            ).join('') + `<option value="Bespoke Private Commission">Bespoke Private Commission</option>`;
         }
 
         // -------------------------------------------------------------
@@ -1173,11 +1362,13 @@
         // -------------------------------------------------------------
         function openProductCustomizer(productId) {
             playClickSound();
-            const product = products.find(p => p.id === productId);
+            const productIndex = products.findIndex(p => p.id === productId);
+            const product = products[productIndex];
             if (!product) return;
 
             selectedCustomizerProduct = {
                 ...product,
+                productIndex,
                 hardware: '18K Yellow Gold',
                 hardwareAddon: 0,
                 leather: 'French Calfskin',
@@ -1193,6 +1384,7 @@
             if (!selectedCustomizerProduct) return;
             const p = selectedCustomizerProduct;
             const totalPriceUSD = p.basePriceUSD + p.hardwareAddon + p.leatherAddon;
+            const inv = getDailyInventoryStatus(p, p.productIndex || 0);
 
             const modalContent = document.getElementById('modal-product-content');
             modalContent.innerHTML = `
@@ -1207,7 +1399,12 @@
 
                 <div class="p-8 flex flex-col justify-between space-y-6">
                     <div>
-                        <div class="text-[9px] text-gold uppercase tracking-widest font-semibold">${p.tag}</div>
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="text-[9px] text-gold uppercase tracking-widest font-semibold">${p.tag}</div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-400/50 text-[9px] text-amber-300 uppercase tracking-widest font-bold">
+                                ${inv.statusLabel}
+                            </span>
+                        </div>
                         <h3 class="font-cinzel text-2xl text-cream mt-1">${p.title}</h3>
                         <div id="modal-calculated-price" class="font-cinzel text-2xl text-gold mt-2 font-light">${formatPrice(totalPriceUSD)}</div>
                         
@@ -1215,8 +1412,13 @@
                             ${p.description}
                         </p>
 
+                        <div class="mt-3 px-3 py-2 rounded-xl bg-obsidian border border-gold/25 text-[10px] text-amber-200 flex items-center space-x-2">
+                            <i class="fa-solid fa-clock text-gold"></i>
+                            <span>${inv.urgencyText} · Resets daily at 00:00</span>
+                        </div>
+
                         <!-- Bespoke Options Controls -->
-                        <div class="mt-6 space-y-4 pt-4 border-t border-white/10 text-xs">
+                        <div class="mt-5 space-y-4 pt-4 border-t border-white/10 text-xs">
                             <div>
                                 <label class="block text-[10px] text-gray-400 uppercase tracking-widest mb-1.5">1. Hardware & Lockwork Alloy</label>
                                 <select onchange="updateCustomizerOption('hardware', this.value)" class="w-full bg-obsidian border border-gold/40 rounded-xl px-3 py-2 text-cream outline-none">
@@ -1243,7 +1445,7 @@
                     </div>
 
                     <button onclick="addCustomizedToVault()" class="w-full py-4 bg-gold text-obsidian font-bold text-xs uppercase tracking-[0.2em] rounded-xl hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(240,210,120,0.4)]">
-                        Add Customized Piece to Vault
+                        ${inv.isSoldOutToday ? 'Lock Priority Waitlist Slot' : 'Add Customized Piece to Vault'}
                     </button>
                 </div>
             `;
@@ -1527,10 +1729,10 @@
             updateVaultUI();
             initParticleCanvas();
             initLocalization();
+            updateDailyUrgencyBanner();
+            setInterval(updateDailyUrgencyBanner, 1000);
         };
     </script>
-
-
 
     <script>
         function googleTranslateElementInit() {
