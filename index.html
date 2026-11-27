@@ -1,4 +1,766 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison Zoria | Haute Création, High Jewelry & Private Vault</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: {
+                            DEFAULT: '#030304',
+                            card: '#0a0a0f',
+                            border: '#1f1f2b'
+                        },
+                        gold: {
+                            DEFAULT: '#f0d278',
+                            light: '#fbf0b9',
+                            dark: '#a88118',
+                            glow: 'rgba(240, 210, 120, 0.35)',
+                            liquid: 'linear-gradient(135deg, #fbf0b9 0%, #f0d278 50%, #8a650d 100%)'
+                        },
+                        cream: '#fcfaf7',
+                        platinum: '#e5e4e2'
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+                        sans: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Aesthetics & Animations -->
+    <style>
+        body {
+            background-color: #030304;
+            color: #fcfaf7;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+
+        /* Liquid Gold Shimmer Text */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fff2c6 0%, #f0d278 40%, #c49a2a 70%, #fbf0b9 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: goldShimmer 6s linear infinite;
+        }
+
+        @keyframes goldShimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 24K Gold Border Glow */
+        .gold-border-glow {
+            border: 1px solid rgba(240, 210, 120, 0.25);
+            box-shadow: 0 0 25px rgba(240, 210, 120, 0.08);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gold-border-glow:hover {
+            border-color: rgba(240, 210, 120, 0.85);
+            box-shadow: 0 0 45px rgba(240, 210, 120, 0.3);
+            transform: translateY(-4px);
+        }
+
+        /* Diamond Shimmer Effect */
+        .diamond-sparkle {
+            position: relative;
+            overflow: hidden;
+        }
+        .diamond-sparkle::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                60deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.25) 50%,
+                transparent 70%
+            );
+            transform: rotate(30deg);
+            animation: sparkleSweep 7s infinite ease-in-out;
+        }
+
+        @keyframes sparkleSweep {
+            0% { transform: translate(-100%, -100%) rotate(30deg); }
+            20%, 100% { transform: translate(100%, 100%) rotate(30deg); }
+        }
+
+        /* Glassmorphism Ultra Luxury */
+        .glass-header {
+            background: rgba(3, 3, 4, 0.88);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(240, 210, 120, 0.18);
+        }
+
+        .glass-card {
+            background: rgba(10, 10, 15, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(240, 210, 120, 0.15);
+        }
+
+        /* Modal Overlay Backdrop */
+        .modal-backdrop {
+            background: rgba(2, 2, 3, 0.92);
+            backdrop-filter: blur(20px);
+        }
+
+        /* Custom Gold Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #030304; }
+        ::-webkit-scrollbar-thumb { background: #f0d278; border-radius: 2px; }
+
+        /* Custom Interactive Glowing Cursor Effect */
+        #gold-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 30px; height: 30px;
+            border: 1px solid rgba(240, 210, 120, 0.6);
+            border-radius: 50%;
+            transition: transform 0.15s ease-out, opacity 0.3s ease;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(240, 210, 120, 0.3);
+        }
+
+        /* Digital Wax Seal Stamp */
+        .wax-seal {
+            background: radial-gradient(circle, #b8860b 0%, #8b0000 70%, #4a0000 100%);
+            box-shadow: 0 0 20px rgba(184, 134, 11, 0.6), inset 0 0 10px rgba(0,0,0,0.8);
+            border: 2px solid #ffd700;
+        }
+    </style>
+    <style>
+        .goog-te-banner-frame, .skiptranslate iframe, #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+        .goog-text-highlight { background: none !important; box-shadow: none !important; }
+        html, body { top: 0 !important; }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold selection:text-obsidian relative">
+    <div id="google_translate_element" style="display:none"></div>
+
+    <!-- CUSTOM GOLDEN CURSOR RING -->
+    <div id="gold-cursor" class="hidden md:block"></div>
+
+    <!-- CANVAS BACKGROUND PARTICLE ENGINE -->
+    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- NAVIGATION HEADER -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-header transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between gap-4">
+            
+            <!-- Left Nav Links (Cleaned & spaced without duplicate button) -->
+            <nav class="hidden xl:flex items-center space-x-6 text-[10px] uppercase tracking-[0.25em] text-gray-300">
+                <a href="#collection" class="hover:text-gold transition-colors duration-300 whitespace-nowrap">High Creations</a>
+                <a href="#heritage" class="hover:text-gold transition-colors duration-300 whitespace-nowrap">Heritage</a>
+                <a href="#savoir-faire" class="hover:text-gold transition-colors duration-300 whitespace-nowrap">Savoir-Faire</a>
+                <a href="#provenance" class="hover:text-gold transition-colors duration-300 whitespace-nowrap">On-Chain Certificate</a>
+            </nav>
+
+            <!-- Brand Emblem & Logo -->
+            <a href="#" class="flex items-center space-x-3 group shrink-0">
+                <div class="relative">
+                    <img src="./LOGO.jpg" alt="Maison Zoria Emblem" class="h-10 w-10 object-cover rounded-full border border-gold/60 group-hover:border-gold transition-all duration-500 shadow-[0_0_15px_rgba(240,210,120,0.3)]" onerror="this.onerror=null; this.src='https://placehold.co/100x100/030304/f0d278?text=MZ';">
+                    <span class="absolute inset-0 rounded-full border border-gold animate-ping opacity-25"></span>
+                </div>
+                <div class="flex flex-col text-center">
+                    <span class="font-cinzel text-lg sm:text-xl tracking-[0.3em] font-light text-cream group-hover:text-gold transition-colors whitespace-nowrap">MAISON ZORIA</span>
+                    <span class="text-[7px] uppercase tracking-[0.45em] text-gold/80 -mt-0.5 font-medium whitespace-nowrap">Geneva • Paris • High Jewelry Vault</span>
+                </div>
+            </a>
+
+            <!-- Right Controls & Vault Trigger -->
+            <div class="flex items-center space-x-3 sm:space-x-4">
+
+                <!-- Audio Ambience Toggle -->
+                <button onclick="toggleAudioAmbience()" id="audio-toggle-btn" class="hidden md:flex items-center space-x-1.5 text-[10px] uppercase tracking-widest text-gold border border-gold/30 px-3 py-1.5 rounded-full hover:border-gold transition-all shrink-0" title="Toggle Tactile Audio Feedback">
+                    <i id="audio-icon" class="fa-solid fa-volume-xmark text-gold"></i>
+                    <span id="audio-text" class="hidden lg:inline">Sound: Off</span>
+                </button>
+
+                <!-- Currency Selector -->
+                <div class="flex items-center space-x-1 text-xs uppercase tracking-widest text-gray-300 border border-gold/30 px-2.5 py-1.5 rounded-full bg-obsidian-card shrink-0">
+                    <i class="fa-solid fa-coins text-gold text-[10px] me-1"></i>
+                    <select id="currency-select" onchange="updateCurrencyDisplay()" class="bg-transparent text-gray-200 outline-none cursor-pointer text-[11px]">
+                        <option value="USD" class="bg-obsidian text-cream">USD ($)</option>
+                        <option value="EUR" class="bg-obsidian text-cream">EUR (€)</option>
+                        <option value="GBP" class="bg-obsidian text-cream">GBP (£)</option>
+                        <option value="BTC" class="bg-obsidian text-cream">BTC (₿)</option>
+                        <option value="ETH" class="bg-obsidian text-cream">ETH (Ξ)</option>
+                        <option value="SOL" class="bg-obsidian text-cream">SOL (◎)</option>
+                    </select>
+                </div>
+
+                <!-- Language Selector (auto-detected, manual override) -->
+                <div class="hidden md:flex items-center space-x-1 text-xs uppercase tracking-widest text-gray-300 border border-gold/30 px-2.5 py-1.5 rounded-full bg-obsidian-card shrink-0">
+                    <i class="fa-solid fa-globe text-gold text-[10px] me-1"></i>
+                    <select id="lang-select" onchange="setSiteLanguage(this.value)" aria-label="Language" class="bg-transparent text-gray-200 outline-none cursor-pointer text-[11px]">
+                        <option value="en" class="bg-obsidian text-cream">English</option>
+                        <option value="zh-CN" class="bg-obsidian text-cream">简体中文</option>
+                        <option value="zh-TW" class="bg-obsidian text-cream">繁體中文</option>
+                        <option value="ja" class="bg-obsidian text-cream">日本語</option>
+                        <option value="ko" class="bg-obsidian text-cream">한국어</option>
+                        <option value="es" class="bg-obsidian text-cream">Español</option>
+                        <option value="fr" class="bg-obsidian text-cream">Français</option>
+                        <option value="de" class="bg-obsidian text-cream">Deutsch</option>
+                        <option value="it" class="bg-obsidian text-cream">Italiano</option>
+                        <option value="pt" class="bg-obsidian text-cream">Português</option>
+                        <option value="ms" class="bg-obsidian text-cream">Bahasa Melayu</option>
+                        <option value="id" class="bg-obsidian text-cream">Bahasa Indonesia</option>
+                        <option value="th" class="bg-obsidian text-cream">ไทย</option>
+                        <option value="vi" class="bg-obsidian text-cream">Tiếng Việt</option>
+                    </select>
+                </div>
+
+                <!-- Private Vault Trigger -->
+                <button onclick="toggleVaultModal(true)" class="relative p-2 text-gray-200 hover:text-gold transition-colors focus:outline-none shrink-0" aria-label="Open Private Vault">
+                    <i class="fa-solid fa-gem text-lg text-gold"></i>
+                    <span id="vault-count-badge" class="absolute -top-1 -right-1 bg-gold text-obsidian font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(240,210,120,0.8)]">0</span>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="xl:hidden p-2 text-gray-300 hover:text-gold shrink-0">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden xl:hidden bg-obsidian border-b border-gold/20 px-6 py-6 space-y-4 text-center text-xs uppercase tracking-widest">
+            <a href="#collection" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">High Creations ($200K+)</a>
+            <a href="#heritage" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">Heritage Story</a>
+            <a href="#savoir-faire" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">Savoir-Faire</a>
+            <a href="#provenance" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">On-Chain Certificate</a>
+            <a href="#salon" onclick="toggleMobileMenu()" class="block text-gold border border-gold/40 py-2 rounded-full">Private Concierge & Treasury</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center pt-28 overflow-hidden z-10">
+        <div class="relative z-10 max-w-6xl mx-auto px-6 text-center space-y-8">
+            
+            <div class="inline-flex items-center space-x-3 px-5 py-2 rounded-full border border-gold/40 bg-obsidian/80 backdrop-blur-md shadow-[0_0_20px_rgba(240,210,120,0.2)]">
+                <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
+                <span class="text-[10px] uppercase tracking-[0.4em] text-gold font-medium">Bespoke Vault • Masterpieces $120,000 to $6,930,000 USD</span>
+            </div>
+
+            <h1 class="font-cinzel text-4xl sm:text-6xl md:text-8xl font-light text-cream tracking-tight leading-[1.08] diamond-sparkle py-2">
+                Beyond Luxury.<br>
+                <span class="italic font-normal gold-gradient-text">Where Time & Precious Metals Converge.</span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-xs sm:text-base text-gray-300 font-light leading-relaxed tracking-wide">
+                Welcome to Maison Zoria. An exclusive sanctuary of 18K solid gold, rare gemstones, tourbillon horological mechanisms, and confidential multi-chain Web3 treasury settlements.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
+                <a href="#collection" class="w-full sm:w-auto px-10 py-4 bg-gold text-obsidian font-bold text-xs uppercase tracking-[0.3em] rounded-full hover:bg-gold-light transition-all duration-300 shadow-[0_0_35px_rgba(240,210,120,0.5)]">
+                    Explore Masterpieces
+                </a>
+                <button onclick="openCertificateModal()" class="w-full sm:w-auto px-8 py-4 border border-gold/50 hover:border-gold text-cream font-medium text-xs uppercase tracking-[0.25em] rounded-full transition-all duration-300 backdrop-blur-sm flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-certificate text-gold"></i>
+                    <span>Verify On-Chain Provenance</span>
+                </button>
+            </div>
+        </div>
+
+        <a href="#heritage" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-400 hover:text-gold transition-colors flex flex-col items-center space-y-2 text-[9px] uppercase tracking-widest">
+            <span>Ascend Atelier</span>
+            <i class="fa-solid fa-chevron-down animate-bounce text-xs text-gold"></i>
+        </a>
+    </section>
+
+    <!-- CHAPTER I: ATELIER HERITAGE & $200K PRESTIGE -->
+    <section id="heritage" class="py-32 relative border-t border-gold/15 z-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            
+            <div class="lg:col-span-6 space-y-6">
+                <div class="text-xs uppercase tracking-[0.4em] text-gold font-semibold">Chapter I • Geneva Reserve</div>
+                <h2 class="font-cinzel text-3xl sm:text-5xl font-light text-cream leading-tight">
+                    The European Heritage & High-Jewelry Architecture
+                </h2>
+                <div class="w-20 h-[1px] bg-gradient-to-r from-gold to-transparent my-4"></div>
+                <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
+                    Forged along Lake Geneva and refined across private salons in Place Vendôme and Mayfair, <strong class="text-cream">Maison Zoria</strong> crafts heirloom leather sculptures that transcend conventional luxury.
+                </p>
+                <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
+                    Each creation demands up to 650 hours of meticulous hand craftsmanship, incorporating 18K solid gold, VVS diamonds, imperial jade, and Swiss horological lockworks. Every masterpiece is delivered via insured diplomatic courier and registered on-chain in perpetuity.
+                </p>
+
+                <div class="pt-6 grid grid-cols-3 gap-6 text-center border-t border-white/10">
+                    <div>
+                        <div class="font-cinzel text-2xl sm:text-3xl text-gold">100%</div>
+                        <div class="text-[9px] uppercase tracking-widest text-gray-400 mt-1">Traceable European Exotic Leathers</div>
+                    </div>
+                    <div>
+                        <div class="font-cinzel text-2xl sm:text-3xl text-gold">18K / Pt</div>
+                        <div class="text-[9px] uppercase tracking-widest text-gray-400 mt-1">Solid Gold & Platinum Fittings</div>
+                    </div>
+                    <div>
+                        <div class="font-cinzel text-2xl sm:text-3xl text-gold">Web3</div>
+                        <div class="text-[9px] uppercase tracking-widest text-gray-400 mt-1">Cryptographic Provenance Proof</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 relative">
+                <div class="relative rounded-3xl overflow-hidden gold-border-glow group">
+                    <img src="./brand-story.png" alt="Maison Zoria European Atelier Story" class="w-full h-[540px] object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/800x1000/030304/f0d278?text=Maison+Zoria+Atelier';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6 p-6 bg-obsidian/90 backdrop-blur-md rounded-2xl border border-gold/30">
+                        <div class="text-[10px] text-gold uppercase tracking-widest font-semibold">Geneva Atelier Archives</div>
+                        <div class="font-serif text-lg text-cream mt-1 italic">"Crafting priceless art into physical and cryptographic immortality."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIGNATURE COLLECTION ($200,000+ HIGH CREATIONS) -->
+    <section id="collection" class="py-32 bg-obsidian-card border-t border-gold/15 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 space-y-6 md:space-y-0">
+                <div>
+                    <div class="text-xs uppercase tracking-[0.4em] text-gold font-semibold">The Private Portfolio</div>
+                    <h2 class="font-cinzel text-3xl sm:text-5xl font-light text-cream mt-2">Haute Création Masterpieces</h2>
+                </div>
+                <p class="text-xs text-gray-400 max-w-md font-light leading-relaxed">
+                    Exclusive high-jewelry & horological leather sculptures valued between $120,000 and $6,930,000 USD. Customizer enabled for personalized gold alloy and monogramming.
+                </p>
+            </div>
+
+            <!-- DAILY INVENTORY URGENCY SUITE BANNER -->
+            <div class="mb-10 p-4 sm:p-5 rounded-2xl bg-obsidian/95 border border-gold/40 shadow-[0_0_30px_rgba(240,210,120,0.12)] flex flex-col lg:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-3.5 text-center sm:text-left">
+                    <span class="relative flex h-2.5 w-2.5 shrink-0">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold"></span>
+                    </span>
+                    <div>
+                        <div class="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-gold font-semibold flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                            <span>Geneva Vault Daily Allocation Live</span>
+                            <span id="daily-allocation-date" class="px-2 py-0.5 rounded bg-gold/15 border border-gold/30 text-[9px] font-mono text-cream"></span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 font-light mt-0.5">
+                            Atelier release slots refresh every 24 hours. Unclaimed daily pieces return to private reserve upon window close.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 shrink-0">
+                    <div class="text-center sm:text-right">
+                        <div class="text-[9px] uppercase tracking-[0.25em] text-gray-400">Remaining Today</div>
+                        <div id="daily-total-remaining" class="font-cinzel text-base sm:text-lg text-gold font-semibold">-- Slots Globally</div>
+                    </div>
+                    <div class="h-8 w-[1px] bg-gold/20 hidden sm:block"></div>
+                    <div class="px-4 py-2 rounded-xl bg-obsidian-card border border-gold/30 text-center">
+                        <div class="text-[8px] uppercase tracking-[0.25em] text-gray-400">Daily Allocation Reset In</div>
+                        <div id="daily-reset-timer" class="font-mono text-xs sm:text-sm text-cream tracking-widest font-semibold mt-0.5">00:00:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <p id="fx-note" class="text-[11px] text-gray-500 font-light mb-12">Prices in your local currency are indicative, based on current exchange rates. The USD price is the reference price.</p>
+
+            <!-- Product Grid -->
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Products dynamically rendered by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER II: SAVOIR-FAIRE & ATELIER MASTERY -->
+    <section id="savoir-faire" class="py-32 relative border-t border-gold/15 z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="text-center max-w-3xl mx-auto mb-20 space-y-4">
+                <div class="text-xs uppercase tracking-[0.4em] text-gold font-semibold">Chapter II • Craftsmanship</div>
+                <h2 class="font-cinzel text-3xl sm:text-5xl font-light text-cream">Savoir-Faire & Micro-Horology</h2>
+                <p class="text-xs sm:text-sm text-gray-300 font-light">Uncompromising standards crafted by master artisans in Geneva, Paris, and Florence.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+                <div class="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl">
+                    <img src="./maison-zoria-atelier-craftsmen.jpg.png" alt="Maison Zoria Master Artisans" class="w-full h-[450px] object-cover" onerror="this.onerror=null; this.src='https://placehold.co/800x600/030304/f0d278?text=Atelier+Craftsmen';">
+                </div>
+                <div class="space-y-6">
+                    <h3 class="font-cinzel text-2xl sm:text-3xl text-gold">Double-Needle Saddle Stitching</h3>
+                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
+                        Every seam is bound using hand-waxed linen thread saddle stitching—a technique completely impervious to industrial machinery. Even if a single stitch loop breaks, the surrounding leather structural integrity endures for over a century.
+                    </p>
+                    <ul class="space-y-3 text-xs uppercase tracking-wider text-gray-300">
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-gem text-gold"></i> <span>Hand-burnished organic beeswax edging</span></li>
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-gem text-gold"></i> <span>Solid 18K Yellow Gold & Platinum heavy buckles</span></li>
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-gem text-gold"></i> <span>Rare Porosus Crocodile & French Full-Grain Calfskin</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 order-2 lg:order-1">
+                    <h3 class="font-cinzel text-2xl sm:text-3xl text-gold">Micro-Horological Precision Locks</h3>
+                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
+                        Every bag clasp incorporates micro-milled Swiss tourbillon lockwork. Custom-fitted gears are hand-polished using diamond paste to achieve a mirror finish rivaling Geneva haute horlogerie.
+                    </p>
+                    <blockquote class="italic font-serif text-lg text-cream border-l-2 border-gold pl-4 my-4">
+                        "True luxury is not defined by abundance, but by unrepeatable perfection."
+                    </blockquote>
+                </div>
+                <div class="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl order-1 lg:order-2">
+                    <img src="./maison-zoria-craftsmanship-detail.jpg.png" alt="Maison Zoria Craftsmanship Detail" class="w-full h-[450px] object-cover" onerror="this.onerror=null; this.src='https://placehold.co/800x600/030304/f0d278?text=Craftsmanship+Detail';">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ON-CHAIN PROVENANCE & CERTIFICATE VERIFIER SECTION -->
+    <section id="provenance" class="py-28 bg-obsidian-card border-t border-gold/15 relative z-10">
+        <div class="max-w-5xl mx-auto px-6 text-center space-y-8">
+            <div class="text-xs uppercase tracking-[0.4em] text-gold font-semibold">Cryptographic Guarantee</div>
+            <h2 class="font-cinzel text-3xl sm:text-5xl font-light text-cream">On-Chain Certificate Verifier</h2>
+            <p class="text-xs sm:text-sm text-gray-300 font-light max-w-xl mx-auto">
+                Every Maison Zoria $200k+ creation is cryptographically bound to an immutable on-chain Certificate of Provenance. Enter your Serial Token below to generate your official digital seal.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
+                <input type="text" id="serial-search-input" placeholder="Enter Token (e.g. MZ-2026-8899)" class="w-full bg-obsidian border border-gold/40 rounded-full px-6 py-4 text-xs font-mono text-cream focus:border-gold outline-none">
+                <button onclick="generateCertificateFromInput()" class="w-full sm:w-auto px-8 py-4 bg-gold text-obsidian font-bold text-xs uppercase tracking-widest rounded-full hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(240,210,120,0.4)] whitespace-nowrap">
+                    Generate Certificate
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIVATE SALON / CONCIERGE & WEB3 TREASURY SETTLEMENT -->
+    <section id="salon" class="py-32 relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="glass-card p-8 sm:p-14 rounded-3xl border border-gold/30 gold-border-glow">
+                
+                <div class="text-center space-y-4 mb-10">
+                    <div class="text-xs uppercase tracking-[0.4em] text-gold font-semibold">Private Acquisition Portal</div>
+                    <h2 class="font-cinzel text-3xl sm:text-5xl font-light text-cream">Private Salon Concierge</h2>
+                    <p class="text-xs sm:text-sm text-gray-300 font-light max-w-xl mx-auto">
+                        Submit a confidential bespoke acquisition request or initiate a direct Web3 multi-chain treasury transfer.
+                    </p>
+                </div>
+
+                <!-- Tabs: Form or Crypto Settlement -->
+                <div class="flex justify-center border-b border-white/10 mb-8">
+                    <button onclick="switchSalonTab('inquiry')" id="tab-inquiry" class="pb-4 px-6 text-xs uppercase tracking-widest text-gold border-b-2 border-gold font-semibold transition-all">
+                        Private Concierge Inquiry
+                    </button>
+                    <button onclick="switchSalonTab('crypto')" id="tab-crypto" class="pb-4 px-6 text-xs uppercase tracking-widest text-gray-400 hover:text-gold border-b-2 border-transparent transition-all">
+                        Web3 Multi-Chain Treasury Transfer
+                    </button>
+                </div>
+
+                <!-- Tab 1: FormSubmit Inquiry -->
+                <form id="salon-form" action="https://formsubmit.co/ajax/43199a8a726f90d70d589fa611503bf3" method="POST" class="space-y-6">
+                    <input type="hidden" name="_subject" value="Maison Zoria — VIP Salon Bespoke Acquisition Request">
+                    <input type="hidden" name="_template" value="table">
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Title & Full Name *</label>
+                            <input type="text" name="name" required placeholder="Lord / Lady / Dr. / Mr. / Ms." class="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Confidential Email *</label>
+                            <input type="email" name="email" required placeholder="vip@domain.com" class="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Masterpiece of Interest *</label>
+                            <select id="creation-select" name="creation" class="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
+                                <!-- Dynamically populated by JS -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Preferred Settlement Network *</label>
+                            <select name="settlement_type" class="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
+                                <option value="USDT/USDC Crypto">USDT / USDC (ERC20 / TRC20 / Solana)</option>
+                                <option value="Bitcoin (BTC)">Bitcoin (BTC)</option>
+                                <option value="Ethereum (ETH)">Ethereum (ETH)</option>
+                                <option value="Solana (SOL)">Solana (SOL)</option>
+                                <option value="Wire Transfer">USD / EUR Bank Wire Transfer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Diplomatic Delivery Address & Custom Engraving Notes *</label>
+                        <textarea name="message" rows="4" required placeholder="Specify insured diplomatic courier instructions, custom initials, or bespoke stone inquiries..." class="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none"></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-salon-btn" class="w-full py-4 bg-gold text-obsidian font-bold text-xs uppercase tracking-[0.3em] rounded-xl hover:bg-gold-light transition-all shadow-[0_0_25px_rgba(240,210,120,0.4)]">
+                        Submit Private Concierge Request
+                    </button>
+                </form>
+
+                <!-- Tab 2: Crypto Wallet Treasury Panel -->
+                <div id="salon-crypto" class="hidden space-y-6">
+                    <p class="text-xs text-gray-300 font-light text-center">
+                        Select your blockchain network to generate the verified Maison Zoria treasury address and settlement QR code.
+                    </p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                        <button onclick="setCryptoNetwork('BTC')" id="net-BTC" class="crypto-net-btn py-3 border border-gold bg-gold/10 text-gold rounded-xl text-xs font-semibold uppercase tracking-wider">BTC</button>
+                        <button onclick="setCryptoNetwork('ETH')" id="net-ETH" class="crypto-net-btn py-3 border border-white/10 text-gray-300 rounded-xl text-xs font-semibold uppercase tracking-wider hover:border-gold">ETH</button>
+                        <button onclick="setCryptoNetwork('SOL')" id="net-SOL" class="crypto-net-btn py-3 border border-white/10 text-gray-300 rounded-xl text-xs font-semibold uppercase tracking-wider hover:border-gold">SOL</button>
+                        <button onclick="setCryptoNetwork('TRX')" id="net-TRX" class="crypto-net-btn py-3 border border-white/10 text-gray-300 rounded-xl text-xs font-semibold uppercase tracking-wider hover:border-gold">TRC20</button>
+                        <button onclick="setCryptoNetwork('BNB')" id="net-BNB" class="crypto-net-btn py-3 border border-white/10 text-gray-300 rounded-xl text-xs font-semibold uppercase tracking-wider hover:border-gold">BEP20</button>
+                    </div>
+
+                    <div class="p-6 bg-obsidian rounded-2xl border border-gold/30 space-y-6">
+                        <div class="flex items-center justify-between">
+                            <span id="crypto-label" class="text-xs text-gold uppercase tracking-widest font-semibold">Bitcoin Treasury Wallet (BTC)</span>
+                            <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/20">Verified On-Chain</span>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row items-center gap-6">
+                            <!-- Simulated QR Code Placeholder -->
+                            <div class="w-28 h-28 bg-white p-2 rounded-xl flex items-center justify-center shrink-0 border border-gold/50 shadow-lg">
+                                <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bc1q7g9cjpc4686m4tzdjmajpray4ats4xjgvh3x8j" alt="Treasury Address QR Code" class="w-full h-full object-contain">
+                            </div>
+
+                            <div class="w-full space-y-3">
+                                <div class="flex items-center space-x-2 bg-obsidian-card p-3 rounded-xl border border-white/10">
+                                    <input id="crypto-address-input" readonly value="bc1q7g9cjpc4686m4tzdjmajpray4ats4xjgvh3x8j" class="bg-transparent text-[11px] text-cream font-mono w-full outline-none">
+                                    <button onclick="copyWalletAddress()" class="px-4 py-2 bg-gold/20 text-gold hover:bg-gold hover:text-obsidian text-xs rounded-lg transition-all font-semibold flex items-center space-x-1 shrink-0">
+                                        <i class="fa-regular fa-copy"></i>
+                                        <span>Copy</span>
+                                    </button>
+                                </div>
+                                <p class="text-[10px] text-gray-400 font-light italic">
+                                    * Complete transfer based on calculated Vault value. Upon 1 block confirmation, diplomatic concierge dispatched within 24 hours.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-obsidian border-t border-gold/20 pt-20 pb-12 text-gray-400 text-xs z-10 relative">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                    <img src="./LOGO.jpg" alt="Maison Zoria" class="h-8 w-8 rounded-full border border-gold/50" onerror="this.onerror=null; this.src='https://placehold.co/800x800/030304/f0d278?text=MZ';">
+                    <span class="font-cinzel text-lg text-cream tracking-widest">MAISON ZORIA</span>
+                </div>
+                <p class="text-gray-400 font-light leading-relaxed text-[11px]">
+                    Geneva Haute Création Atelier. High jewelry leather works, horological lockpieces, and confidential Web3 private vault acquisitions.
+                </p>
+            </div>
+
+            <div class="space-y-3">
+                <div class="text-cream uppercase tracking-widest font-semibold mb-2">Global Private Salons</div>
+                <ul class="space-y-2 font-light text-[11px]">
+                    <li>Rue du Rhône 42, 1204 Genève</li>
+                    <li>Place Vendôme 18, 75001 Paris</li>
+                    <li>Bond Street 112, London W1S</li>
+                    <li>Madison Avenue 785, New York</li>
+                </ul>
+            </div>
+
+            <div class="space-y-3">
+                <div class="text-cream uppercase tracking-widest font-semibold mb-2">Private Concierge</div>
+                <p class="font-light text-[11px]">Direct Line: +41 22 819 00 00</p>
+                <p class="font-light text-[11px]">Official Email: <a href="mailto:concierge@maisonzoria.com" class="text-gold hover:underline">concierge@maisonzoria.com</a></p>
+                <p class="font-light text-[11px]">Direct Settlement: <a href="mailto:minzhihaibao@gmail.com" class="text-gold hover:underline">minzhihaibao@gmail.com</a></p>
+            </div>
+
+            <div class="space-y-3">
+                <div class="text-cream uppercase tracking-widest font-semibold mb-2">Vault Provenance</div>
+                <p class="font-light leading-relaxed text-[11px]">
+                    All creations are delivered with physical horological certificates and cryptographic on-chain proof of origin.
+                </p>
+                <div class="pt-2 text-gold flex items-center space-x-2">
+                    <i class="fa-solid fa-shield-halved text-xs"></i>
+                    <span class="uppercase tracking-widest text-[9px]">256-Bit SSL Encrypted Vault</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between text-[10px] font-light text-gray-500 space-y-4 sm:space-y-0">
+            <div>&copy; 2026 MAISON ZORIA HAUTE CRÉATION. All Rights Reserved.</div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-gold transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-gold transition-colors">Terms of Vault Protocol</a>
+                <a href="#" class="hover:text-gold transition-colors">Certificate Provenance</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- MODAL 1: PRODUCT BESPOKE CUSTOMIZER MODAL -->
+    <div id="product-detail-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div class="relative bg-obsidian-card border border-gold/40 w-full max-w-4xl rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(240,210,120,0.2)] my-8">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-obsidian/80 text-cream rounded-full border border-white/10 hover:border-gold flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="modal-product-content" class="grid grid-cols-1 md:grid-cols-2">
+                <!-- Dynamically Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL 2: PRIVATE VAULT (CART) MODAL -->
+    <div id="vault-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-end">
+        <div class="bg-obsidian-card border-l border-gold/40 w-full max-w-lg h-full p-8 flex flex-col justify-between overflow-y-auto">
+            
+            <div>
+                <div class="flex items-center justify-between pb-6 border-b border-white/10">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-gem text-gold text-xl"></i>
+                        <h3 class="font-cinzel text-xl text-cream">Your Private Vault</h3>
+                    </div>
+                    <button onclick="toggleVaultModal(false)" class="text-gray-400 hover:text-gold text-xl">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Vault Items List -->
+                <div id="vault-items-container" class="py-6 space-y-6">
+                    <!-- Dynamic rendering -->
+                </div>
+            </div>
+
+            <!-- Vault Footer Summary -->
+            <div class="border-t border-white/10 pt-6 space-y-4">
+                <div class="flex items-center justify-between text-sm">
+                    <span class="text-gray-400 uppercase tracking-widest text-xs">Total Creation Value</span>
+                    <span id="vault-total-price" class="font-cinzel text-2xl text-gold font-light">$0</span>
+                </div>
+                <button onclick="proceedVaultToSalon()" class="w-full py-4 bg-gold text-obsidian font-bold text-xs uppercase tracking-[0.2em] rounded-xl hover:bg-gold-light transition-all shadow-[0_0_25px_rgba(240,210,120,0.4)]">
+                    Proceed to Concierge Settlement
+                </button>
+                <p class="text-[9px] text-gray-500 text-center uppercase tracking-widest">
+                    Direct Web3 Crypto Settlement & Insured Diplomatic Courier Included
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- MODAL 3: ON-CHAIN CERTIFICATE GENERATOR MODAL -->
+    <div id="certificate-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="relative bg-obsidian-card border-2 border-gold/50 w-full max-w-2xl rounded-3xl p-8 sm:p-12 shadow-[0_0_60px_rgba(240,210,120,0.3)] space-y-6 text-center">
+            <button onclick="closeCertificateModal()" class="absolute top-4 right-4 w-8 h-8 text-gray-400 hover:text-gold">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="border-2 border-gold/30 p-8 rounded-2xl bg-obsidian/90 relative overflow-hidden">
+                <div class="text-[9px] uppercase tracking-[0.4em] text-gold mb-2">Cryptographic Proof of Origin</div>
+                <h3 class="font-cinzel text-2xl sm:text-3xl text-cream font-light">Certificate of Authenticity</h3>
+                <div class="w-16 h-[1px] bg-gold/50 mx-auto my-4"></div>
+
+                <div class="space-y-3 text-xs text-gray-300 font-light">
+                    <div>Token Serial: <span id="cert-serial" class="font-mono text-gold font-semibold">MZ-2026-8899</span></div>
+                    <div>Item: <span id="cert-item-title" class="text-cream font-medium">Dream Awakening - 24K Gold Edition</span></div>
+                    <div>Provenance Status: <span class="text-emerald-400 font-semibold">Verified On-Chain (Block #1984203)</span></div>
+                    <div>Master Artisan: <span class="text-cream">Atelier Master Geneva</span></div>
+                </div>
+
+                <!-- Digital Wax Seal Stamp -->
+                <div class="mt-8 flex items-center justify-center">
+                    <div class="w-20 h-20 rounded-full wax-seal flex flex-col items-center justify-center text-gold shadow-2xl">
+                        <i class="fa-solid fa-crown text-base"></i>
+                        <span class="text-[7px] uppercase tracking-widest font-bold mt-0.5">Maison Zoria</span>
+                    </div>
+                </div>
+
+                <p class="text-[9px] text-gray-500 font-mono mt-6">
+                    SHA-256: 0x8f4c9a21b3e4f50912d87e12c4a9801ff2a037b58c73d9e0134b22e11a
+                </p>
+            </div>
+
+            <button onclick="closeCertificateModal()" class="px-8 py-3 bg-gold/20 hover:bg-gold text-gold hover:text-obsidian text-xs font-semibold uppercase tracking-widest rounded-full transition-all border border-gold/40">
+                Close Provenance Certificate
+            </button>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        // -------------------------------------------------------------
+        // $200K+ HIGH JEWELRY PRODUCTS DATA ENGINE
+        // -------------------------------------------------------------
+        const products = [
+            {
+                id: 'cloud-crown-starlight',
+                title: 'Cloud Crown Starlight',
+                basePriceUSD: 530000,
+                image: './Cloud Crown Starlight.jpg',
+                altImage: 'https://placehold.co/800x800/030304/f0d278?text=Cloud+Crown+Starlight+530K',
+                tag: 'Haute Création · 2027 Boom Aesthetics',
+                description: 'A youthful, fairy-tale sculptural creation fusing Rococo and Baroque architecture with a pearlized marbled acrylic cloud silhouette, crown details, and the signature MZ ten-star emblem.',
+                craftingTime: 'Bespoke Commission',
+                origin: 'Maison Zoria Private Collection'
+            },
+            {
+                id: 'lunar-architects',
+                title: 'LUNAR ARCHITECTS - The Lunar Dome Masterpiece',
+                basePriceUSD: 890000,
+                image: 'https://raw.githubusercontent.com/minzhihaibao-dev/Maison-Zoria-/main/LUNAR%20ARCHITECTS.png',
+                altImage: 'https://placehold.co/800x800/030304/f0d278?text=LUNAR+ARCHITECTS+890K',
+                tag: 'GLOBAL 1/1 · UNIQUE PIECE',
+                description: 'A one-of-one Maison Zoria creation inspired by Rococo and Baroque architecture, pairing mother-of-pearl white with midnight-blue crocodile texture and an ornate golden MZ emblem.',
+                craftingTime: 'Private Atelier Commission',
+                origin: 'Maison Zoria Private Collection'
+            },
+            {
+                id: 'lastre-eternel',
+                title: "L'ASTRE ÉTERNEL - Diamond Haute Horlogerie Timepiece",
+                basePriceUSD: 6930000,
+                image: "./L'ASTRE ÉTERNEL.png",
+                altImage: 'https://placehold.co/800x800/030304/f0d278?text=LASTRE+ETERNEL+6.93M',
+                tag: 'Haute Horlogerie Masterpiece',
+                description: 'An eternal star rendered in 18K solid yellow gold, encrusted with multi-carat flawless pavé diamonds and precision chronograph sub-dials.',
+                craftingTime: '520 Hours',
+                origin: 'Geneva Master Atelier'
+            },
+            {
                 id: 'dream-awakening',
                 title: 'Dream Awakening - 24K Gold & Diamond Inlaid Edition',
                 basePriceUSD: 3000000,
