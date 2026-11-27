@@ -60,7 +60,7 @@
         .font-cinzel { font-family: 'Cinzel', serif; }
         .font-serif { font-family: 'Cormorant Garamond', serif; }
 
-        /* Full-Bleed Cosmic Starfield Backdrop */
+        /* Full-Bleed Cosmic Exploration Backdrop */
         #cosmic-backdrop {
             position: fixed;
             inset: 0;
@@ -74,14 +74,34 @@
                 radial-gradient(ellipse 90% 80% at 50% 50%, rgba(11, 16, 38, 0.72) 0%, #020308 100%);
         }
 
-        /* Seamless Atmospheric Section Blending (Eliminates Hard Section Cuts) */
+        /* Interactive Constellation & Starlight Trail Canvas */
+        #starlight-trail-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 35;
+            pointer-events: none;
+        }
+
+        /* Glass Shatter Overlay Canvas */
+        #glass-shatter-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 60;
+            pointer-events: none;
+        }
+
+        /* Seamless Atmospheric Section Blending */
         .cosmic-section {
             position: relative;
             z-index: 10;
             background: linear-gradient(
                 180deg,
                 rgba(4, 6, 16, 0.0) 0%,
-                rgba(5, 8, 20, 0.42) 50%,
+                rgba(5, 8, 20, 0.40) 50%,
                 rgba(4, 6, 16, 0.0) 100%
             );
         }
@@ -114,17 +134,123 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 24K Gold Border Glow */
-        .gold-border-glow {
-            border: 1px solid rgba(240, 210, 120, 0.22);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 25px rgba(240, 210, 120, 0.07);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Giant Interactive 3D Logo (180°+ Rotation) */
+        .hero-3d-stage {
+            perspective: 1400px;
+            user-select: none;
+            touch-action: none;
         }
 
-        .gold-border-glow:hover {
+        .hero-3d-emblem {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            cursor: grab;
+            will-change: transform;
+        }
+
+        @media (min-width: 640px) {
+            .hero-3d-emblem {
+                width: 290px;
+                height: 290px;
+            }
+        }
+
+        .hero-3d-emblem:active {
+            cursor: grabbing;
+        }
+
+        .hero-3d-face {
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid rgba(240, 210, 120, 0.65);
+            box-shadow:
+                0 0 55px rgba(240, 210, 120, 0.24),
+                inset 0 0 36px rgba(240, 210, 120, 0.16);
+        }
+
+        .hero-3d-front {
+            background:
+                radial-gradient(circle at 30% 25%, rgba(251, 240, 185, 0.18) 0%, transparent 55%),
+                radial-gradient(circle at 75% 75%, rgba(26, 44, 98, 0.42) 0%, rgba(5, 7, 16, 0.88) 78%);
+            transform: translateZ(16px);
+        }
+
+        .hero-3d-back {
+            background:
+                radial-gradient(circle at 70% 30%, rgba(240, 210, 120, 0.20) 0%, transparent 55%),
+                radial-gradient(circle at 30% 70%, rgba(168, 129, 24, 0.24) 0%, rgba(4, 6, 14, 0.92) 80%);
+            transform: rotateY(180deg) translateZ(16px);
+        }
+
+        .hero-3d-rim {
+            position: absolute;
+            inset: 6px;
+            border-radius: 9999px;
+            border: 1px dashed rgba(240, 210, 120, 0.35);
+            transform: translateZ(0px);
+            pointer-events: none;
+        }
+
+        /* 3D Tilt Cards + Specular Foil Sheen */
+        .tilt-card-3d {
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(240, 210, 120, 0.22);
+            box-shadow: 0 10px 34px rgba(0, 0, 0, 0.48), 0 0 22px rgba(240, 210, 120, 0.07);
+        }
+
+        .tilt-card-3d:hover {
             border-color: rgba(240, 210, 120, 0.85);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65), 0 0 45px rgba(240, 210, 120, 0.28);
-            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.72), 0 0 42px rgba(240, 210, 120, 0.26);
+        }
+
+        .foil-sheen {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            background: linear-gradient(
+                115deg,
+                transparent 20%,
+                rgba(255, 244, 200, 0.14) 38%,
+                rgba(255, 255, 255, 0.34) 50%,
+                rgba(240, 210, 120, 0.18) 62%,
+                transparent 80%
+            );
+            transform: translateX(-120%) skewX(-18deg);
+        }
+
+        .tilt-card-3d:hover .foil-sheen {
+            opacity: 1;
+            animation: foilSweep 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes foilSweep {
+            0% { transform: translateX(-125%) skewX(-18deg); }
+            100% { transform: translateX(135%) skewX(-18deg); }
+        }
+
+        .card-shatter-extract {
+            animation: cardExtractLift 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cardExtractLift {
+            0% { transform: scale(1) translateZ(0); filter: brightness(1); }
+            45% { transform: scale(1.045) translateY(-10px); filter: brightness(1.25) drop-shadow(0 0 28px rgba(240, 210, 120, 0.65)); }
+            100% { transform: scale(1) translateY(0); filter: brightness(1); }
         }
 
         /* Diamond Shimmer Effect */
@@ -154,7 +280,7 @@
             20%, 100% { transform: translate(100%, 100%) rotate(30deg); }
         }
 
-        /* Glassmorphism Ultra Luxury - Unified Translucent Cosmic Glass */
+        /* Glassmorphism Ultra Luxury */
         .glass-header {
             background: rgba(3, 5, 14, 0.62);
             backdrop-filter: blur(22px);
@@ -166,7 +292,6 @@
             background: linear-gradient(145deg, rgba(10, 13, 28, 0.58) 0%, rgba(5, 7, 16, 0.74) 100%);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            border: 1px solid rgba(240, 210, 120, 0.16);
         }
 
         /* Modal Overlay Backdrop */
@@ -180,20 +305,6 @@
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #020308; }
         ::-webkit-scrollbar-thumb { background: #f0d278; border-radius: 2px; }
-
-        /* Custom Interactive Glowing Cursor Effect */
-        #gold-cursor {
-            pointer-events: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 30px; height: 30px;
-            border: 1px solid rgba(240, 210, 120, 0.6);
-            border-radius: 50%;
-            transition: transform 0.15s ease-out, opacity 0.3s ease;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 15px rgba(240, 210, 120, 0.3);
-        }
 
         /* Digital Wax Seal Stamp */
         .wax-seal {
@@ -209,12 +320,37 @@
 <body class="antialiased selection:bg-gold selection:text-obsidian relative">
     <div id="google_translate_element" style="display:none"></div>
 
-    <!-- CUSTOM GOLDEN CURSOR RING -->
-    <div id="gold-cursor" class="hidden md:block"></div>
-
-    <!-- FULL-BLEED COSMIC EXPLORATION DYNAMIC BACKDROP (FIXED FROM TOP TO BOTTOM) -->
+    <!-- FULL-BLEED COSMIC EXPLORATION DYNAMIC BACKDROP -->
     <div id="cosmic-backdrop">
         <canvas id="cosmic-canvas" class="w-full h-full block"></canvas>
+    </div>
+
+    <!-- STARLIGHT CURSOR TRAIL & CONSTELLATION WEB OVERLAY -->
+    <canvas id="starlight-trail-canvas"></canvas>
+
+    <!-- GLASS SHATTER FRAGMENT OVERLAY -->
+    <canvas id="glass-shatter-canvas"></canvas>
+
+    <!-- CELESTIAL SCROLL ASTROLABE (RIGHT TRACK + BOTTOM COSMIC TIER HUD) -->
+    <aside aria-label="Celestial Scroll Astrolabe" class="hidden md:flex fixed right-4 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-2 pointer-events-none select-none">
+        <span class="text-[8px] font-mono tracking-widest text-gold/80 uppercase">ORB</span>
+        <div class="relative w-[2px] h-44 rounded-full bg-gold/15 overflow-visible">
+            <div id="astrolabe-fill" class="w-full bg-gradient-to-b from-gold-light via-gold to-gold-dark rounded-full transition-all duration-150" style="height: 0%;"></div>
+            <div id="astrolabe-star" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-gold-light shadow-[0_0_14px_#f0d278,0_0_26px_rgba(240,210,120,0.85)] border border-white/80" style="top: 0%;"></div>
+        </div>
+        <span id="astrolabe-pct" class="text-[9px] font-mono text-gold">0%</span>
+    </aside>
+
+    <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 px-4 py-1.5 rounded-full bg-obsidian/70 backdrop-blur-xl border border-gold/30 shadow-[0_0_24px_rgba(240,210,120,0.16)] flex items-center gap-2 sm:gap-3 text-[9px] sm:text-[10px] font-cinzel tracking-[0.18em] text-gray-300 max-w-[95vw] overflow-x-auto whitespace-nowrap">
+        <a href="#heritage" data-tier="heritage" class="astrolabe-tier px-2 py-0.5 rounded-full text-gold bg-gold/15 transition-all">01 · GENEVA RESERVE</a>
+        <span class="text-gold/40">→</span>
+        <a href="#collection" data-tier="collection" class="astrolabe-tier px-2 py-0.5 rounded-full hover:text-gold transition-all">02 · ASTRUM VAULT</a>
+        <span class="text-gold/40">→</span>
+        <a href="#savoir-faire" data-tier="savoir-faire" class="astrolabe-tier px-2 py-0.5 rounded-full hover:text-gold transition-all">03 · SAVOIR-FAIRE</a>
+        <span class="text-gold/40">→</span>
+        <a href="#provenance" data-tier="provenance" class="astrolabe-tier px-2 py-0.5 rounded-full hover:text-gold transition-all">04 · ON-CHAIN</a>
+        <span class="text-gold/40">→</span>
+        <a href="#salon" data-tier="salon" class="astrolabe-tier px-2 py-0.5 rounded-full hover:text-gold transition-all">05 · TREASURY</a>
     </div>
 
     <!-- NAVIGATION HEADER -->
@@ -307,16 +443,56 @@
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="relative min-h-screen flex items-center justify-center pt-28 overflow-hidden z-10">
-        <div class="relative z-10 max-w-6xl mx-auto px-6 text-center space-y-8">
+    <!-- HERO SECTION WITH GIANT 180° INTERACTIVE 3D LOGO -->
+    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden z-10">
+        <div class="relative z-10 max-w-6xl mx-auto px-6 text-center space-y-7">
             
             <div class="inline-flex items-center space-x-3 px-5 py-2 rounded-full border border-gold/40 bg-obsidian/45 backdrop-blur-md shadow-[0_0_25px_rgba(240,210,120,0.2)]">
                 <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
                 <span class="text-[10px] uppercase tracking-[0.4em] text-gold font-medium">Cosmic Exploration Series • Masterpieces $73,143 to $6,930,000 USD</span>
             </div>
 
-            <h1 class="font-cinzel text-4xl sm:text-6xl md:text-8xl font-light text-cream tracking-tight leading-[1.08] diamond-sparkle py-2">
+            <!-- GIANT INTERACTIVE 3D EMBLEM (DRAG 180°+) -->
+            <div class="pt-2 pb-1 flex flex-col items-center">
+                <div class="hero-3d-stage">
+                    <div id="hero-3d-logo" class="hero-3d-emblem" title="Drag horizontally to rotate 180°">
+                        <div class="hero-3d-rim"></div>
+
+                        <!-- Front Face -->
+                        <div class="hero-3d-face hero-3d-front p-6">
+                            <div class="text-[9px] tracking-[0.45em] text-gold/80 uppercase mb-1">✦ ✦</div>
+                            <div class="px-5 py-2 rounded-full border border-gold/60 bg-obsidian/55 shadow-[0_0_25px_rgba(240,210,120,0.28)]">
+                                <span class="font-cinzel text-4xl sm:text-5xl font-semibold tracking-[0.18em] gold-gradient-text">MZ</span>
+                            </div>
+                            <div class="text-[9px] tracking-[0.45em] text-gold/80 uppercase mt-1 mb-2">✦ ✦</div>
+                            <div class="font-cinzel text-xs sm:text-sm tracking-[0.35em] text-cream font-light">MAISON ZORIA</div>
+                            <div class="w-14 h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent my-2"></div>
+                            <div class="text-[8px] uppercase tracking-[0.32em] text-gold/80">18K • ASTRUM VAULT</div>
+                        </div>
+
+                        <!-- Back Face (180° Reverse) -->
+                        <div class="hero-3d-face hero-3d-back p-6">
+                            <div class="text-[8px] uppercase tracking-[0.38em] text-gold/75 mb-2">CELESTIAL REVERSE</div>
+                            <div class="w-20 h-20 rounded-full border border-gold/55 flex items-center justify-center shadow-[0_0_25px_rgba(240,210,120,0.22)] mb-2">
+                                <i class="fa-solid fa-compass-drafting text-3xl text-gold"></i>
+                            </div>
+                            <div class="font-cinzel text-sm sm:text-base tracking-[0.28em] gold-gradient-text">ASTRUM • 180°</div>
+                            <div class="text-[8px] uppercase tracking-[0.28em] text-gray-300 mt-1.5">GENEVA • PARIS • WEB3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.25em] text-gray-400">
+                    <span id="logo-3d-angle" class="font-mono text-gold">Y: 0°</span>
+                    <span>•</span>
+                    <span>Drag 180° to Rotate</span>
+                    <button type="button" onclick="flipLogo180()" class="px-2.5 py-0.5 rounded-full border border-gold/35 text-gold hover:bg-gold hover:text-obsidian transition-all text-[9px]">
+                        Flip 180°
+                    </button>
+                </div>
+            </div>
+
+            <h1 class="font-cinzel text-4xl sm:text-6xl md:text-7xl font-light text-cream tracking-tight leading-[1.08] diamond-sparkle py-1">
                 Beyond Luxury.<br>
                 <span class="italic font-normal gold-gradient-text">Where Time & Precious Metals Converge.</span>
             </h1>
@@ -325,7 +501,7 @@
                 Welcome to Maison Zoria. An exclusive sanctuary of 18K solid gold, rare gemstones, tourbillon horological mechanisms, and confidential multi-chain Web3 treasury settlements.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
                 <a href="#collection" class="w-full sm:w-auto px-10 py-4 bg-gold text-obsidian font-bold text-xs uppercase tracking-[0.3em] rounded-full hover:bg-gold-light transition-all duration-300 shadow-[0_0_35px_rgba(240,210,120,0.5)]">
                     Explore Masterpieces
                 </a>
@@ -336,7 +512,7 @@
             </div>
         </div>
 
-        <a href="#heritage" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-400 hover:text-gold transition-colors flex flex-col items-center space-y-2 text-[9px] uppercase tracking-widest">
+        <a href="#heritage" class="hidden sm:flex absolute bottom-14 left-1/2 -translate-x-1/2 text-gray-400 hover:text-gold transition-colors flex-col items-center space-y-1.5 text-[9px] uppercase tracking-widest">
             <span>Ascend Atelier</span>
             <i class="fa-solid fa-chevron-down animate-bounce text-xs text-gold"></i>
         </a>
@@ -344,7 +520,7 @@
 
     <div class="cosmic-divider relative z-10"></div>
 
-    <!-- CHAPTER I: ATELIER HERITAGE -->
+    <!-- CHAPTER I: ATELIER HERITAGE & PALATIAL FLAGSHIP -->
     <section id="heritage" class="py-32 cosmic-section">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
@@ -378,11 +554,12 @@
             </div>
 
             <div class="lg:col-span-6 relative">
-                <div class="relative rounded-3xl overflow-hidden gold-border-glow group">
-                    <img src="./brand-story.png" alt="Maison Zoria European Atelier Story" class="w-full h-[540px] object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/800x1000/030304/f0d278?text=Maison+Zoria+Atelier';">
+                <div class="relative rounded-3xl overflow-hidden tilt-card-3d group">
+                    <div class="foil-sheen"></div>
+                    <img src="./4300b4ef6e01d1c515c2d0bfccb385db.jpg" alt="Maison Zoria Palatial Flagship Salon" class="w-full h-[540px] object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='./brand-story.png';">
                     <div class="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-transparent"></div>
                     <div class="absolute bottom-6 left-6 right-6 p-6 bg-obsidian/70 backdrop-blur-xl rounded-2xl border border-gold/30">
-                        <div class="text-[10px] text-gold uppercase tracking-widest font-semibold">Geneva Atelier Archives</div>
+                        <div class="text-[10px] text-gold uppercase tracking-widest font-semibold">Palatial Flagship & Geneva Reserve</div>
                         <div class="font-serif text-lg text-cream mt-1 italic">"Crafting priceless art into physical and cryptographic immortality."</div>
                     </div>
                 </div>
@@ -459,7 +636,8 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-                <div class="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl">
+                <div class="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl tilt-card-3d">
+                    <div class="foil-sheen"></div>
                     <img src="./maison-zoria-atelier-craftsmen.jpg.png" alt="Maison Zoria Master Artisans" class="w-full h-[450px] object-cover" onerror="this.onerror=null; this.src='https://placehold.co/800x600/030304/f0d278?text=Atelier+Craftsmen';">
                 </div>
                 <div class="space-y-6">
@@ -485,7 +663,8 @@
                         "True luxury is not defined by abundance, but by unrepeatable perfection."
                     </blockquote>
                 </div>
-                <div class="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl order-1 lg:order-2">
+                <div class="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl order-1 lg:order-2 tilt-card-3d">
+                    <div class="foil-sheen"></div>
                     <img src="./maison-zoria-craftsmanship-detail.jpg.png" alt="Maison Zoria Craftsmanship Detail" class="w-full h-[450px] object-cover" onerror="this.onerror=null; this.src='https://placehold.co/800x600/030304/f0d278?text=Craftsmanship+Detail';">
                 </div>
             </div>
@@ -517,7 +696,8 @@
     <!-- PRIVATE SALON / CONCIERGE & WEB3 TREASURY SETTLEMENT -->
     <section id="salon" class="py-32 cosmic-section">
         <div class="max-w-5xl mx-auto px-6">
-            <div class="glass-card p-8 sm:p-14 rounded-3xl border border-gold/30 gold-border-glow">
+            <div class="glass-card p-8 sm:p-14 rounded-3xl tilt-card-3d">
+                <div class="foil-sheen"></div>
                 
                 <div class="text-center space-y-4 mb-10">
                     <div class="text-xs uppercase tracking-[0.4em] text-gold font-semibold">Private Acquisition Portal</div>
@@ -627,8 +807,8 @@
         </div>
     </section>
 
-    <!-- FOOTER (SEAMLESS COSMIC GLASS, NO HARD BLACK CUT) -->
-    <footer class="bg-gradient-to-b from-transparent via-obsidian/55 to-obsidian/85 backdrop-blur-md border-t border-gold/20 pt-20 pb-12 text-gray-400 text-xs z-10 relative">
+    <!-- FOOTER (SEAMLESS COSMIC GLASS) -->
+    <footer class="bg-gradient-to-b from-transparent via-obsidian/55 to-obsidian/85 backdrop-blur-md border-t border-gold/20 pt-20 pb-20 text-gray-400 text-xs z-10 relative">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             
             <div class="space-y-4">
@@ -748,7 +928,7 @@
 
                 <div class="space-y-3 text-xs text-gray-300 font-light">
                     <div>Token Serial: <span id="cert-serial" class="font-mono text-gold font-semibold">MZ-2026-8899</span></div>
-                    <div>Item: <span id="cert-item-title" class="text-cream font-medium">Dream Awakening - 24K Gold Edition</span></div>
+                    <div>Item: <span id="cert-item-title" class="text-cream font-medium">Astrum Table - Cosmic Exploration Series</span></div>
                     <div>Provenance Status: <span class="text-emerald-400 font-semibold">Verified On-Chain (Block #1984203)</span></div>
                     <div>Master Artisan: <span class="text-cream">Atelier Master Geneva</span></div>
                 </div>
@@ -1024,7 +1204,7 @@
         ];
 
         // -------------------------------------------------------------
-        // DAILY INVENTORY URGENCY ENGINE (AUTO-UPDATES EVERY DAY)
+        // DAILY INVENTORY URGENCY ENGINE
         // -------------------------------------------------------------
         let currentDayKey = '';
 
@@ -1301,6 +1481,26 @@
             } catch (e) {}
         }
 
+        function playGlassShatterSound() {
+            if (!audioEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                [1760, 2349, 3136].forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.015);
+                    osc.frequency.exponentialRampToValueAtTime(freq * 0.62, ctx.currentTime + 0.16 + idx * 0.02);
+                    gain.gain.setValueAtTime(0.035, ctx.currentTime + idx * 0.015);
+                    gain.gain.exponentialRampToValueAtTime(0.0008, ctx.currentTime + 0.18 + idx * 0.02);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + idx * 0.015);
+                    osc.stop(ctx.currentTime + 0.2 + idx * 0.02);
+                });
+            } catch (e) {}
+        }
+
         function toggleAudioAmbience() {
             audioEnabled = !audioEnabled;
             const btnText = document.getElementById('audio-text');
@@ -1347,6 +1547,149 @@
         }
 
         // -------------------------------------------------------------
+        // GLASS SHATTER & EXTRACT EFFECT ENGINE
+        // -------------------------------------------------------------
+        let shatterShards = [];
+        let shatterAnimRunning = false;
+
+        function triggerGlassShatterExtract(triggerEl, callback) {
+            playGlassShatterSound();
+            const cardEl = triggerEl ? triggerEl.closest('.tilt-card-3d') : null;
+            const rect = cardEl
+                ? cardEl.getBoundingClientRect()
+                : (triggerEl ? triggerEl.getBoundingClientRect() : { left: window.innerWidth / 2 - 140, top: window.innerHeight / 2 - 140, width: 280, height: 280 });
+
+            if (cardEl) {
+                cardEl.classList.remove('card-shatter-extract');
+                void cardEl.offsetWidth;
+                cardEl.classList.add('card-shatter-extract');
+            }
+
+            const centerX = rect.left + rect.width * 0.5;
+            const centerY = rect.top + rect.height * 0.42;
+            const shardCount = 34;
+
+            for (let i = 0; i < shardCount; i++) {
+                const angle = (Math.PI * 2 * i) / shardCount + (Math.random() - 0.5) * 0.25;
+                const speed = 2.6 + Math.random() * 6.4;
+                const size = 9 + Math.random() * 16;
+                const poly = [];
+                const sides = 3 + Math.floor(Math.random() * 2);
+                for (let v = 0; v < sides; v++) {
+                    const a = (Math.PI * 2 * v) / sides + (Math.random() - 0.5) * 0.5;
+                    const r = size * (0.55 + Math.random() * 0.55);
+                    poly.push({ x: Math.cos(a) * r, y: Math.sin(a) * r });
+                }
+
+                shatterShards.push({
+                    x: centerX + (Math.random() - 0.5) * Math.min(rect.width * 0.55, 110),
+                    y: centerY + (Math.random() - 0.5) * Math.min(rect.height * 0.45, 95),
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed - 1.2,
+                    rot: Math.random() * Math.PI * 2,
+                    vRot: (Math.random() - 0.5) * 0.22,
+                    poly,
+                    alpha: 0.92,
+                    decay: 0.024 + Math.random() * 0.012,
+                    isGoldEdge: Math.random() < 0.45
+                });
+            }
+
+            if (!shatterAnimRunning) {
+                shatterAnimRunning = true;
+                requestAnimationFrame(stepGlassShatter);
+            }
+
+            setTimeout(() => {
+                if (typeof callback === 'function') callback();
+            }, 260);
+        }
+
+        function stepGlassShatter() {
+            const canvas = document.getElementById('glass-shatter-canvas');
+            if (!canvas) {
+                shatterAnimRunning = false;
+                return;
+            }
+            const ctx = canvas.getContext('2d');
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            if (canvas.width !== Math.floor(window.innerWidth * dpr) || canvas.height !== Math.floor(window.innerHeight * dpr)) {
+                canvas.width = Math.floor(window.innerWidth * dpr);
+                canvas.height = Math.floor(window.innerHeight * dpr);
+            }
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+            for (let i = shatterShards.length - 1; i >= 0; i--) {
+                const s = shatterShards[i];
+                s.x += s.vx;
+                s.y += s.vy;
+                s.vy += 0.14; // subtle gravity after outward burst
+                s.vx *= 0.985;
+                s.rot += s.vRot;
+                s.alpha -= s.decay;
+
+                if (s.alpha <= 0) {
+                    shatterShards.splice(i, 1);
+                    continue;
+                }
+
+                ctx.save();
+                ctx.translate(s.x, s.y);
+                ctx.rotate(s.rot);
+                ctx.beginPath();
+                s.poly.forEach((pt, idx) => {
+                    if (idx === 0) ctx.moveTo(pt.x, pt.y);
+                    else ctx.lineTo(pt.x, pt.y);
+                });
+                ctx.closePath();
+
+                ctx.fillStyle = s.isGoldEdge
+                    ? `rgba(251, 240, 185, ${s.alpha * 0.24})`
+                    : `rgba(215, 236, 255, ${s.alpha * 0.20})`;
+                ctx.fill();
+
+                ctx.strokeStyle = s.isGoldEdge
+                    ? `rgba(240, 210, 120, ${s.alpha * 0.85})`
+                    : `rgba(255, 255, 255, ${s.alpha * 0.72})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            if (shatterShards.length > 0) {
+                requestAnimationFrame(stepGlassShatter);
+            } else {
+                ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                shatterAnimRunning = false;
+            }
+        }
+
+        // -------------------------------------------------------------
+        // 3D CARD TILT BINDING
+        // -------------------------------------------------------------
+        function bind3DTiltCards() {
+            const cards = document.querySelectorAll('.tilt-card-3d');
+            cards.forEach(card => {
+                if (card.dataset.tiltBound === '1') return;
+                card.dataset.tiltBound = '1';
+
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const nx = (e.clientX - rect.left) / Math.max(1, rect.width) - 0.5;
+                    const ny = (e.clientY - rect.top) / Math.max(1, rect.height) - 0.5;
+                    const rotY = nx * 11;
+                    const rotX = -ny * 11;
+                    card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-4px)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                });
+            });
+        }
+
+        // -------------------------------------------------------------
         // RENDER PRODUCT GRID
         // -------------------------------------------------------------
         function renderProducts() {
@@ -1365,7 +1708,8 @@
                 const fillPct = inv.totalDaily > 0 ? Math.round((inv.remaining / inv.totalDaily) * 100) : 0;
 
                 return `
-                <div class="glass-card rounded-3xl overflow-hidden gold-border-glow flex flex-col justify-between group">
+                <div class="glass-card rounded-3xl overflow-hidden tilt-card-3d flex flex-col justify-between group relative">
+                    <div class="foil-sheen"></div>
                     <div class="relative overflow-hidden aspect-square bg-obsidian/70">
                         <img src="${product.image}" alt="${product.title}" 
                              class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700" 
@@ -1406,10 +1750,10 @@
                         </div>
 
                         <div class="pt-4 border-t border-white/10 flex items-center gap-3">
-                            <button onclick="openProductCustomizer('${product.id}')" class="flex-1 py-3 border border-white/20 hover:border-gold text-cream text-[11px] uppercase tracking-wider rounded-xl transition-all">
+                            <button onclick="openProductCustomizer('${product.id}', this)" class="flex-1 py-3 border border-white/20 hover:border-gold text-cream text-[11px] uppercase tracking-wider rounded-xl transition-all">
                                 Customizer
                             </button>
-                            <button onclick="addToVault('${product.id}')" class="flex-1 py-3 bg-gold/15 hover:bg-gold text-gold hover:text-obsidian border border-gold/50 text-[11px] uppercase tracking-wider rounded-xl transition-all font-semibold">
+                            <button onclick="addToVault('${product.id}', this)" class="flex-1 py-3 bg-gold/15 hover:bg-gold text-gold hover:text-obsidian border border-gold/50 text-[11px] uppercase tracking-wider rounded-xl transition-all font-semibold">
                                 ${inv.isSoldOutToday ? 'Join Waitlist' : 'Reserve Vault'}
                             </button>
                         </div>
@@ -1420,6 +1764,7 @@
 
             renderCreationDropdown();
             updateDailyUrgencyBanner();
+            bind3DTiltCards();
         }
 
         function renderCreationDropdown() {
@@ -1434,7 +1779,7 @@
         // -------------------------------------------------------------
         // PRODUCT CUSTOMIZER ENGINE & MODAL
         // -------------------------------------------------------------
-        function openProductCustomizer(productId) {
+        function openProductCustomizer(productId, triggerEl = null) {
             playClickSound();
             const productIndex = products.findIndex(p => p.id === productId);
             const product = products[productIndex];
@@ -1451,7 +1796,9 @@
             };
 
             updateCustomizerModalUI();
-            document.getElementById('product-detail-modal').classList.remove('hidden');
+            triggerGlassShatterExtract(triggerEl, () => {
+                document.getElementById('product-detail-modal').classList.remove('hidden');
+            });
         }
 
         function updateCustomizerModalUI() {
@@ -1565,19 +1912,21 @@
         // -------------------------------------------------------------
         // PRIVATE VAULT LOGIC
         // -------------------------------------------------------------
-        function addToVault(productId) {
+        function addToVault(productId, triggerEl = null) {
             playClickSound();
             const product = products.find(p => p.id === productId);
             if (!product) return;
 
-            vault.push({
-                ...product,
-                priceUSD: product.basePriceUSD,
-                quantity: 1
-            });
+            triggerGlassShatterExtract(triggerEl, () => {
+                vault.push({
+                    ...product,
+                    priceUSD: product.basePriceUSD,
+                    quantity: 1
+                });
 
-            updateVaultUI();
-            toggleVaultModal(true);
+                updateVaultUI();
+                toggleVaultModal(true);
+            });
         }
 
         function removeFromVault(index) {
@@ -1740,62 +2089,201 @@
         });
 
         // -------------------------------------------------------------
-        // COSMIC EXPLORATION SERIES: FULL-BLEED DYNAMIC STARFIELD ENGINE
+        // INTERACTIVE 180°+ 3D LOGO CONTROLLER
+        // -------------------------------------------------------------
+        let logoRotY = 0;
+        let logoTargetRotY = 0;
+        let logoTiltX = 0;
+        let logoTargetTiltX = 0;
+        let isDraggingLogo = false;
+        let logoDragStartX = 0;
+        let logoDragStartY = 0;
+        let logoBaseRotY = 0;
+
+        function flipLogo180() {
+            playClickSound();
+            logoTargetRotY += 180;
+        }
+
+        function init3DLogoController() {
+            const emblem = document.getElementById('hero-3d-logo');
+            const angleReadout = document.getElementById('logo-3d-angle');
+            if (!emblem) return;
+
+            emblem.addEventListener('pointerdown', (e) => {
+                isDraggingLogo = true;
+                logoDragStartX = e.clientX;
+                logoDragStartY = e.clientY;
+                logoBaseRotY = logoTargetRotY;
+                emblem.setPointerCapture(e.pointerId);
+            });
+
+            emblem.addEventListener('pointermove', (e) => {
+                if (!isDraggingLogo) return;
+                const dx = e.clientX - logoDragStartX;
+                const dy = e.clientY - logoDragStartY;
+                logoTargetRotY = logoBaseRotY + dx * 0.85;
+                logoTargetTiltX = Math.max(-28, Math.min(28, -dy * 0.25));
+            });
+
+            const releaseDrag = (e) => {
+                if (!isDraggingLogo) return;
+                isDraggingLogo = false;
+                logoTargetTiltX = 0;
+                try { emblem.releasePointerCapture(e.pointerId); } catch (err) {}
+            };
+
+            emblem.addEventListener('pointerup', releaseDrag);
+            emblem.addEventListener('pointercancel', releaseDrag);
+
+            function tickLogo() {
+                if (!isDraggingLogo) {
+                    logoTargetRotY += 0.22; // gentle celestial rotation
+                }
+                logoRotY += (logoTargetRotY - logoRotY) * 0.12;
+                logoTiltX += (logoTargetTiltX - logoTiltX) * 0.12;
+
+                emblem.style.transform = `rotateX(${logoTiltX.toFixed(2)}deg) rotateY(${logoRotY.toFixed(2)}deg)`;
+                if (angleReadout) {
+                    const normDeg = (((Math.round(logoRotY) % 360) + 360) % 360);
+                    angleReadout.textContent = `Y: ${normDeg}°`;
+                }
+                requestAnimationFrame(tickLogo);
+            }
+            tickLogo();
+        }
+
+        // -------------------------------------------------------------
+        // CELESTIAL SCROLL ASTROLABE PROGRESS & TIER INDICATOR
+        // -------------------------------------------------------------
+        function initScrollAstrolabe() {
+            const fillEl = document.getElementById('astrolabe-fill');
+            const starEl = document.getElementById('astrolabe-star');
+            const pctEl = document.getElementById('astrolabe-pct');
+            const tierLinks = document.querySelectorAll('.astrolabe-tier');
+            const sectionIds = ['heritage', 'collection', 'savoir-faire', 'provenance', 'salon'];
+
+            function updateAstrolabe() {
+                const docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+                const progress = Math.max(0, Math.min(1, (window.scrollY || 0) / docHeight));
+                const pct = Math.round(progress * 100);
+
+                if (fillEl) fillEl.style.height = `${pct}%`;
+                if (starEl) starEl.style.top = `${pct}%`;
+                if (pctEl) pctEl.textContent = `${pct}%`;
+
+                let activeId = 'heritage';
+                const anchorY = (window.scrollY || 0) + window.innerHeight * 0.45;
+                sectionIds.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && el.offsetTop <= anchorY) {
+                        activeId = id;
+                    }
+                });
+
+                tierLinks.forEach(link => {
+                    if (link.dataset.tier === activeId) {
+                        link.classList.add('text-gold', 'bg-gold/15');
+                    } else {
+                        link.classList.remove('text-gold', 'bg-gold/15');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateAstrolabe, { passive: true });
+            window.addEventListener('resize', updateAstrolabe);
+            updateAstrolabe();
+        }
+
+        // -------------------------------------------------------------
+        // COSMIC EXPLORATION SERIES: NEBULA + WARP STREAKS + CONSTELLATION TRAIL
         // -------------------------------------------------------------
         function initCosmicStarfield() {
             const canvas = document.getElementById('cosmic-canvas');
-            if (!canvas) return;
+            const trailCanvas = document.getElementById('starlight-trail-canvas');
+            if (!canvas || !trailCanvas) return;
+
             const ctx = canvas.getContext('2d');
+            const trailCtx = trailCanvas.getContext('2d');
 
             let width = 0;
             let height = 0;
             let scrollY = window.scrollY || 0;
             let targetScrollY = scrollY;
-            let mouseX = 0;
-            let mouseY = 0;
-            let targetMouseX = 0;
-            let targetMouseY = 0;
+            let scrollVelocity = 0;
+            let mouseX = -9999;
+            let mouseY = -9999;
+            let normMouseX = 0;
+            let normMouseY = 0;
+            let targetNormX = 0;
+            let targetNormY = 0;
+
+            const stardustTrail = [];
 
             function resize() {
                 const dpr = Math.min(window.devicePixelRatio || 1, 2);
                 width = window.innerWidth;
                 height = window.innerHeight;
+
                 canvas.width = width * dpr;
                 canvas.height = height * dpr;
                 ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                trailCanvas.width = width * dpr;
+                trailCanvas.height = height * dpr;
+                trailCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
             }
 
             window.addEventListener('resize', resize);
             window.addEventListener('scroll', () => {
-                targetScrollY = window.scrollY || 0;
+                const nextY = window.scrollY || 0;
+                scrollVelocity = Math.min(28, Math.max(scrollVelocity, Math.abs(nextY - targetScrollY)));
+                targetScrollY = nextY;
             }, { passive: true });
+
             window.addEventListener('mousemove', (e) => {
-                targetMouseX = (e.clientX / Math.max(1, width) - 0.5) * 2;
-                targetMouseY = (e.clientY / Math.max(1, height) - 0.5) * 2;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                targetNormX = (e.clientX / Math.max(1, width) - 0.5) * 2;
+                targetNormY = (e.clientY / Math.max(1, height) - 0.5) * 2;
+
+                for (let i = 0; i < 2; i++) {
+                    stardustTrail.push({
+                        x: e.clientX + (Math.random() - 0.5) * 10,
+                        y: e.clientY + (Math.random() - 0.5) * 10,
+                        vx: (Math.random() - 0.5) * 0.9,
+                        vy: (Math.random() - 0.5) * 0.9 - 0.35,
+                        r: Math.random() * 2.1 + 0.7,
+                        alpha: 0.9,
+                        decay: 0.025 + Math.random() * 0.015,
+                        isGold: Math.random() < 0.78
+                    });
+                }
+                if (stardustTrail.length > 130) {
+                    stardustTrail.splice(0, stardustTrail.length - 130);
+                }
             }, { passive: true });
 
             resize();
 
-            // 1. Deep Cosmic Nebulae Clouds (Drifting luminous gas clouds)
             const nebulae = [
-                { rx: 0.25, ry: 0.22, radius: 420, color: 'rgba(34, 58, 128, 0.20)', speed: 0.00018, phase: 0 },
-                { rx: 0.78, ry: 0.35, radius: 480, color: 'rgba(130, 96, 28, 0.14)', speed: 0.00014, phase: 2.1 },
-                { rx: 0.52, ry: 0.72, radius: 520, color: 'rgba(24, 45, 102, 0.22)', speed: 0.00016, phase: 4.2 },
-                { rx: 0.18, ry: 0.82, radius: 380, color: 'rgba(165, 128, 46, 0.12)', speed: 0.00021, phase: 1.3 }
+                { rx: 0.25, ry: 0.22, radius: 440, color: 'rgba(34, 58, 128, 0.22)', speed: 0.00018, phase: 0 },
+                { rx: 0.78, ry: 0.35, radius: 500, color: 'rgba(138, 102, 30, 0.16)', speed: 0.00014, phase: 2.1 },
+                { rx: 0.52, ry: 0.72, radius: 540, color: 'rgba(24, 45, 102, 0.24)', speed: 0.00016, phase: 4.2 },
+                { rx: 0.18, ry: 0.82, radius: 400, color: 'rgba(165, 128, 46, 0.13)', speed: 0.00021, phase: 1.3 }
             ];
 
-            // 2. Multi-Layer Parallax Stars (Deep silver stars + radiant 24K gold stars)
-            const starCount = Math.min(260, Math.floor((width * height) / 6500));
+            const starCount = Math.min(280, Math.floor((width * height) / 6000));
             const stars = [];
             for (let i = 0; i < starCount; i++) {
-                const depth = Math.random(); // 0 = far background, 1 = close foreground
-                const isGold = Math.random() < 0.36;
+                const depth = Math.random();
+                const isGold = Math.random() < 0.38;
                 stars.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
                     depth,
                     radius: depth * 1.9 + 0.35,
-                    baseAlpha: depth * 0.65 + 0.2,
+                    baseAlpha: depth * 0.68 + 0.2,
                     twinkleSpeed: Math.random() * 0.025 + 0.008,
                     twinkleOffset: Math.random() * Math.PI * 2,
                     driftX: (Math.random() - 0.5) * (0.08 + depth * 0.18),
@@ -1805,10 +2293,7 @@
                 });
             }
 
-            // 3. Orbital Constellation Rings (Subtle celestial astrolabe arcs)
             let astrolabeAngle = 0;
-
-            // 4. Occasional Shooting Stars
             const shootingStars = [];
             function spawnShootingStar() {
                 if (shootingStars.length >= 2) return;
@@ -1821,7 +2306,7 @@
                     y: startY,
                     vx: Math.cos(angle) * speed,
                     vy: Math.sin(angle) * speed,
-                    length: 110 + Math.random() * 90,
+                    length: 120 + Math.random() * 90,
                     life: 1,
                     decay: 0.016 + Math.random() * 0.01
                 });
@@ -1831,49 +2316,53 @@
             function renderFrame() {
                 tick += 1;
                 scrollY += (targetScrollY - scrollY) * 0.08;
-                mouseX += (targetMouseX - mouseX) * 0.05;
-                mouseY += (targetMouseY - mouseY) * 0.05;
+                scrollVelocity *= 0.88;
+                normMouseX += (targetNormX - normMouseX) * 0.05;
+                normMouseY += (targetNormY - normMouseY) * 0.05;
 
                 ctx.clearRect(0, 0, width, height);
+                trailCtx.clearRect(0, 0, width, height);
 
-                // Draw Drifting Nebulae
+                // 1. Drifting Deep Nebulae
                 nebulae.forEach((n) => {
-                    const cx = width * n.rx + Math.sin(tick * n.speed + n.phase) * 55 - mouseX * 18;
+                    const breath = 1 + 0.08 * Math.sin(tick * 0.006 + n.phase);
+                    const cx = width * n.rx + Math.sin(tick * n.speed + n.phase) * 55 - normMouseX * 18;
                     const cy = ((height * n.ry - scrollY * 0.08 + Math.cos(tick * n.speed + n.phase) * 40) % (height + n.radius * 2));
                     const wrappedY = cy < -n.radius ? cy + height + n.radius * 2 : cy;
 
-                    const grad = ctx.createRadialGradient(cx, wrappedY, 0, cx, wrappedY, n.radius);
+                    const grad = ctx.createRadialGradient(cx, wrappedY, 0, cx, wrappedY, n.radius * breath);
                     grad.addColorStop(0, n.color);
                     grad.addColorStop(1, 'rgba(2, 3, 8, 0)');
                     ctx.fillStyle = grad;
                     ctx.beginPath();
-                    ctx.arc(cx, wrappedY, n.radius, 0, Math.PI * 2);
+                    ctx.arc(cx, wrappedY, n.radius * breath, 0, Math.PI * 2);
                     ctx.fill();
                 });
 
-                // Draw Subtle Rotating Celestial Astrolabe Orbit
+                // 2. Rotating Celestial Astrolabe Orbit
                 astrolabeAngle += 0.00045;
-                const orbitX = width * 0.5 - mouseX * 14;
-                const orbitY = height * 0.48 - (scrollY * 0.04) % 120 - mouseY * 14;
+                const orbitX = width * 0.5 - normMouseX * 14;
+                const orbitY = height * 0.48 - (scrollY * 0.04) % 120 - normMouseY * 14;
                 const orbitRadius = Math.min(width, height) * 0.42;
 
                 ctx.save();
                 ctx.translate(orbitX, orbitY);
                 ctx.rotate(astrolabeAngle);
-                ctx.strokeStyle = 'rgba(240, 210, 120, 0.055)';
+                ctx.strokeStyle = 'rgba(240, 210, 120, 0.06)';
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.arc(0, 0, orbitRadius, 0, Math.PI * 2);
                 ctx.stroke();
 
                 ctx.setLineDash([4, 14]);
-                ctx.strokeStyle = 'rgba(140, 175, 255, 0.05)';
+                ctx.strokeStyle = 'rgba(140, 175, 255, 0.055)';
                 ctx.beginPath();
                 ctx.arc(0, 0, orbitRadius * 0.72, 0, Math.PI * 2);
                 ctx.stroke();
                 ctx.restore();
 
-                // Draw Multi-Layer Parallax Stars
+                // 3. Multi-Layer Parallax Stars + Warp Streaks + Constellation Web near Cursor
+                const nearbyStars = [];
                 stars.forEach((s) => {
                     s.x += s.driftX;
                     s.y += s.driftY;
@@ -1884,10 +2373,23 @@
                     if (s.y > height + 10) s.y = -10;
 
                     const parallaxY = ((s.y - scrollY * (0.06 + s.depth * 0.24)) % height + height) % height;
-                    const parallaxX = ((s.x - mouseX * (6 + s.depth * 22)) % width + width) % width;
+                    const parallaxX = ((s.x - normMouseX * (6 + s.depth * 22)) % width + width) % width;
 
                     const twinkle = 0.65 + 0.35 * Math.sin(tick * s.twinkleSpeed + s.twinkleOffset);
                     const alpha = Math.min(1, s.baseAlpha * twinkle);
+
+                    // Warp streak on fast scrolling
+                    if (scrollVelocity > 1.5 && s.depth > 0.35) {
+                        const streakLen = Math.min(36, scrollVelocity * (0.5 + s.depth * 1.1));
+                        ctx.strokeStyle = s.isGold
+                            ? `rgba(240, 210, 120, ${alpha * 0.45})`
+                            : `rgba(215, 230, 255, ${alpha * 0.35})`;
+                        ctx.lineWidth = s.radius * 0.85;
+                        ctx.beginPath();
+                        ctx.moveTo(parallaxX, parallaxY);
+                        ctx.lineTo(parallaxX, parallaxY - streakLen);
+                        ctx.stroke();
+                    }
 
                     ctx.fillStyle = s.isGold
                         ? `rgba(240, 210, 120, ${alpha})`
@@ -1897,7 +2399,6 @@
                     ctx.arc(parallaxX, parallaxY, s.radius, 0, Math.PI * 2);
                     ctx.fill();
 
-                    // 4-point diamond star flare on bright foreground stars
                     if (s.hasFlare) {
                         const flareLen = s.radius * 5.2 * twinkle;
                         ctx.strokeStyle = s.isGold
@@ -1911,9 +2412,68 @@
                         ctx.lineTo(parallaxX, parallaxY + flareLen);
                         ctx.stroke();
                     }
+
+                    const dist = Math.hypot(parallaxX - mouseX, parallaxY - mouseY);
+                    if (dist < 145) {
+                        nearbyStars.push({ x: parallaxX, y: parallaxY, dist });
+                    }
                 });
 
-                // Spawn & Render Shooting Stars
+                // Constellation lines connecting cursor to nearby stars & between close stars
+                if (mouseX >= 0 && mouseY >= 0 && nearbyStars.length > 0) {
+                    nearbyStars.sort((a, b) => a.dist - b.dist);
+                    const capped = nearbyStars.slice(0, 7);
+                    capped.forEach((st) => {
+                        const strength = 1 - st.dist / 145;
+                        trailCtx.strokeStyle = `rgba(240, 210, 120, ${strength * 0.42})`;
+                        trailCtx.lineWidth = 0.85;
+                        trailCtx.beginPath();
+                        trailCtx.moveTo(mouseX, mouseY);
+                        trailCtx.lineTo(st.x, st.y);
+                        trailCtx.stroke();
+                    });
+
+                    for (let i = 0; i < capped.length; i++) {
+                        for (let j = i + 1; j < capped.length; j++) {
+                            const d = Math.hypot(capped[i].x - capped[j].x, capped[i].y - capped[j].y);
+                            if (d < 95) {
+                                trailCtx.strokeStyle = `rgba(240, 210, 120, ${(1 - d / 95) * 0.22})`;
+                                trailCtx.lineWidth = 0.65;
+                                trailCtx.beginPath();
+                                trailCtx.moveTo(capped[i].x, capped[i].y);
+                                trailCtx.lineTo(capped[j].x, capped[j].y);
+                                trailCtx.stroke();
+                            }
+                        }
+                    }
+
+                    // Subtle golden astrolabe reticle at cursor
+                    trailCtx.strokeStyle = 'rgba(240, 210, 120, 0.55)';
+                    trailCtx.lineWidth = 1;
+                    trailCtx.beginPath();
+                    trailCtx.arc(mouseX, mouseY, 11, 0, Math.PI * 2);
+                    trailCtx.stroke();
+                }
+
+                // 4. Stardust Cursor Trail
+                for (let i = stardustTrail.length - 1; i >= 0; i--) {
+                    const p = stardustTrail[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.alpha -= p.decay;
+                    if (p.alpha <= 0) {
+                        stardustTrail.splice(i, 1);
+                        continue;
+                    }
+                    trailCtx.fillStyle = p.isGold
+                        ? `rgba(251, 240, 185, ${p.alpha})`
+                        : `rgba(210, 232, 255, ${p.alpha * 0.85})`;
+                    trailCtx.beginPath();
+                    trailCtx.arc(p.x, p.y, p.r * p.alpha + 0.3, 0, Math.PI * 2);
+                    trailCtx.fill();
+                }
+
+                // 5. Shooting Stars
                 if (Math.random() < 0.008) {
                     spawnShootingStar();
                 }
@@ -1953,23 +2513,15 @@
         }
 
         // -------------------------------------------------------------
-        // CUSTOM GOLD CURSOR GLOW
-        // -------------------------------------------------------------
-        window.addEventListener('mousemove', (e) => {
-            const cursor = document.getElementById('gold-cursor');
-            if (cursor) {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            }
-        });
-
-        // -------------------------------------------------------------
         // INIT ON WINDOW LOAD
         // -------------------------------------------------------------
         window.onload = function() {
             renderProducts();
             updateVaultUI();
             initCosmicStarfield();
+            init3DLogoController();
+            initScrollAstrolabe();
+            bind3DTiltCards();
             initLocalization();
             updateDailyUrgencyBanner();
             setInterval(updateDailyUrgencyBanner, 1000);
