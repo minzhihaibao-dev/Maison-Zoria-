@@ -23,9 +23,9 @@
                 extend: {
                     colors: {
                         obsidian: {
-                            DEFAULT: '#030304',
-                            card: '#0a0a0f',
-                            border: '#1f1f2b'
+                            DEFAULT: '#030306',
+                            card: '#080912',
+                            border: '#1f2235'
                         },
                         gold: {
                             DEFAULT: '#f0d278',
@@ -49,15 +49,75 @@
 
     <!-- Custom Aesthetics & Animations -->
     <style>
-        body {
-            background-color: #030304;
+        html, body {
+            background-color: #020308;
             color: #fcfaf7;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
+            top: 0 !important;
         }
 
         .font-cinzel { font-family: 'Cinzel', serif; }
         .font-serif { font-family: 'Cormorant Garamond', serif; }
+
+        /* Full-Bleed Cosmic Exploration Backdrop */
+        #cosmic-backdrop {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 25%, rgba(28, 42, 92, 0.38) 0%, transparent 65%),
+                radial-gradient(ellipse 70% 55% at 80% 70%, rgba(72, 46, 18, 0.28) 0%, transparent 65%),
+                radial-gradient(ellipse 90% 80% at 50% 50%, rgba(11, 16, 38, 0.72) 0%, #020308 100%);
+        }
+
+        /* Interactive Constellation & Starlight Trail Canvas */
+        #starlight-trail-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 35;
+            pointer-events: none;
+        }
+
+        /* Glass Shatter Overlay Canvas */
+        #glass-shatter-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 60;
+            pointer-events: none;
+        }
+
+        /* Seamless Atmospheric Section Blending */
+        .cosmic-section {
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(
+                180deg,
+                rgba(4, 6, 16, 0.0) 0%,
+                rgba(5, 8, 20, 0.40) 50%,
+                rgba(4, 6, 16, 0.0) 100%
+            );
+        }
+
+        .cosmic-divider {
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(240, 210, 120, 0.08) 20%,
+                rgba(240, 210, 120, 0.28) 50%,
+                rgba(240, 210, 120, 0.08) 80%,
+                transparent 100%
+            );
+        }
 
         /* Liquid Gold Shimmer Text */
         .gold-gradient-text {
@@ -74,17 +134,123 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 24K Gold Border Glow */
-        .gold-border-glow {
-            border: 1px solid rgba(240, 210, 120, 0.25);
-            box-shadow: 0 0 25px rgba(240, 210, 120, 0.08);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Giant Interactive 3D Logo (180°+ Rotation) */
+        .hero-3d-stage {
+            perspective: 1400px;
+            user-select: none;
+            touch-action: none;
         }
 
-        .gold-border-glow:hover {
+        .hero-3d-emblem {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            cursor: grab;
+            will-change: transform;
+        }
+
+        @media (min-width: 640px) {
+            .hero-3d-emblem {
+                width: 290px;
+                height: 290px;
+            }
+        }
+
+        .hero-3d-emblem:active {
+            cursor: grabbing;
+        }
+
+        .hero-3d-face {
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid rgba(240, 210, 120, 0.65);
+            box-shadow:
+                0 0 55px rgba(240, 210, 120, 0.24),
+                inset 0 0 36px rgba(240, 210, 120, 0.16);
+        }
+
+        .hero-3d-front {
+            background:
+                radial-gradient(circle at 30% 25%, rgba(251, 240, 185, 0.18) 0%, transparent 55%),
+                radial-gradient(circle at 75% 75%, rgba(26, 44, 98, 0.42) 0%, rgba(5, 7, 16, 0.88) 78%);
+            transform: translateZ(16px);
+        }
+
+        .hero-3d-back {
+            background:
+                radial-gradient(circle at 70% 30%, rgba(240, 210, 120, 0.20) 0%, transparent 55%),
+                radial-gradient(circle at 30% 70%, rgba(168, 129, 24, 0.24) 0%, rgba(4, 6, 14, 0.92) 80%);
+            transform: rotateY(180deg) translateZ(16px);
+        }
+
+        .hero-3d-rim {
+            position: absolute;
+            inset: 6px;
+            border-radius: 9999px;
+            border: 1px dashed rgba(240, 210, 120, 0.35);
+            transform: translateZ(0px);
+            pointer-events: none;
+        }
+
+        /* 3D Tilt Cards + Specular Foil Sheen */
+        .tilt-card-3d {
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(240, 210, 120, 0.22);
+            box-shadow: 0 10px 34px rgba(0, 0, 0, 0.48), 0 0 22px rgba(240, 210, 120, 0.07);
+        }
+
+        .tilt-card-3d:hover {
             border-color: rgba(240, 210, 120, 0.85);
-            box-shadow: 0 0 45px rgba(240, 210, 120, 0.3);
-            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.72), 0 0 42px rgba(240, 210, 120, 0.26);
+        }
+
+        .foil-sheen {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            background: linear-gradient(
+                115deg,
+                transparent 20%,
+                rgba(255, 244, 200, 0.14) 38%,
+                rgba(255, 255, 255, 0.34) 50%,
+                rgba(240, 210, 120, 0.18) 62%,
+                transparent 80%
+            );
+            transform: translateX(-120%) skewX(-18deg);
+        }
+
+        .tilt-card-3d:hover .foil-sheen {
+            opacity: 1;
+            animation: foilSweep 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes foilSweep {
+            0% { transform: translateX(-125%) skewX(-18deg); }
+            100% { transform: translateX(135%) skewX(-18deg); }
+        }
+
+        .card-shatter-extract {
+            animation: cardExtractLift 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cardExtractLift {
+            0% { transform: scale(1) translateZ(0); filter: brightness(1); }
+            45% { transform: scale(1.045) translateY(-10px); filter: brightness(1.25) drop-shadow(0 0 28px rgba(240, 210, 120, 0.65)); }
+            100% { transform: scale(1) translateY(0); filter: brightness(1); }
         }
 
         /* Diamond Shimmer Effect */
@@ -116,41 +282,29 @@
 
         /* Glassmorphism Ultra Luxury */
         .glass-header {
-            background: rgba(3, 3, 4, 0.88);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(240, 210, 120, 0.18);
+            background: rgba(3, 5, 14, 0.62);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border-bottom: 1px solid rgba(240, 210, 120, 0.16);
         }
 
         .glass-card {
-            background: rgba(10, 10, 15, 0.75);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(240, 210, 120, 0.15);
+            background: linear-gradient(145deg, rgba(10, 13, 28, 0.58) 0%, rgba(5, 7, 16, 0.74) 100%);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
         }
 
         /* Modal Overlay Backdrop */
         .modal-backdrop {
-            background: rgba(2, 2, 3, 0.92);
-            backdrop-filter: blur(20px);
+            background: rgba(2, 3, 10, 0.88);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
         }
 
         /* Custom Gold Scrollbar */
         ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #030304; }
+        ::-webkit-scrollbar-track { background: #020308; }
         ::-webkit-scrollbar-thumb { background: #f0d278; border-radius: 2px; }
-
-        /* Custom Interactive Glowing Cursor Effect */
-        #gold-cursor {
-            pointer-events: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 30px; height: 30px;
-            border: 1px solid rgba(240, 210, 120, 0.6);
-            border-radius: 50%;
-            transition: transform 0.15s ease-out, opacity 0.3s ease;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 15px rgba(240, 210, 120, 0.3);
-        }
 
         /* Digital Wax Seal Stamp */
         .wax-seal {
@@ -159,83 +313,51 @@
             border: 2px solid #ffd700;
         }
 
-        /* 3D Splash & Floating Emblem Aesthetics */
-        #mz-3d-splash {
-            background: radial-gradient(circle at center, #0d0c12 0%, #030304 75%);
-            transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.1s;
-        }
-        #mz-3d-splash.splash-hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .mz-3d-stage {
-            perspective: 1200px;
-        }
-        .mz-3d-card {
-            transform-style: preserve-3d;
-            animation: mzIntroSpin 2.6s cubic-bezier(0.16, 1, 0.3, 1) forwards, mzFloatPulse 6s ease-in-out 2.6s infinite;
-            filter: drop-shadow(0 0 32px rgba(240, 210, 120, 0.32));
-            transition: transform 0.18s ease-out;
-        }
-        .mz-hero-3d-card {
-            transform-style: preserve-3d;
-            animation: mzFloatPulse 6s ease-in-out infinite;
-            filter: drop-shadow(0 0 26px rgba(240, 210, 120, 0.28));
-            transition: transform 0.15s ease-out;
-        }
-        @keyframes mzIntroSpin {
-            0% {
-                opacity: 0;
-                transform: rotateY(-38deg) rotateX(14deg) scale(0.78) translateZ(-60px);
-            }
-            60% {
-                opacity: 1;
-                transform: rotateY(8deg) rotateX(-4deg) scale(1.03) translateZ(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: rotateY(0deg) rotateX(0deg) scale(1) translateZ(0px);
-            }
-        }
-        @keyframes mzFloatPulse {
-            0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
-            50% { transform: translateY(-8px) rotateX(3deg) rotateY(-4deg); }
-        }
-    </style>
-    <style>
         .goog-te-banner-frame, .skiptranslate iframe, #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
         .goog-text-highlight { background: none !important; box-shadow: none !important; }
-        html, body { top: 0 !important; }
     </style>
 </head>
 <body class="antialiased selection:bg-gold selection:text-obsidian relative">
     <div id="google_translate_element" style="display:none"></div>
 
-    <!-- CUSTOM GOLDEN CURSOR RING -->
-    <div id="gold-cursor" class="hidden md:block"></div>
+    <!-- FULL-BLEED COSMIC EXPLORATION DYNAMIC BACKDROP -->
+    <div id="cosmic-backdrop">
+        <canvas id="cosmic-canvas" class="w-full h-full block"></canvas>
+    </div>
 
-    <!-- CANVAS BACKGROUND PARTICLE ENGINE -->
-    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+    <!-- STARLIGHT CURSOR TRAIL & CONSTELLATION WEB OVERLAY -->
+    <canvas id="starlight-trail-canvas"></canvas>
 
-    <!-- 3D OPENING SPLASH SCREEN -->
-    <div id="mz-3d-splash" onclick="dismissSplash()" class="fixed inset-0 z-50 flex flex-col items-center justify-center px-6 cursor-pointer select-none">
-        <div class="mz-3d-stage flex flex-col items-center">
-            <div id="splash-3d-wrapper" class="mz-3d-card relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
-                <canvas id="mz-splash-logo-canvas" class="w-full h-full object-contain"></canvas>
-            </div>
-            <div class="mt-4 text-center space-y-2 opacity-90">
-                <div class="font-cinzel text-sm sm:text-base tracking-[0.45em] text-gold uppercase">MAISON ZORIA</div>
-                <div class="text-[9px] uppercase tracking-[0.35em] text-gray-400">Haute Création • Entering Private Vault</div>
-            </div>
+    <!-- GLASS SHATTER FRAGMENT OVERLAY -->
+    <canvas id="glass-shatter-canvas"></canvas>
+
+    <!-- CELESTIAL SCROLL ASTROLABE (RIGHT TRACK + BOTTOM COSMIC TIER HUD) -->
+    <aside aria-label="Celestial Scroll Astrolabe" class="hidden md:flex fixed right-4 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-2 pointer-events-none select-none">
+        <span class="text-[8px] font-mono tracking-widest text-gold/80 uppercase">ORB</span>
+        <div class="relative w-[2px] h-44 rounded-full bg-gold/15 overflow-visible">
+            <div id="astrolabe-fill" class="w-full bg-gradient-to-b from-gold-light via-gold to-gold-dark rounded-full transition-all duration-150" style="height: 0%;"></div>
+            <div id="astrolabe-star" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-gold-light shadow-[0_0_14px_#f0d278,0_0_26px_rgba(240,210,120,0.85)] border border-white/80" style="top: 0%;"></div>
         </div>
+        <span id="astrolabe-pct" class="text-[9px] font-mono text-gold">0%</span>
+    </aside>
+
+    <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 px-4 py-1.5 rounded-full bg-obsidian/70 backdrop-blur-xl border border-gold/30 shadow-[0_0_24px_rgba(240,210,120,0.16)] flex items-center gap-2 sm:gap-3 text-[9px] sm:text-[10px] font-cinzel tracking-[0.18em] text-gray-300 max-w-[95vw] overflow-x-auto whitespace-nowrap">
+        <a href="#heritage" data-tier="heritage" class="astrolabe-tier px-2 py-0.5 rounded-full text-gold bg-gold/15 transition-all">01 · GENEVA RESERVE</a>
+        <span class="text-gold/40">→</span>
+        <a href="#collection" data-tier="collection" class="astrolabe-tier px-2 py-0.5 rounded-full hover:text-gold transition-all">02 · ASTRUM VAULT</a>
+        <span class="text-gold/40">→</span>
+        <a href="#savoir-faire" data-tier="savoir-faire" class="astrolabe-tier px-2 py-0.5 rounded-full hover:text-gold transition-all">03 · SAVOIR-FAIRE</a>
+        <span class="text-gold/40">→</span>
+        <a href="#provenance" data-tier="provenance" class="astrolabe-tier px-2 py-0.5 rounded-full hover:text-gold transition-all">04 · ON-CHAIN</a>
+        <span class="text-gold/40">→</span>
+        <a href="#salon" data-tier="salon" class="astrolabe-tier px-2 py-0.5 rounded-full hover:text-gold transition-all">05 · TREASURY</a>
     </div>
 
     <!-- NAVIGATION HEADER -->
     <header class="fixed top-0 left-0 w-full z-40 glass-header transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between gap-4">
             
-            <!-- Left Nav Links (Cleaned & spaced without duplicate button) -->
+            <!-- Left Nav Links -->
             <nav class="hidden xl:flex items-center space-x-6 text-[10px] uppercase tracking-[0.25em] text-gray-300">
                 <a href="#collection" class="hover:text-gold transition-colors duration-300 whitespace-nowrap">High Creations</a>
                 <a href="#heritage" class="hover:text-gold transition-colors duration-300 whitespace-nowrap">Heritage</a>
@@ -259,13 +381,13 @@
             <div class="flex items-center space-x-3 sm:space-x-4">
 
                 <!-- Audio Ambience Toggle -->
-                <button onclick="toggleAudioAmbience()" id="audio-toggle-btn" class="hidden md:flex items-center space-x-1.5 text-[10px] uppercase tracking-widest text-gold border border-gold/30 px-3 py-1.5 rounded-full hover:border-gold transition-all shrink-0" title="Toggle Tactile Audio Feedback">
+                <button onclick="toggleAudioAmbience()" id="audio-toggle-btn" class="hidden md:flex items-center space-x-1.5 text-[10px] uppercase tracking-widest text-gold border border-gold/30 px-3 py-1.5 rounded-full hover:border-gold transition-all shrink-0 bg-obsidian/40 backdrop-blur-md" title="Toggle Tactile Audio Feedback">
                     <i id="audio-icon" class="fa-solid fa-volume-xmark text-gold"></i>
                     <span id="audio-text" class="hidden lg:inline">Sound: Off</span>
                 </button>
 
                 <!-- Currency Selector -->
-                <div class="flex items-center space-x-1 text-xs uppercase tracking-widest text-gray-300 border border-gold/30 px-2.5 py-1.5 rounded-full bg-obsidian-card shrink-0">
+                <div class="flex items-center space-x-1 text-xs uppercase tracking-widest text-gray-300 border border-gold/30 px-2.5 py-1.5 rounded-full bg-obsidian/45 backdrop-blur-md shrink-0">
                     <i class="fa-solid fa-coins text-gold text-[10px] me-1"></i>
                     <select id="currency-select" onchange="updateCurrencyDisplay()" class="bg-transparent text-gray-200 outline-none cursor-pointer text-[11px]">
                         <option value="USD" class="bg-obsidian text-cream">USD ($)</option>
@@ -277,8 +399,8 @@
                     </select>
                 </div>
 
-                <!-- Language Selector (auto-detected, manual override) -->
-                <div class="hidden md:flex items-center space-x-1 text-xs uppercase tracking-widest text-gray-300 border border-gold/30 px-2.5 py-1.5 rounded-full bg-obsidian-card shrink-0">
+                <!-- Language Selector -->
+                <div class="hidden md:flex items-center space-x-1 text-xs uppercase tracking-widest text-gray-300 border border-gold/30 px-2.5 py-1.5 rounded-full bg-obsidian/45 backdrop-blur-md shrink-0">
                     <i class="fa-solid fa-globe text-gold text-[10px] me-1"></i>
                     <select id="lang-select" onchange="setSiteLanguage(this.value)" aria-label="Language" class="bg-transparent text-gray-200 outline-none cursor-pointer text-[11px]">
                         <option value="en" class="bg-obsidian text-cream">English</option>
@@ -312,8 +434,8 @@
         </div>
 
         <!-- Mobile Navigation Drawer -->
-        <div id="mobile-menu" class="hidden xl:hidden bg-obsidian border-b border-gold/20 px-6 py-6 space-y-4 text-center text-xs uppercase tracking-widest">
-            <a href="#collection" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">High Creations ($200K+)</a>
+        <div id="mobile-menu" class="hidden xl:hidden bg-obsidian/90 backdrop-blur-xl border-b border-gold/20 px-6 py-6 space-y-4 text-center text-xs uppercase tracking-widest">
+            <a href="#collection" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">High Creations</a>
             <a href="#heritage" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">Heritage Story</a>
             <a href="#savoir-faire" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">Savoir-Faire</a>
             <a href="#provenance" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-2">On-Chain Certificate</a>
@@ -321,23 +443,56 @@
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="relative min-h-screen flex items-center justify-center pt-28 overflow-hidden z-10">
-        <div class="relative z-10 max-w-6xl mx-auto px-6 text-center space-y-8">
+    <!-- HERO SECTION WITH GIANT 180° INTERACTIVE 3D LOGO -->
+    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden z-10">
+        <div class="relative z-10 max-w-6xl mx-auto px-6 text-center space-y-7">
             
-            <!-- 3D Blended Cloud Emblem -->
-            <div class="mz-3d-stage flex justify-center -mb-2">
-                <div id="hero-3d-wrapper" class="mz-hero-3d-card w-36 h-36 sm:w-44 sm:h-44 flex items-center justify-center">
-                    <canvas id="mz-hero-logo-canvas" class="w-full h-full object-contain"></canvas>
+            <div class="inline-flex items-center space-x-3 px-5 py-2 rounded-full border border-gold/40 bg-obsidian/45 backdrop-blur-md shadow-[0_0_25px_rgba(240,210,120,0.2)]">
+                <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
+                <span class="text-[10px] uppercase tracking-[0.4em] text-gold font-medium">Cosmic Exploration Series • Masterpieces $73,143 to $6,930,000 USD</span>
+            </div>
+
+            <!-- GIANT INTERACTIVE 3D EMBLEM (DRAG 180°+) -->
+            <div class="pt-2 pb-1 flex flex-col items-center">
+                <div class="hero-3d-stage">
+                    <div id="hero-3d-logo" class="hero-3d-emblem" title="Drag horizontally to rotate 180°">
+                        <div class="hero-3d-rim"></div>
+
+                        <!-- Front Face -->
+                        <div class="hero-3d-face hero-3d-front p-6">
+                            <div class="text-[9px] tracking-[0.45em] text-gold/80 uppercase mb-1">✦ ✦</div>
+                            <div class="px-5 py-2 rounded-full border border-gold/60 bg-obsidian/55 shadow-[0_0_25px_rgba(240,210,120,0.28)]">
+                                <span class="font-cinzel text-4xl sm:text-5xl font-semibold tracking-[0.18em] gold-gradient-text">MZ</span>
+                            </div>
+                            <div class="text-[9px] tracking-[0.45em] text-gold/80 uppercase mt-1 mb-2">✦ ✦</div>
+                            <div class="font-cinzel text-xs sm:text-sm tracking-[0.35em] text-cream font-light">MAISON ZORIA</div>
+                            <div class="w-14 h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent my-2"></div>
+                            <div class="text-[8px] uppercase tracking-[0.32em] text-gold/80">18K • ASTRUM VAULT</div>
+                        </div>
+
+                        <!-- Back Face (180° Reverse) -->
+                        <div class="hero-3d-face hero-3d-back p-6">
+                            <div class="text-[8px] uppercase tracking-[0.38em] text-gold/75 mb-2">CELESTIAL REVERSE</div>
+                            <div class="w-20 h-20 rounded-full border border-gold/55 flex items-center justify-center shadow-[0_0_25px_rgba(240,210,120,0.22)] mb-2">
+                                <i class="fa-solid fa-compass-drafting text-3xl text-gold"></i>
+                            </div>
+                            <div class="font-cinzel text-sm sm:text-base tracking-[0.28em] gold-gradient-text">ASTRUM • 180°</div>
+                            <div class="text-[8px] uppercase tracking-[0.28em] text-gray-300 mt-1.5">GENEVA • PARIS • WEB3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.25em] text-gray-400">
+                    <span id="logo-3d-angle" class="font-mono text-gold">Y: 0°</span>
+                    <span>•</span>
+                    <span>Drag 180° to Rotate</span>
+                    <button type="button" onclick="flipLogo180()" class="px-2.5 py-0.5 rounded-full border border-gold/35 text-gold hover:bg-gold hover:text-obsidian transition-all text-[9px]">
+                        Flip 180°
+                    </button>
                 </div>
             </div>
 
-            <div class="inline-flex items-center space-x-3 px-5 py-2 rounded-full border border-gold/40 bg-obsidian/80 backdrop-blur-md shadow-[0_0_20px_rgba(240,210,120,0.2)]">
-                <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
-                <span class="text-[10px] uppercase tracking-[0.4em] text-gold font-medium">Bespoke Vault • Masterpieces $120,000 to $6,930,000 USD</span>
-            </div>
-
-            <h1 class="font-cinzel text-4xl sm:text-6xl md:text-8xl font-light text-cream tracking-tight leading-[1.08] diamond-sparkle py-2">
+            <h1 class="font-cinzel text-4xl sm:text-6xl md:text-7xl font-light text-cream tracking-tight leading-[1.08] diamond-sparkle py-1">
                 Beyond Luxury.<br>
                 <span class="italic font-normal gold-gradient-text">Where Time & Precious Metals Converge.</span>
             </h1>
@@ -346,25 +501,27 @@
                 Welcome to Maison Zoria. An exclusive sanctuary of 18K solid gold, rare gemstones, tourbillon horological mechanisms, and confidential multi-chain Web3 treasury settlements.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
                 <a href="#collection" class="w-full sm:w-auto px-10 py-4 bg-gold text-obsidian font-bold text-xs uppercase tracking-[0.3em] rounded-full hover:bg-gold-light transition-all duration-300 shadow-[0_0_35px_rgba(240,210,120,0.5)]">
                     Explore Masterpieces
                 </a>
-                <button onclick="openCertificateModal()" class="w-full sm:w-auto px-8 py-4 border border-gold/50 hover:border-gold text-cream font-medium text-xs uppercase tracking-[0.25em] rounded-full transition-all duration-300 backdrop-blur-sm flex items-center justify-center space-x-2">
+                <button onclick="openCertificateModal()" class="w-full sm:w-auto px-8 py-4 border border-gold/50 hover:border-gold text-cream font-medium text-xs uppercase tracking-[0.25em] rounded-full transition-all duration-300 bg-obsidian/35 backdrop-blur-md flex items-center justify-center space-x-2">
                     <i class="fa-solid fa-certificate text-gold"></i>
                     <span>Verify On-Chain Provenance</span>
                 </button>
             </div>
         </div>
 
-        <a href="#heritage" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-400 hover:text-gold transition-colors flex flex-col items-center space-y-2 text-[9px] uppercase tracking-widest">
+        <a href="#heritage" class="hidden sm:flex absolute bottom-14 left-1/2 -translate-x-1/2 text-gray-400 hover:text-gold transition-colors flex-col items-center space-y-1.5 text-[9px] uppercase tracking-widest">
             <span>Ascend Atelier</span>
             <i class="fa-solid fa-chevron-down animate-bounce text-xs text-gold"></i>
         </a>
     </section>
 
-    <!-- CHAPTER I: ATELIER HERITAGE & $200K PRESTIGE -->
-    <section id="heritage" class="py-32 relative border-t border-gold/15 z-10">
+    <div class="cosmic-divider relative z-10"></div>
+
+    <!-- CHAPTER I: ATELIER HERITAGE & PALATIAL FLAGSHIP -->
+    <section id="heritage" class="py-32 cosmic-section">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
             <div class="lg:col-span-6 space-y-6">
@@ -374,16 +531,16 @@
                 </h2>
                 <div class="w-20 h-[1px] bg-gradient-to-r from-gold to-transparent my-4"></div>
                 <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
-                    Forged along Lake Geneva and refined across private salons in Place Vendôme and Mayfair, <strong class="text-cream">Maison Zoria</strong> crafts heirloom leather sculptures that transcend conventional luxury.
+                    Forged along Lake Geneva and refined across private salons in Place Vendôme and Mayfair, <strong class="text-cream">Maison Zoria</strong> crafts heirloom sculptures that transcend conventional luxury.
                 </p>
                 <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
                     Each creation demands up to 650 hours of meticulous hand craftsmanship, incorporating 18K solid gold, VVS diamonds, imperial jade, and Swiss horological lockworks. Every masterpiece is delivered via insured diplomatic courier and registered on-chain in perpetuity.
                 </p>
 
-                <div class="pt-6 grid grid-cols-3 gap-6 text-center border-t border-white/10">
+                <div class="pt-6 grid grid-cols-3 gap-6 text-center border-t border-gold/15">
                     <div>
                         <div class="font-cinzel text-2xl sm:text-3xl text-gold">100%</div>
-                        <div class="text-[9px] uppercase tracking-widest text-gray-400 mt-1">Traceable European Exotic Leathers</div>
+                        <div class="text-[9px] uppercase tracking-widest text-gray-400 mt-1">Traceable European Exotic Materials</div>
                     </div>
                     <div>
                         <div class="font-cinzel text-2xl sm:text-3xl text-gold">18K / Pt</div>
@@ -397,11 +554,12 @@
             </div>
 
             <div class="lg:col-span-6 relative">
-                <div class="relative rounded-3xl overflow-hidden gold-border-glow group">
-                    <img src="./brand-story.png" alt="Maison Zoria European Atelier Story" class="w-full h-[540px] object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/800x1000/030304/f0d278?text=Maison+Zoria+Atelier';">
-                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent"></div>
-                    <div class="absolute bottom-6 left-6 right-6 p-6 bg-obsidian/90 backdrop-blur-md rounded-2xl border border-gold/30">
-                        <div class="text-[10px] text-gold uppercase tracking-widest font-semibold">Geneva Atelier Archives</div>
+                <div class="relative rounded-3xl overflow-hidden tilt-card-3d group">
+                    <div class="foil-sheen"></div>
+                    <img src="./4300b4ef6e01d1c515c2d0bfccb385db.jpg" alt="Maison Zoria Palatial Flagship Salon" class="w-full h-[540px] object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='./brand-story.png';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6 p-6 bg-obsidian/70 backdrop-blur-xl rounded-2xl border border-gold/30">
+                        <div class="text-[10px] text-gold uppercase tracking-widest font-semibold">Palatial Flagship & Geneva Reserve</div>
                         <div class="font-serif text-lg text-cream mt-1 italic">"Crafting priceless art into physical and cryptographic immortality."</div>
                     </div>
                 </div>
@@ -409,8 +567,10 @@
         </div>
     </section>
 
-    <!-- SIGNATURE COLLECTION ($200,000+ HIGH CREATIONS) -->
-    <section id="collection" class="py-32 bg-obsidian-card border-t border-gold/15 relative z-10">
+    <div class="cosmic-divider relative z-10"></div>
+
+    <!-- SIGNATURE COLLECTION -->
+    <section id="collection" class="py-32 cosmic-section">
         <div class="max-w-7xl mx-auto px-6">
             
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 space-y-6 md:space-y-0">
@@ -419,12 +579,12 @@
                     <h2 class="font-cinzel text-3xl sm:text-5xl font-light text-cream mt-2">Haute Création Masterpieces</h2>
                 </div>
                 <p class="text-xs text-gray-400 max-w-md font-light leading-relaxed">
-                    Exclusive high-jewelry & horological leather sculptures valued between $120,000 and $6,930,000 USD. Customizer enabled for personalized gold alloy and monogramming.
+                    Exclusive high-jewelry, horological & architectural sculptures valued between $73,143 and $6,930,000 USD. Customizer enabled for personalized gold alloy and monogramming.
                 </p>
             </div>
 
             <!-- DAILY INVENTORY URGENCY SUITE BANNER -->
-            <div class="mb-10 p-4 sm:p-5 rounded-2xl bg-obsidian/95 border border-gold/40 shadow-[0_0_30px_rgba(240,210,120,0.12)] flex flex-col lg:flex-row items-center justify-between gap-4">
+            <div class="mb-10 p-4 sm:p-5 rounded-2xl glass-card border border-gold/35 shadow-[0_0_30px_rgba(240,210,120,0.12)] flex flex-col lg:flex-row items-center justify-between gap-4">
                 <div class="flex items-center space-x-3.5 text-center sm:text-left">
                     <span class="relative flex h-2.5 w-2.5 shrink-0">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
@@ -447,14 +607,14 @@
                         <div id="daily-total-remaining" class="font-cinzel text-base sm:text-lg text-gold font-semibold">-- Slots Globally</div>
                     </div>
                     <div class="h-8 w-[1px] bg-gold/20 hidden sm:block"></div>
-                    <div class="px-4 py-2 rounded-xl bg-obsidian-card border border-gold/30 text-center">
+                    <div class="px-4 py-2 rounded-xl bg-obsidian/55 backdrop-blur-md border border-gold/30 text-center">
                         <div class="text-[8px] uppercase tracking-[0.25em] text-gray-400">Daily Allocation Reset In</div>
                         <div id="daily-reset-timer" class="font-mono text-xs sm:text-sm text-cream tracking-widest font-semibold mt-0.5">00:00:00</div>
                     </div>
                 </div>
             </div>
 
-            <p id="fx-note" class="text-[11px] text-gray-500 font-light mb-12">Prices in your local currency are indicative, based on current exchange rates. The USD price is the reference price.</p>
+            <p id="fx-note" class="text-[11px] text-gray-400 font-light mb-12">Prices in your local currency are indicative, based on current exchange rates. The USD price is the reference price.</p>
 
             <!-- Product Grid -->
             <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -463,8 +623,10 @@
         </div>
     </section>
 
+    <div class="cosmic-divider relative z-10"></div>
+
     <!-- CHAPTER II: SAVOIR-FAIRE & ATELIER MASTERY -->
-    <section id="savoir-faire" class="py-32 relative border-t border-gold/15 z-10">
+    <section id="savoir-faire" class="py-32 cosmic-section">
         <div class="max-w-7xl mx-auto px-6">
             
             <div class="text-center max-w-3xl mx-auto mb-20 space-y-4">
@@ -474,13 +636,14 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-                <div class="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl">
+                <div class="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl tilt-card-3d">
+                    <div class="foil-sheen"></div>
                     <img src="./maison-zoria-atelier-craftsmen.jpg.png" alt="Maison Zoria Master Artisans" class="w-full h-[450px] object-cover" onerror="this.onerror=null; this.src='https://placehold.co/800x600/030304/f0d278?text=Atelier+Craftsmen';">
                 </div>
                 <div class="space-y-6">
                     <h3 class="font-cinzel text-2xl sm:text-3xl text-gold">Double-Needle Saddle Stitching</h3>
                     <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
-                        Every seam is bound using hand-waxed linen thread saddle stitching—a technique completely impervious to industrial machinery. Even if a single stitch loop breaks, the surrounding leather structural integrity endures for over a century.
+                        Every seam is bound using hand-waxed linen thread saddle stitching—a technique completely impervious to industrial machinery. Even if a single stitch loop breaks, the surrounding structural integrity endures for over a century.
                     </p>
                     <ul class="space-y-3 text-xs uppercase tracking-wider text-gray-300">
                         <li class="flex items-center space-x-3"><i class="fa-solid fa-gem text-gold"></i> <span>Hand-burnished organic beeswax edging</span></li>
@@ -494,30 +657,33 @@
                 <div class="space-y-6 order-2 lg:order-1">
                     <h3 class="font-cinzel text-2xl sm:text-3xl text-gold">Micro-Horological Precision Locks</h3>
                     <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
-                        Every bag clasp incorporates micro-milled Swiss tourbillon lockwork. Custom-fitted gears are hand-polished using diamond paste to achieve a mirror finish rivaling Geneva haute horlogerie.
+                        Every creation incorporates micro-milled Swiss tourbillon lockwork. Custom-fitted gears are hand-polished using diamond paste to achieve a mirror finish rivaling Geneva haute horlogerie.
                     </p>
                     <blockquote class="italic font-serif text-lg text-cream border-l-2 border-gold pl-4 my-4">
                         "True luxury is not defined by abundance, but by unrepeatable perfection."
                     </blockquote>
                 </div>
-                <div class="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl order-1 lg:order-2">
+                <div class="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl order-1 lg:order-2 tilt-card-3d">
+                    <div class="foil-sheen"></div>
                     <img src="./maison-zoria-craftsmanship-detail.jpg.png" alt="Maison Zoria Craftsmanship Detail" class="w-full h-[450px] object-cover" onerror="this.onerror=null; this.src='https://placehold.co/800x600/030304/f0d278?text=Craftsmanship+Detail';">
                 </div>
             </div>
         </div>
     </section>
 
+    <div class="cosmic-divider relative z-10"></div>
+
     <!-- ON-CHAIN PROVENANCE & CERTIFICATE VERIFIER SECTION -->
-    <section id="provenance" class="py-28 bg-obsidian-card border-t border-gold/15 relative z-10">
+    <section id="provenance" class="py-28 cosmic-section">
         <div class="max-w-5xl mx-auto px-6 text-center space-y-8">
             <div class="text-xs uppercase tracking-[0.4em] text-gold font-semibold">Cryptographic Guarantee</div>
             <h2 class="font-cinzel text-3xl sm:text-5xl font-light text-cream">On-Chain Certificate Verifier</h2>
             <p class="text-xs sm:text-sm text-gray-300 font-light max-w-xl mx-auto">
-                Every Maison Zoria $200k+ creation is cryptographically bound to an immutable on-chain Certificate of Provenance. Enter your Serial Token below to generate your official digital seal.
+                Every Maison Zoria creation is cryptographically bound to an immutable on-chain Certificate of Provenance. Enter your Serial Token below to generate your official digital seal.
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
-                <input type="text" id="serial-search-input" placeholder="Enter Token (e.g. MZ-2026-8899)" class="w-full bg-obsidian border border-gold/40 rounded-full px-6 py-4 text-xs font-mono text-cream focus:border-gold outline-none">
+                <input type="text" id="serial-search-input" placeholder="Enter Token (e.g. MZ-2026-8899)" class="w-full bg-obsidian/60 backdrop-blur-md border border-gold/40 rounded-full px-6 py-4 text-xs font-mono text-cream focus:border-gold outline-none">
                 <button onclick="generateCertificateFromInput()" class="w-full sm:w-auto px-8 py-4 bg-gold text-obsidian font-bold text-xs uppercase tracking-widest rounded-full hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(240,210,120,0.4)] whitespace-nowrap">
                     Generate Certificate
                 </button>
@@ -525,10 +691,13 @@
         </div>
     </section>
 
+    <div class="cosmic-divider relative z-10"></div>
+
     <!-- PRIVATE SALON / CONCIERGE & WEB3 TREASURY SETTLEMENT -->
-    <section id="salon" class="py-32 relative z-10">
+    <section id="salon" class="py-32 cosmic-section">
         <div class="max-w-5xl mx-auto px-6">
-            <div class="glass-card p-8 sm:p-14 rounded-3xl border border-gold/30 gold-border-glow">
+            <div class="glass-card p-8 sm:p-14 rounded-3xl tilt-card-3d">
+                <div class="foil-sheen"></div>
                 
                 <div class="text-center space-y-4 mb-10">
                     <div class="text-xs uppercase tracking-[0.4em] text-gold font-semibold">Private Acquisition Portal</div>
@@ -556,24 +725,24 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Title & Full Name *</label>
-                            <input type="text" name="name" required placeholder="Lord / Lady / Dr. / Mr. / Ms." class="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
+                            <input type="text" name="name" required placeholder="Lord / Lady / Dr. / Mr. / Ms." class="w-full bg-obsidian/60 border border-white/15 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
                         </div>
                         <div>
                             <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Confidential Email *</label>
-                            <input type="email" name="email" required placeholder="vip@domain.com" class="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
+                            <input type="email" name="email" required placeholder="vip@domain.com" class="w-full bg-obsidian/60 border border-white/15 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Masterpiece of Interest *</label>
-                            <select id="creation-select" name="creation" class="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
+                            <select id="creation-select" name="creation" class="w-full bg-obsidian/60 border border-white/15 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
                                 <!-- Dynamically populated by JS -->
                             </select>
                         </div>
                         <div>
                             <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Preferred Settlement Network *</label>
-                            <select name="settlement_type" class="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
+                            <select name="settlement_type" class="w-full bg-obsidian/60 border border-white/15 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none">
                                 <option value="USDT/USDC Crypto">USDT / USDC (ERC20 / TRC20 / Solana)</option>
                                 <option value="Bitcoin (BTC)">Bitcoin (BTC)</option>
                                 <option value="Ethereum (ETH)">Ethereum (ETH)</option>
@@ -585,7 +754,7 @@
 
                     <div>
                         <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Diplomatic Delivery Address & Custom Engraving Notes *</label>
-                        <textarea name="message" rows="4" required placeholder="Specify insured diplomatic courier instructions, custom initials, or bespoke stone inquiries..." class="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none"></textarea>
+                        <textarea name="message" rows="4" required placeholder="Specify insured diplomatic courier instructions, custom initials, or bespoke stone inquiries..." class="w-full bg-obsidian/60 border border-white/15 rounded-xl px-4 py-3.5 text-xs text-cream focus:border-gold outline-none"></textarea>
                     </div>
 
                     <button type="submit" id="submit-salon-btn" class="w-full py-4 bg-gold text-obsidian font-bold text-xs uppercase tracking-[0.3em] rounded-xl hover:bg-gold-light transition-all shadow-[0_0_25px_rgba(240,210,120,0.4)]">
@@ -607,20 +776,19 @@
                         <button onclick="setCryptoNetwork('BNB')" id="net-BNB" class="crypto-net-btn py-3 border border-white/10 text-gray-300 rounded-xl text-xs font-semibold uppercase tracking-wider hover:border-gold">BEP20</button>
                     </div>
 
-                    <div class="p-6 bg-obsidian rounded-2xl border border-gold/30 space-y-6">
+                    <div class="p-6 bg-obsidian/65 rounded-2xl border border-gold/30 space-y-6">
                         <div class="flex items-center justify-between">
                             <span id="crypto-label" class="text-xs text-gold uppercase tracking-widest font-semibold">Bitcoin Treasury Wallet (BTC)</span>
                             <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/20">Verified On-Chain</span>
                         </div>
 
                         <div class="flex flex-col sm:flex-row items-center gap-6">
-                            <!-- Simulated QR Code Placeholder -->
                             <div class="w-28 h-28 bg-white p-2 rounded-xl flex items-center justify-center shrink-0 border border-gold/50 shadow-lg">
                                 <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bc1q7g9cjpc4686m4tzdjmajpray4ats4xjgvh3x8j" alt="Treasury Address QR Code" class="w-full h-full object-contain">
                             </div>
 
                             <div class="w-full space-y-3">
-                                <div class="flex items-center space-x-2 bg-obsidian-card p-3 rounded-xl border border-white/10">
+                                <div class="flex items-center space-x-2 bg-obsidian-card/80 p-3 rounded-xl border border-white/10">
                                     <input id="crypto-address-input" readonly value="bc1q7g9cjpc4686m4tzdjmajpray4ats4xjgvh3x8j" class="bg-transparent text-[11px] text-cream font-mono w-full outline-none">
                                     <button onclick="copyWalletAddress()" class="px-4 py-2 bg-gold/20 text-gold hover:bg-gold hover:text-obsidian text-xs rounded-lg transition-all font-semibold flex items-center space-x-1 shrink-0">
                                         <i class="fa-regular fa-copy"></i>
@@ -639,8 +807,8 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-obsidian border-t border-gold/20 pt-20 pb-12 text-gray-400 text-xs z-10 relative">
+    <!-- FOOTER (SEAMLESS COSMIC GLASS) -->
+    <footer class="bg-gradient-to-b from-transparent via-obsidian/55 to-obsidian/85 backdrop-blur-md border-t border-gold/20 pt-20 pb-20 text-gray-400 text-xs z-10 relative">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             
             <div class="space-y-4">
@@ -649,7 +817,7 @@
                     <span class="font-cinzel text-lg text-cream tracking-widest">MAISON ZORIA</span>
                 </div>
                 <p class="text-gray-400 font-light leading-relaxed text-[11px]">
-                    Geneva Haute Création Atelier. High jewelry leather works, horological lockpieces, and confidential Web3 private vault acquisitions.
+                    Geneva Haute Création Atelier. High jewelry works, horological lockpieces, and confidential Web3 private vault acquisitions.
                 </p>
             </div>
 
@@ -683,7 +851,7 @@
 
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between text-[10px] font-light text-gray-500 space-y-4 sm:space-y-0">
+        <div class="max-w-7xl mx-auto px-6 border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between text-[10px] font-light text-gray-500 space-y-4 sm:space-y-0">
             <div>&copy; 2026 MAISON ZORIA HAUTE CRÉATION. All Rights Reserved.</div>
             <div class="flex space-x-6">
                 <a href="#" class="hover:text-gold transition-colors">Privacy Policy</a>
@@ -696,7 +864,7 @@
 
     <!-- MODAL 1: PRODUCT BESPOKE CUSTOMIZER MODAL -->
     <div id="product-detail-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-        <div class="relative bg-obsidian-card border border-gold/40 w-full max-w-4xl rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(240,210,120,0.2)] my-8">
+        <div class="relative bg-obsidian-card/95 backdrop-blur-2xl border border-gold/40 w-full max-w-4xl rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(240,210,120,0.2)] my-8">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-obsidian/80 text-cream rounded-full border border-white/10 hover:border-gold flex items-center justify-center">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
@@ -709,7 +877,7 @@
 
     <!-- MODAL 2: PRIVATE VAULT (CART) MODAL -->
     <div id="vault-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-end">
-        <div class="bg-obsidian-card border-l border-gold/40 w-full max-w-lg h-full p-8 flex flex-col justify-between overflow-y-auto">
+        <div class="bg-obsidian-card/95 backdrop-blur-2xl border-l border-gold/40 w-full max-w-lg h-full p-8 flex flex-col justify-between overflow-y-auto">
             
             <div>
                 <div class="flex items-center justify-between pb-6 border-b border-white/10">
@@ -748,7 +916,7 @@
 
     <!-- MODAL 3: ON-CHAIN CERTIFICATE GENERATOR MODAL -->
     <div id="certificate-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
-        <div class="relative bg-obsidian-card border-2 border-gold/50 w-full max-w-2xl rounded-3xl p-8 sm:p-12 shadow-[0_0_60px_rgba(240,210,120,0.3)] space-y-6 text-center">
+        <div class="relative bg-obsidian-card/95 backdrop-blur-2xl border-2 border-gold/50 w-full max-w-2xl rounded-3xl p-8 sm:p-12 shadow-[0_0_60px_rgba(240,210,120,0.3)] space-y-6 text-center">
             <button onclick="closeCertificateModal()" class="absolute top-4 right-4 w-8 h-8 text-gray-400 hover:text-gold">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
@@ -760,7 +928,7 @@
 
                 <div class="space-y-3 text-xs text-gray-300 font-light">
                     <div>Token Serial: <span id="cert-serial" class="font-mono text-gold font-semibold">MZ-2026-8899</span></div>
-                    <div>Item: <span id="cert-item-title" class="text-cream font-medium">Dream Awakening - 24K Gold Edition</span></div>
+                    <div>Item: <span id="cert-item-title" class="text-cream font-medium">Astrum Table - Cosmic Exploration Series</span></div>
                     <div>Provenance Status: <span class="text-emerald-400 font-semibold">Verified On-Chain (Block #1984203)</span></div>
                     <div>Master Artisan: <span class="text-cream">Atelier Master Geneva</span></div>
                 </div>
@@ -788,9 +956,20 @@
     <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
         // -------------------------------------------------------------
-        // $200K+ HIGH JEWELRY PRODUCTS DATA ENGINE
+        // HIGH JEWELRY & HAUTE CRÉATION PRODUCTS DATA ENGINE
         // -------------------------------------------------------------
         const products = [
+            {
+                id: 'astrum-table',
+                title: 'Astrum Table',
+                basePriceUSD: 73143,
+                image: './Astrum Table.png',
+                altImage: 'https://placehold.co/800x800/030304/f0d278?text=Astrum+Table+73143',
+                tag: 'Cosmic Exploration Series · Haute Création',
+                description: 'An architectural high-jewelry chess pedestal sculpted in 18K gold-finished metalwork, midnight lapis lazuli and white crystal chessboard squares, pavé gemstone borders, and a black-and-gold marble plinth.',
+                craftingTime: 'Bespoke Commission',
+                origin: 'Maison Zoria Private Collection'
+            },
             {
                 id: 'cloud-crown-starlight',
                 title: 'Cloud Crown Starlight',
@@ -1025,7 +1204,7 @@
         ];
 
         // -------------------------------------------------------------
-        // DAILY INVENTORY URGENCY ENGINE (AUTO-UPDATES EVERY DAY)
+        // DAILY INVENTORY URGENCY ENGINE
         // -------------------------------------------------------------
         let currentDayKey = '';
 
@@ -1302,6 +1481,26 @@
             } catch (e) {}
         }
 
+        function playGlassShatterSound() {
+            if (!audioEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                [1760, 2349, 3136].forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.015);
+                    osc.frequency.exponentialRampToValueAtTime(freq * 0.62, ctx.currentTime + 0.16 + idx * 0.02);
+                    gain.gain.setValueAtTime(0.035, ctx.currentTime + idx * 0.015);
+                    gain.gain.exponentialRampToValueAtTime(0.0008, ctx.currentTime + 0.18 + idx * 0.02);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + idx * 0.015);
+                    osc.stop(ctx.currentTime + 0.2 + idx * 0.02);
+                });
+            } catch (e) {}
+        }
+
         function toggleAudioAmbience() {
             audioEnabled = !audioEnabled;
             const btnText = document.getElementById('audio-text');
@@ -1348,6 +1547,149 @@
         }
 
         // -------------------------------------------------------------
+        // GLASS SHATTER & EXTRACT EFFECT ENGINE
+        // -------------------------------------------------------------
+        let shatterShards = [];
+        let shatterAnimRunning = false;
+
+        function triggerGlassShatterExtract(triggerEl, callback) {
+            playGlassShatterSound();
+            const cardEl = triggerEl ? triggerEl.closest('.tilt-card-3d') : null;
+            const rect = cardEl
+                ? cardEl.getBoundingClientRect()
+                : (triggerEl ? triggerEl.getBoundingClientRect() : { left: window.innerWidth / 2 - 140, top: window.innerHeight / 2 - 140, width: 280, height: 280 });
+
+            if (cardEl) {
+                cardEl.classList.remove('card-shatter-extract');
+                void cardEl.offsetWidth;
+                cardEl.classList.add('card-shatter-extract');
+            }
+
+            const centerX = rect.left + rect.width * 0.5;
+            const centerY = rect.top + rect.height * 0.42;
+            const shardCount = 34;
+
+            for (let i = 0; i < shardCount; i++) {
+                const angle = (Math.PI * 2 * i) / shardCount + (Math.random() - 0.5) * 0.25;
+                const speed = 2.6 + Math.random() * 6.4;
+                const size = 9 + Math.random() * 16;
+                const poly = [];
+                const sides = 3 + Math.floor(Math.random() * 2);
+                for (let v = 0; v < sides; v++) {
+                    const a = (Math.PI * 2 * v) / sides + (Math.random() - 0.5) * 0.5;
+                    const r = size * (0.55 + Math.random() * 0.55);
+                    poly.push({ x: Math.cos(a) * r, y: Math.sin(a) * r });
+                }
+
+                shatterShards.push({
+                    x: centerX + (Math.random() - 0.5) * Math.min(rect.width * 0.55, 110),
+                    y: centerY + (Math.random() - 0.5) * Math.min(rect.height * 0.45, 95),
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed - 1.2,
+                    rot: Math.random() * Math.PI * 2,
+                    vRot: (Math.random() - 0.5) * 0.22,
+                    poly,
+                    alpha: 0.92,
+                    decay: 0.024 + Math.random() * 0.012,
+                    isGoldEdge: Math.random() < 0.45
+                });
+            }
+
+            if (!shatterAnimRunning) {
+                shatterAnimRunning = true;
+                requestAnimationFrame(stepGlassShatter);
+            }
+
+            setTimeout(() => {
+                if (typeof callback === 'function') callback();
+            }, 260);
+        }
+
+        function stepGlassShatter() {
+            const canvas = document.getElementById('glass-shatter-canvas');
+            if (!canvas) {
+                shatterAnimRunning = false;
+                return;
+            }
+            const ctx = canvas.getContext('2d');
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            if (canvas.width !== Math.floor(window.innerWidth * dpr) || canvas.height !== Math.floor(window.innerHeight * dpr)) {
+                canvas.width = Math.floor(window.innerWidth * dpr);
+                canvas.height = Math.floor(window.innerHeight * dpr);
+            }
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+            for (let i = shatterShards.length - 1; i >= 0; i--) {
+                const s = shatterShards[i];
+                s.x += s.vx;
+                s.y += s.vy;
+                s.vy += 0.14; // subtle gravity after outward burst
+                s.vx *= 0.985;
+                s.rot += s.vRot;
+                s.alpha -= s.decay;
+
+                if (s.alpha <= 0) {
+                    shatterShards.splice(i, 1);
+                    continue;
+                }
+
+                ctx.save();
+                ctx.translate(s.x, s.y);
+                ctx.rotate(s.rot);
+                ctx.beginPath();
+                s.poly.forEach((pt, idx) => {
+                    if (idx === 0) ctx.moveTo(pt.x, pt.y);
+                    else ctx.lineTo(pt.x, pt.y);
+                });
+                ctx.closePath();
+
+                ctx.fillStyle = s.isGoldEdge
+                    ? `rgba(251, 240, 185, ${s.alpha * 0.24})`
+                    : `rgba(215, 236, 255, ${s.alpha * 0.20})`;
+                ctx.fill();
+
+                ctx.strokeStyle = s.isGoldEdge
+                    ? `rgba(240, 210, 120, ${s.alpha * 0.85})`
+                    : `rgba(255, 255, 255, ${s.alpha * 0.72})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            if (shatterShards.length > 0) {
+                requestAnimationFrame(stepGlassShatter);
+            } else {
+                ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                shatterAnimRunning = false;
+            }
+        }
+
+        // -------------------------------------------------------------
+        // 3D CARD TILT BINDING
+        // -------------------------------------------------------------
+        function bind3DTiltCards() {
+            const cards = document.querySelectorAll('.tilt-card-3d');
+            cards.forEach(card => {
+                if (card.dataset.tiltBound === '1') return;
+                card.dataset.tiltBound = '1';
+
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const nx = (e.clientX - rect.left) / Math.max(1, rect.width) - 0.5;
+                    const ny = (e.clientY - rect.top) / Math.max(1, rect.height) - 0.5;
+                    const rotY = nx * 11;
+                    const rotX = -ny * 11;
+                    card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-4px)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                });
+            });
+        }
+
+        // -------------------------------------------------------------
         // RENDER PRODUCT GRID
         // -------------------------------------------------------------
         function renderProducts() {
@@ -1360,18 +1702,19 @@
                     ? 'bg-red-950/90 border-red-400/60 text-red-200'
                     : (inv.isCritical
                         ? 'bg-amber-950/90 border-amber-400/70 text-amber-200'
-                        : 'bg-obsidian/90 border-gold/50 text-gold');
+                        : 'bg-obsidian/80 border-gold/50 text-gold');
 
                 const dotColor = inv.isSoldOutToday ? 'bg-red-400' : 'bg-amber-400 animate-ping';
                 const fillPct = inv.totalDaily > 0 ? Math.round((inv.remaining / inv.totalDaily) * 100) : 0;
 
                 return `
-                <div class="glass-card rounded-3xl overflow-hidden gold-border-glow flex flex-col justify-between group">
-                    <div class="relative overflow-hidden aspect-square bg-obsidian">
+                <div class="glass-card rounded-3xl overflow-hidden tilt-card-3d flex flex-col justify-between group relative">
+                    <div class="foil-sheen"></div>
+                    <div class="relative overflow-hidden aspect-square bg-obsidian/70">
                         <img src="${product.image}" alt="${product.title}" 
                              class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700" 
                              onerror="this.onerror=null; this.src='${product.altImage}';">
-                        <div class="absolute top-4 left-4 bg-obsidian/90 backdrop-blur-md px-3.5 py-1 rounded-full border border-gold/40 text-[9px] text-gold uppercase tracking-widest font-semibold">
+                        <div class="absolute top-4 left-4 bg-obsidian/80 backdrop-blur-md px-3.5 py-1 rounded-full border border-gold/40 text-[9px] text-gold uppercase tracking-widest font-semibold">
                             ${product.tag}
                         </div>
                         <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3 py-1.5 rounded-xl backdrop-blur-md border ${badgeStyle}">
@@ -1389,12 +1732,12 @@
                                 <h3 class="font-cinzel text-xl text-cream group-hover:text-gold transition-colors leading-tight">${product.title}</h3>
                             </div>
                             <div class="font-cinzel text-xl text-gold font-light mt-2">${formatPrice(product.basePriceUSD)}</div>
-                            <p class="text-xs text-gray-400 font-light mt-2 line-clamp-2 leading-relaxed">
+                            <p class="text-xs text-gray-300/80 font-light mt-2 line-clamp-2 leading-relaxed">
                                 ${product.description}
                             </p>
 
                             <!-- Daily Scarcity Meter -->
-                            <div class="mt-4 pt-3 border-t border-white/5 space-y-1.5">
+                            <div class="mt-4 pt-3 border-t border-white/10 space-y-1.5">
                                 <div class="flex items-center justify-between text-[10px]">
                                     <span class="${inv.isCritical ? 'text-amber-300' : 'text-gray-300'} font-medium tracking-wide">
                                         <i class="fa-solid fa-fire-flame-curved text-gold mr-1"></i>${inv.urgencyText}
@@ -1406,11 +1749,11 @@
                             </div>
                         </div>
 
-                        <div class="pt-4 border-t border-white/5 flex items-center gap-3">
-                            <button onclick="openProductCustomizer('${product.id}')" class="flex-1 py-3 border border-white/20 hover:border-gold text-cream text-[11px] uppercase tracking-wider rounded-xl transition-all">
+                        <div class="pt-4 border-t border-white/10 flex items-center gap-3">
+                            <button onclick="openProductCustomizer('${product.id}', this)" class="flex-1 py-3 border border-white/20 hover:border-gold text-cream text-[11px] uppercase tracking-wider rounded-xl transition-all">
                                 Customizer
                             </button>
-                            <button onclick="addToVault('${product.id}')" class="flex-1 py-3 bg-gold/15 hover:bg-gold text-gold hover:text-obsidian border border-gold/50 text-[11px] uppercase tracking-wider rounded-xl transition-all font-semibold">
+                            <button onclick="addToVault('${product.id}', this)" class="flex-1 py-3 bg-gold/15 hover:bg-gold text-gold hover:text-obsidian border border-gold/50 text-[11px] uppercase tracking-wider rounded-xl transition-all font-semibold">
                                 ${inv.isSoldOutToday ? 'Join Waitlist' : 'Reserve Vault'}
                             </button>
                         </div>
@@ -1421,6 +1764,7 @@
 
             renderCreationDropdown();
             updateDailyUrgencyBanner();
+            bind3DTiltCards();
         }
 
         function renderCreationDropdown() {
@@ -1435,7 +1779,7 @@
         // -------------------------------------------------------------
         // PRODUCT CUSTOMIZER ENGINE & MODAL
         // -------------------------------------------------------------
-        function openProductCustomizer(productId) {
+        function openProductCustomizer(productId, triggerEl = null) {
             playClickSound();
             const productIndex = products.findIndex(p => p.id === productId);
             const product = products[productIndex];
@@ -1452,7 +1796,9 @@
             };
 
             updateCustomizerModalUI();
-            document.getElementById('product-detail-modal').classList.remove('hidden');
+            triggerGlassShatterExtract(triggerEl, () => {
+                document.getElementById('product-detail-modal').classList.remove('hidden');
+            });
         }
 
         function updateCustomizerModalUI() {
@@ -1504,11 +1850,11 @@
                             </div>
 
                             <div>
-                                <label class="block text-[10px] text-gray-400 uppercase tracking-widest mb-1.5">2. Rare Exotic Leather Selection</label>
+                                <label class="block text-[10px] text-gray-400 uppercase tracking-widest mb-1.5">2. Rare Exotic Material Selection</label>
                                 <select onchange="updateCustomizerOption('leather', this.value)" class="w-full bg-obsidian border border-gold/40 rounded-xl px-3 py-2 text-cream outline-none">
-                                    <option value="French Calfskin" ${p.leather === 'French Calfskin' ? 'selected' : ''}>French Full-Grain Calfskin (Included)</option>
-                                    <option value="Porosus Crocodile" ${p.leather === 'Porosus Crocodile' ? 'selected' : ''}>Rare Porosus Crocodile (+$40,000 USD)</option>
-                                    <option value="Chèvre Leather" ${p.leather === 'Chèvre Leather' ? 'selected' : ''}>French Chèvre Kidskin (+$15,000 USD)</option>
+                                    <option value="French Calfskin" ${p.leather === 'French Calfskin' ? 'selected' : ''}>Signature Atelier Finish (Included)</option>
+                                    <option value="Porosus Crocodile" ${p.leather === 'Porosus Crocodile' ? 'selected' : ''}>Rare Porosus Crocodile Trim (+$40,000 USD)</option>
+                                    <option value="Chèvre Leather" ${p.leather === 'Chèvre Leather' ? 'selected' : ''}>French Chèvre Kidskin Lining (+$15,000 USD)</option>
                                 </select>
                             </div>
 
@@ -1566,19 +1912,21 @@
         // -------------------------------------------------------------
         // PRIVATE VAULT LOGIC
         // -------------------------------------------------------------
-        function addToVault(productId) {
+        function addToVault(productId, triggerEl = null) {
             playClickSound();
             const product = products.find(p => p.id === productId);
             if (!product) return;
 
-            vault.push({
-                ...product,
-                priceUSD: product.basePriceUSD,
-                quantity: 1
-            });
+            triggerGlassShatterExtract(triggerEl, () => {
+                vault.push({
+                    ...product,
+                    priceUSD: product.basePriceUSD,
+                    quantity: 1
+                });
 
-            updateVaultUI();
-            toggleVaultModal(true);
+                updateVaultUI();
+                toggleVaultModal(true);
+            });
         }
 
         function removeFromVault(index) {
@@ -1640,7 +1988,7 @@
         // -------------------------------------------------------------
         // ON-CHAIN CERTIFICATE MODAL LOGIC
         // -------------------------------------------------------------
-        function openCertificateModal(serialCode = 'MZ-2026-8899', title = 'Dream Awakening - 24K Gold Edition') {
+        function openCertificateModal(serialCode = 'MZ-2026-8899', title = 'Astrum Table - Cosmic Exploration Series') {
             playClickSound();
             document.getElementById('cert-serial').innerText = serialCode;
             document.getElementById('cert-item-title').innerText = title;
@@ -1741,180 +2089,442 @@
         });
 
         // -------------------------------------------------------------
-        // GOLD PARTICLE CANVAS ENGINE
+        // INTERACTIVE 180°+ 3D LOGO CONTROLLER
         // -------------------------------------------------------------
-        function initParticleCanvas() {
-            const canvas = document.getElementById('particle-canvas');
-            const ctx = canvas.getContext('2d');
-            let particles = [];
+        let logoRotY = 0;
+        let logoTargetRotY = 0;
+        let logoTiltX = 0;
+        let logoTargetTiltX = 0;
+        let isDraggingLogo = false;
+        let logoDragStartX = 0;
+        let logoDragStartY = 0;
+        let logoBaseRotY = 0;
 
-            function resize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resize);
-            resize();
+        function flipLogo180() {
+            playClickSound();
+            logoTargetRotY += 180;
+        }
 
-            for (let i = 0; i < 60; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2 + 0.5,
-                    speedY: Math.random() * -0.4 - 0.1,
-                    speedX: (Math.random() - 0.5) * 0.2,
-                    opacity: Math.random() * 0.6 + 0.2
-                });
-            }
+        function init3DLogoController() {
+            const emblem = document.getElementById('hero-3d-logo');
+            const angleReadout = document.getElementById('logo-3d-angle');
+            if (!emblem) return;
 
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach(p => {
-                    p.y += p.speedY;
-                    p.x += p.speedX;
-                    if (p.y < 0) {
-                        p.y = canvas.height;
-                        p.x = Math.random() * canvas.width;
-                    }
-                    ctx.fillStyle = `rgba(240, 210, 120, ${p.opacity})`;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-                requestAnimationFrame(animate);
+            emblem.addEventListener('pointerdown', (e) => {
+                isDraggingLogo = true;
+                logoDragStartX = e.clientX;
+                logoDragStartY = e.clientY;
+                logoBaseRotY = logoTargetRotY;
+                emblem.setPointerCapture(e.pointerId);
+            });
+
+            emblem.addEventListener('pointermove', (e) => {
+                if (!isDraggingLogo) return;
+                const dx = e.clientX - logoDragStartX;
+                const dy = e.clientY - logoDragStartY;
+                logoTargetRotY = logoBaseRotY + dx * 0.85;
+                logoTargetTiltX = Math.max(-28, Math.min(28, -dy * 0.25));
+            });
+
+            const releaseDrag = (e) => {
+                if (!isDraggingLogo) return;
+                isDraggingLogo = false;
+                logoTargetTiltX = 0;
+                try { emblem.releasePointerCapture(e.pointerId); } catch (err) {}
+            };
+
+            emblem.addEventListener('pointerup', releaseDrag);
+            emblem.addEventListener('pointercancel', releaseDrag);
+
+            function tickLogo() {
+                if (!isDraggingLogo) {
+                    logoTargetRotY += 0.22; // gentle celestial rotation
+                }
+                logoRotY += (logoTargetRotY - logoRotY) * 0.12;
+                logoTiltX += (logoTargetTiltX - logoTiltX) * 0.12;
+
+                emblem.style.transform = `rotateX(${logoTiltX.toFixed(2)}deg) rotateY(${logoRotY.toFixed(2)}deg)`;
+                if (angleReadout) {
+                    const normDeg = (((Math.round(logoRotY) % 360) + 360) % 360);
+                    angleReadout.textContent = `Y: ${normDeg}°`;
+                }
+                requestAnimationFrame(tickLogo);
             }
-            animate();
+            tickLogo();
         }
 
         // -------------------------------------------------------------
-        // CUSTOM GOLD CURSOR GLOW
+        // CELESTIAL SCROLL ASTROLABE PROGRESS & TIER INDICATOR
         // -------------------------------------------------------------
-        window.addEventListener('mousemove', (e) => {
-            const cursor = document.getElementById('gold-cursor');
-            if (cursor) {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
+        function initScrollAstrolabe() {
+            const fillEl = document.getElementById('astrolabe-fill');
+            const starEl = document.getElementById('astrolabe-star');
+            const pctEl = document.getElementById('astrolabe-pct');
+            const tierLinks = document.querySelectorAll('.astrolabe-tier');
+            const sectionIds = ['heritage', 'collection', 'savoir-faire', 'provenance', 'salon'];
+
+            function updateAstrolabe() {
+                const docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+                const progress = Math.max(0, Math.min(1, (window.scrollY || 0) / docHeight));
+                const pct = Math.round(progress * 100);
+
+                if (fillEl) fillEl.style.height = `${pct}%`;
+                if (starEl) starEl.style.top = `${pct}%`;
+                if (pctEl) pctEl.textContent = `${pct}%`;
+
+                let activeId = 'heritage';
+                const anchorY = (window.scrollY || 0) + window.innerHeight * 0.45;
+                sectionIds.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && el.offsetTop <= anchorY) {
+                        activeId = id;
+                    }
+                });
+
+                tierLinks.forEach(link => {
+                    if (link.dataset.tier === activeId) {
+                        link.classList.add('text-gold', 'bg-gold/15');
+                    } else {
+                        link.classList.remove('text-gold', 'bg-gold/15');
+                    }
+                });
             }
-        });
+
+            window.addEventListener('scroll', updateAstrolabe, { passive: true });
+            window.addEventListener('resize', updateAstrolabe);
+            updateAstrolabe();
+        }
+
+        // -------------------------------------------------------------
+        // COSMIC EXPLORATION SERIES: NEBULA + WARP STREAKS + CONSTELLATION TRAIL
+        // -------------------------------------------------------------
+        function initCosmicStarfield() {
+            const canvas = document.getElementById('cosmic-canvas');
+            const trailCanvas = document.getElementById('starlight-trail-canvas');
+            if (!canvas || !trailCanvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const trailCtx = trailCanvas.getContext('2d');
+
+            let width = 0;
+            let height = 0;
+            let scrollY = window.scrollY || 0;
+            let targetScrollY = scrollY;
+            let scrollVelocity = 0;
+            let mouseX = -9999;
+            let mouseY = -9999;
+            let normMouseX = 0;
+            let normMouseY = 0;
+            let targetNormX = 0;
+            let targetNormY = 0;
+
+            const stardustTrail = [];
+
+            function resize() {
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                width = window.innerWidth;
+                height = window.innerHeight;
+
+                canvas.width = width * dpr;
+                canvas.height = height * dpr;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                trailCanvas.width = width * dpr;
+                trailCanvas.height = height * dpr;
+                trailCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+
+            window.addEventListener('resize', resize);
+            window.addEventListener('scroll', () => {
+                const nextY = window.scrollY || 0;
+                scrollVelocity = Math.min(28, Math.max(scrollVelocity, Math.abs(nextY - targetScrollY)));
+                targetScrollY = nextY;
+            }, { passive: true });
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                targetNormX = (e.clientX / Math.max(1, width) - 0.5) * 2;
+                targetNormY = (e.clientY / Math.max(1, height) - 0.5) * 2;
+
+                for (let i = 0; i < 2; i++) {
+                    stardustTrail.push({
+                        x: e.clientX + (Math.random() - 0.5) * 10,
+                        y: e.clientY + (Math.random() - 0.5) * 10,
+                        vx: (Math.random() - 0.5) * 0.9,
+                        vy: (Math.random() - 0.5) * 0.9 - 0.35,
+                        r: Math.random() * 2.1 + 0.7,
+                        alpha: 0.9,
+                        decay: 0.025 + Math.random() * 0.015,
+                        isGold: Math.random() < 0.78
+                    });
+                }
+                if (stardustTrail.length > 130) {
+                    stardustTrail.splice(0, stardustTrail.length - 130);
+                }
+            }, { passive: true });
+
+            resize();
+
+            const nebulae = [
+                { rx: 0.25, ry: 0.22, radius: 440, color: 'rgba(34, 58, 128, 0.22)', speed: 0.00018, phase: 0 },
+                { rx: 0.78, ry: 0.35, radius: 500, color: 'rgba(138, 102, 30, 0.16)', speed: 0.00014, phase: 2.1 },
+                { rx: 0.52, ry: 0.72, radius: 540, color: 'rgba(24, 45, 102, 0.24)', speed: 0.00016, phase: 4.2 },
+                { rx: 0.18, ry: 0.82, radius: 400, color: 'rgba(165, 128, 46, 0.13)', speed: 0.00021, phase: 1.3 }
+            ];
+
+            const starCount = Math.min(280, Math.floor((width * height) / 6000));
+            const stars = [];
+            for (let i = 0; i < starCount; i++) {
+                const depth = Math.random();
+                const isGold = Math.random() < 0.38;
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    depth,
+                    radius: depth * 1.9 + 0.35,
+                    baseAlpha: depth * 0.68 + 0.2,
+                    twinkleSpeed: Math.random() * 0.025 + 0.008,
+                    twinkleOffset: Math.random() * Math.PI * 2,
+                    driftX: (Math.random() - 0.5) * (0.08 + depth * 0.18),
+                    driftY: -(0.05 + depth * 0.22),
+                    isGold,
+                    hasFlare: depth > 0.84 && Math.random() < 0.45
+                });
+            }
+
+            let astrolabeAngle = 0;
+            const shootingStars = [];
+            function spawnShootingStar() {
+                if (shootingStars.length >= 2) return;
+                const startX = Math.random() * width * 0.85;
+                const startY = Math.random() * height * 0.45;
+                const angle = Math.PI / 5 + (Math.random() - 0.5) * 0.25;
+                const speed = 9 + Math.random() * 6;
+                shootingStars.push({
+                    x: startX,
+                    y: startY,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    length: 120 + Math.random() * 90,
+                    life: 1,
+                    decay: 0.016 + Math.random() * 0.01
+                });
+            }
+
+            let tick = 0;
+            function renderFrame() {
+                tick += 1;
+                scrollY += (targetScrollY - scrollY) * 0.08;
+                scrollVelocity *= 0.88;
+                normMouseX += (targetNormX - normMouseX) * 0.05;
+                normMouseY += (targetNormY - normMouseY) * 0.05;
+
+                ctx.clearRect(0, 0, width, height);
+                trailCtx.clearRect(0, 0, width, height);
+
+                // 1. Drifting Deep Nebulae
+                nebulae.forEach((n) => {
+                    const breath = 1 + 0.08 * Math.sin(tick * 0.006 + n.phase);
+                    const cx = width * n.rx + Math.sin(tick * n.speed + n.phase) * 55 - normMouseX * 18;
+                    const cy = ((height * n.ry - scrollY * 0.08 + Math.cos(tick * n.speed + n.phase) * 40) % (height + n.radius * 2));
+                    const wrappedY = cy < -n.radius ? cy + height + n.radius * 2 : cy;
+
+                    const grad = ctx.createRadialGradient(cx, wrappedY, 0, cx, wrappedY, n.radius * breath);
+                    grad.addColorStop(0, n.color);
+                    grad.addColorStop(1, 'rgba(2, 3, 8, 0)');
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(cx, wrappedY, n.radius * breath, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                // 2. Rotating Celestial Astrolabe Orbit
+                astrolabeAngle += 0.00045;
+                const orbitX = width * 0.5 - normMouseX * 14;
+                const orbitY = height * 0.48 - (scrollY * 0.04) % 120 - normMouseY * 14;
+                const orbitRadius = Math.min(width, height) * 0.42;
+
+                ctx.save();
+                ctx.translate(orbitX, orbitY);
+                ctx.rotate(astrolabeAngle);
+                ctx.strokeStyle = 'rgba(240, 210, 120, 0.06)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(0, 0, orbitRadius, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.setLineDash([4, 14]);
+                ctx.strokeStyle = 'rgba(140, 175, 255, 0.055)';
+                ctx.beginPath();
+                ctx.arc(0, 0, orbitRadius * 0.72, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.restore();
+
+                // 3. Multi-Layer Parallax Stars + Warp Streaks + Constellation Web near Cursor
+                const nearbyStars = [];
+                stars.forEach((s) => {
+                    s.x += s.driftX;
+                    s.y += s.driftY;
+
+                    if (s.x < -10) s.x = width + 10;
+                    if (s.x > width + 10) s.x = -10;
+                    if (s.y < -10) s.y = height + 10;
+                    if (s.y > height + 10) s.y = -10;
+
+                    const parallaxY = ((s.y - scrollY * (0.06 + s.depth * 0.24)) % height + height) % height;
+                    const parallaxX = ((s.x - normMouseX * (6 + s.depth * 22)) % width + width) % width;
+
+                    const twinkle = 0.65 + 0.35 * Math.sin(tick * s.twinkleSpeed + s.twinkleOffset);
+                    const alpha = Math.min(1, s.baseAlpha * twinkle);
+
+                    // Warp streak on fast scrolling
+                    if (scrollVelocity > 1.5 && s.depth > 0.35) {
+                        const streakLen = Math.min(36, scrollVelocity * (0.5 + s.depth * 1.1));
+                        ctx.strokeStyle = s.isGold
+                            ? `rgba(240, 210, 120, ${alpha * 0.45})`
+                            : `rgba(215, 230, 255, ${alpha * 0.35})`;
+                        ctx.lineWidth = s.radius * 0.85;
+                        ctx.beginPath();
+                        ctx.moveTo(parallaxX, parallaxY);
+                        ctx.lineTo(parallaxX, parallaxY - streakLen);
+                        ctx.stroke();
+                    }
+
+                    ctx.fillStyle = s.isGold
+                        ? `rgba(240, 210, 120, ${alpha})`
+                        : `rgba(220, 232, 255, ${alpha * 0.9})`;
+
+                    ctx.beginPath();
+                    ctx.arc(parallaxX, parallaxY, s.radius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    if (s.hasFlare) {
+                        const flareLen = s.radius * 5.2 * twinkle;
+                        ctx.strokeStyle = s.isGold
+                            ? `rgba(251, 240, 185, ${alpha * 0.55})`
+                            : `rgba(225, 238, 255, ${alpha * 0.45})`;
+                        ctx.lineWidth = 0.75;
+                        ctx.beginPath();
+                        ctx.moveTo(parallaxX - flareLen, parallaxY);
+                        ctx.lineTo(parallaxX + flareLen, parallaxY);
+                        ctx.moveTo(parallaxX, parallaxY - flareLen);
+                        ctx.lineTo(parallaxX, parallaxY + flareLen);
+                        ctx.stroke();
+                    }
+
+                    const dist = Math.hypot(parallaxX - mouseX, parallaxY - mouseY);
+                    if (dist < 145) {
+                        nearbyStars.push({ x: parallaxX, y: parallaxY, dist });
+                    }
+                });
+
+                // Constellation lines connecting cursor to nearby stars & between close stars
+                if (mouseX >= 0 && mouseY >= 0 && nearbyStars.length > 0) {
+                    nearbyStars.sort((a, b) => a.dist - b.dist);
+                    const capped = nearbyStars.slice(0, 7);
+                    capped.forEach((st) => {
+                        const strength = 1 - st.dist / 145;
+                        trailCtx.strokeStyle = `rgba(240, 210, 120, ${strength * 0.42})`;
+                        trailCtx.lineWidth = 0.85;
+                        trailCtx.beginPath();
+                        trailCtx.moveTo(mouseX, mouseY);
+                        trailCtx.lineTo(st.x, st.y);
+                        trailCtx.stroke();
+                    });
+
+                    for (let i = 0; i < capped.length; i++) {
+                        for (let j = i + 1; j < capped.length; j++) {
+                            const d = Math.hypot(capped[i].x - capped[j].x, capped[i].y - capped[j].y);
+                            if (d < 95) {
+                                trailCtx.strokeStyle = `rgba(240, 210, 120, ${(1 - d / 95) * 0.22})`;
+                                trailCtx.lineWidth = 0.65;
+                                trailCtx.beginPath();
+                                trailCtx.moveTo(capped[i].x, capped[i].y);
+                                trailCtx.lineTo(capped[j].x, capped[j].y);
+                                trailCtx.stroke();
+                            }
+                        }
+                    }
+
+                    // Subtle golden astrolabe reticle at cursor
+                    trailCtx.strokeStyle = 'rgba(240, 210, 120, 0.55)';
+                    trailCtx.lineWidth = 1;
+                    trailCtx.beginPath();
+                    trailCtx.arc(mouseX, mouseY, 11, 0, Math.PI * 2);
+                    trailCtx.stroke();
+                }
+
+                // 4. Stardust Cursor Trail
+                for (let i = stardustTrail.length - 1; i >= 0; i--) {
+                    const p = stardustTrail[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.alpha -= p.decay;
+                    if (p.alpha <= 0) {
+                        stardustTrail.splice(i, 1);
+                        continue;
+                    }
+                    trailCtx.fillStyle = p.isGold
+                        ? `rgba(251, 240, 185, ${p.alpha})`
+                        : `rgba(210, 232, 255, ${p.alpha * 0.85})`;
+                    trailCtx.beginPath();
+                    trailCtx.arc(p.x, p.y, p.r * p.alpha + 0.3, 0, Math.PI * 2);
+                    trailCtx.fill();
+                }
+
+                // 5. Shooting Stars
+                if (Math.random() < 0.008) {
+                    spawnShootingStar();
+                }
+
+                for (let i = shootingStars.length - 1; i >= 0; i--) {
+                    const st = shootingStars[i];
+                    st.x += st.vx;
+                    st.y += st.vy;
+                    st.life -= st.decay;
+
+                    if (st.life <= 0) {
+                        shootingStars.splice(i, 1);
+                        continue;
+                    }
+
+                    const norm = Math.hypot(st.vx, st.vy);
+                    const tailX = st.x - (st.vx / norm) * st.length;
+                    const tailY = st.y - (st.vy / norm) * st.length;
+
+                    const grad = ctx.createLinearGradient(st.x, st.y, tailX, tailY);
+                    grad.addColorStop(0, `rgba(255, 246, 214, ${st.life * 0.9})`);
+                    grad.addColorStop(0.35, `rgba(240, 210, 120, ${st.life * 0.45})`);
+                    grad.addColorStop(1, 'rgba(240, 210, 120, 0)');
+
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = 1.6;
+                    ctx.beginPath();
+                    ctx.moveTo(st.x, st.y);
+                    ctx.lineTo(tailX, tailY);
+                    ctx.stroke();
+                }
+
+                requestAnimationFrame(renderFrame);
+            }
+
+            renderFrame();
+        }
 
         // -------------------------------------------------------------
         // INIT ON WINDOW LOAD
         // -------------------------------------------------------------
-        // -------------------------------------------------------------
-        // 3D LOGO PIXEL BLENDER (REMOVES OUTER WHITE & TINTS INNER CREAM TO OBSIDIAN GLASS)
-        // -------------------------------------------------------------
-        function initBlended3DLogo() {
-            const img = new Image();
-            img.crossOrigin = 'anonymous';
-            img.src = './LOGO.jpg';
-
-            img.onload = function() {
-                const w = img.width;
-                const h = img.height;
-                const offCanvas = document.createElement('canvas');
-                offCanvas.width = w;
-                offCanvas.height = h;
-                const ctx = offCanvas.getContext('2d');
-                ctx.drawImage(img, 0, 0);
-
-                const imgData = ctx.getImageData(0, 0, w, h);
-                const data = imgData.data;
-
-                // Flood-fill from corners to identify outer white background vs inner cream
-                const visited = new Uint8Array(w * h);
-                const isOuter = new Uint8Array(w * h);
-                const stack = [0, w - 1, (h - 1) * w, h * w - 1];
-
-                function isLightNeutral(idx) {
-                    const r = data[idx * 4];
-                    const g = data[idx * 4 + 1];
-                    const b = data[idx * 4 + 2];
-                    const max = Math.max(r, g, b);
-                    const min = Math.min(r, g, b);
-                    const lum = 0.299 * r + 0.587 * g + 0.114 * b;
-                    const sat = max > 0 ? (max - min) / max : 0;
-                    return lum > 195 && sat < 0.18;
-                }
-
-                while (stack.length > 0) {
-                    const p = stack.pop();
-                    if (visited[p]) continue;
-                    visited[p] = 1;
-                    if (!isLightNeutral(p)) continue;
-                    isOuter[p] = 1;
-                    const x = p % w;
-                    const y = (p / w) | 0;
-                    if (x > 0) stack.push(p - 1);
-                    if (x < w - 1) stack.push(p + 1);
-                    if (y > 0) stack.push(p - w);
-                    if (y < h - 1) stack.push(p + w);
-                }
-
-                for (let p = 0; p < w * h; p++) {
-                    const i = p * 4;
-                    const r = data[i];
-                    const g = data[i + 1];
-                    const b = data[i + 2];
-                    const max = Math.max(r, g, b);
-                    const min = Math.min(r, g, b);
-                    const lum = 0.299 * r + 0.587 * g + 0.114 * b;
-                    const sat = max > 0 ? (max - min) / max : 0;
-
-                    if (isOuter[p]) {
-                        const edgeAlpha = lum > 235 ? 0 : Math.max(0, Math.min(255, (245 - lum) * 6));
-                        data[i + 3] = edgeAlpha;
-                    } else if (lum > 188 && sat < 0.20) {
-                        const shade = (lum - 188) / 67;
-                        data[i] = Math.round(10 + shade * 14);
-                        data[i + 1] = Math.round(10 + shade * 13);
-                        data[i + 2] = Math.round(16 + shade * 18);
-                        data[i + 3] = Math.round(175 + shade * 45);
-                    } else {
-                        data[i] = Math.min(255, Math.round(r * 1.04));
-                        data[i + 1] = Math.min(255, Math.round(g * 1.02));
-                        data[i + 2] = Math.max(0, Math.round(b * 0.92));
-                        data[i + 3] = 255;
-                    }
-                }
-
-                ctx.putImageData(imgData, 0, 0);
-
-                ['mz-splash-logo-canvas', 'mz-hero-logo-canvas'].forEach(id => {
-                    const target = document.getElementById(id);
-                    if (target) {
-                        target.width = w;
-                        target.height = h;
-                        target.getContext('2d').drawImage(offCanvas, 0, 0);
-                    }
-                });
-            };
-
-            setTimeout(dismissSplash, 3200);
-
-            window.addEventListener('mousemove', (e) => {
-                const nx = (e.clientX / window.innerWidth - 0.5) * 2;
-                const ny = (e.clientY / window.innerHeight - 0.5) * 2;
-                const heroCard = document.getElementById('hero-3d-wrapper');
-                if (heroCard) {
-                    heroCard.style.transform = `rotateY(${nx * 16}deg) rotateX(${-ny * 14}deg)`;
-                }
-            });
-        }
-
-        function dismissSplash() {
-            const splash = document.getElementById('mz-3d-splash');
-            if (splash && !splash.classList.contains('splash-hidden')) {
-                splash.classList.add('splash-hidden');
-            }
-        }
-
         window.onload = function() {
             renderProducts();
             updateVaultUI();
-            initParticleCanvas();
+            initCosmicStarfield();
+            init3DLogoController();
+            initScrollAstrolabe();
+            bind3DTiltCards();
             initLocalization();
             updateDailyUrgencyBanner();
             setInterval(updateDailyUrgencyBanner, 1000);
-            initBlended3DLogo();
         };
     </script>
 
